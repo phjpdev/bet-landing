@@ -6,6 +6,7 @@ import TabList from './components/tab-list/TabList';
 import ImageSlider from './components/image-slider/ImageSlider';
 import Tabs from './components/tabs/Tabs';
 import SideBar from './components/sidebar/SideBar';
+import MatchHeader from './components/match-header/MatchHeader';
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
           </div>
           <div className='third-div'>
             <SideBar />
+            <div className='match-container'>
+              <MatchHeader />
+            </div>
           </div>
         </div>
         <Login />

@@ -7,7 +7,7 @@
 .main-div {
     width: calc(100vw - 380px);
 }
-.first-div {
+.first-div, .third-div {
     display: flex;
     gap: 8px;
 }

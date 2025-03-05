@@ -5,6 +5,7 @@ import Login from './components/login/Login';
 import TabList from './components/tab-list/TabList';
 import ImageSlider from './components/image-slider/ImageSlider';
 import Tabs from './components/tabs/Tabs';
+import SideBar from './components/sidebar/SideBar';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
           </div>
           <div className='second-div'>
             <Tabs />
+          </div>
+          <div className='third-div'>
+            <SideBar />
           </div>
         </div>
         <Login />

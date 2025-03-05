@@ -38,7 +38,7 @@
     background-color: #00c06c;
     color: white;
 }
-.sidebar-top-list li:focus, .sidebar-list li:focus {
+.sidebar-top-list li.active, .sidebar-list li.active {
     background-color: #00c06c;
     color: white;
 }

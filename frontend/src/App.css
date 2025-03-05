@@ -1,3 +1,11 @@
-.App {
-  text-align: center;
+.main {
+    padding: 8px 0 8px 8px;
+    display: flex;
+    justify-content: space-between;
+}
+.main-div {
+    width: calc(100vw - 380px);
+}
+.first-div {
+    display: flex;
 }

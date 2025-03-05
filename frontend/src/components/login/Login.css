@@ -1,0 +1,128 @@
+/* Container */
+.login-container {
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #e7e7e7;
+    float: right;
+    height: calc(100vh - 52px);
+    position: relative;
+    top: -44px;
+    z-index: 9000;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.15); /* Left and bottom shadow */
+}
+
+  .login-box {
+    background-color: #405a55;
+    padding: 0 12px;
+    padding-bottom: 12px;
+    border-top-left-radius: 16px;
+  }
+  .login-basic-form {
+    padding: 16px 0 14px;
+  }
+  .login-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+    
+  /* Input Fields */
+  .input-group {
+    margin-bottom: 8px;
+    width: 90%;
+    text-align: left;
+  }
+
+  .login-input {
+    width: 100%;
+  }
+  
+  .input-field {
+    border: 0;
+    border-radius: 2px;
+    font-size: 13px;
+    font-weight: 400;
+    height: 28px;
+    line-height: 18px;
+    padding-left: 8px;
+    width: 90%;
+  }
+  .input-field:focus {
+    background-color: #fffbe6 !important;
+    border: none;
+    outline: none;
+  }
+  
+  /* Button */
+  .login-btn {
+    align-items: center;
+    background: #fecf13;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    height: 30px;
+    margin-top: auto;
+    margin-bottom: 8px;
+    min-width: 90px;
+    border: none;
+  }
+  
+  .login-btn:hover {
+    background-color: #d98f00;
+  }
+  
+  /* Extra Links */
+  .extra-links {
+    color: #fff;
+    line-height: 13px;
+    margin-left: -12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .extra-links a {
+    color: #fff;
+    font-size: 13px;
+    text-decoration: none;
+    padding: 0 12px;
+  }
+  
+  .extra-links a:hover {
+    text-decoration: underline;
+  }
+
+.login-manage {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 16px 12px;
+    background-color: white;
+    border-bottom-left-radius: 16px;
+}
+.manage-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 28px;
+}
+.manage-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+.manage-button button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    color: white !important;
+    font-size: 15px;
+    height: 45px;
+    border-radius: 25px;
+}

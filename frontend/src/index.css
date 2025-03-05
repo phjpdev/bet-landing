@@ -12,6 +12,7 @@ body {
 button {
   font-family: "Noto Sans TC", sans-serif;
   color: #212529;
+  border: none;
 }
 
 code {

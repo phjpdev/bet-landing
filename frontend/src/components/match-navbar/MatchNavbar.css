@@ -1,0 +1,127 @@
+/* Navbar Styles */
+.match-navbar {
+    background-color: white;
+}
+
+.match-navbar-container {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
+/* Navigation List */
+.match-nav-list,
+.match-nav-right-list {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.match-nav-right-list {
+    gap: 18px;
+    margin-left: 24px;
+}
+
+.match-nav-list li {
+    display: flex;
+    justify-content: center;
+    width: 150px;
+    height: 44px;
+}
+
+.match-nav-right-list li {
+    display: flex;
+    justify-content: center;
+}
+
+/* Buttons */
+.match-nav-button {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 16px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    padding: 5px 0;
+
+}
+.buttonContent {
+    border-right: 1px solid #aaa;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.match-nav-button.active {
+    color: white;
+    background-color: inherit; /* Don't change background when active */
+}
+
+/* Hover Effect */
+.match-nav-button:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Light background on hover */
+}
+
+/* If the button is active, keep the same color when hovering */
+.match-nav-button.active:hover {
+    background-color: inherit; /* Keep the active background color when hovering */
+}
+
+/* Specific hover for individual buttons */
+.match-nav-button:hover:not(.active) {
+    background-color: rgba(0, 0, 0, 0.1); /* This makes hover work for non-active buttons */
+}
+
+/* Navigation Icons */
+.nav-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Logo */
+.nav-logo {
+    width: 50px;
+    height: auto;
+}
+
+/* Right-side Buttons */
+.match-nav-right-button {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 16px;
+    padding: 0 16px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+.match-nav-right-button:hover {
+    color: #00c06c;
+}
+.match-nav-right-button:focus {
+    color: #00c06c;
+}
+
+/* Responsive - Stack menu on smaller screens */
+@media (max-width: 768px) {
+    .match-navbar-container {
+        flex-direction: column;
+    }
+
+    .match-nav-list {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+}

@@ -61,8 +61,4 @@
     right: 50px; /* Position the button on the right */
   }
   
-  .prev-btn:hover,
-  .next-btn:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
   

@@ -31,7 +31,7 @@ const ImageSlider = () => {
 
   return (
     <div className="slider-container">
-      <div className="slider">
+      <div className="slider" >
         <img
           src={images[(currentIndex - 1 + images.length) % images.length]}
           alt={`Previous Slide`}

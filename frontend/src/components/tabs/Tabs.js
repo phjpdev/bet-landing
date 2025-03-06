@@ -37,7 +37,7 @@ const Tabs = () => {
           onClick={() => handleTabClick('tab4')}
         >
           派彩快
-          <img src="https://consvc.hkjc.com//consvc.hkjc.com/-/media/Sites/JCBW/MenuIcons/icon-betslip/earlySettlement_svg/img-2406/Early-Settlement_default.svg?sc_lang=zh-HK" style={{marginLeft: '5px'}}></img>
+          <img src="https://consvc.hkjc.com//consvc.hkjc.com/-/media/Sites/JCBW/MenuIcons/icon-betslip/earlySettlement_svg/img-2406/Early-Settlement_default.svg?sc_lang=zh-HK" className='span-icon'></img>
         </div>
         <div className='vertical-bar'></div>
         <div

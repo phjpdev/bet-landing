@@ -30,30 +30,36 @@ const MatchNavbar = () => {
         {/* Navigation Buttons */}
         <ul className="match-nav-list">
             <li>
-                <button className="match-nav-button">
+                <button className={`match-nav-button ewin ${active === "" ? "active" : ""}`} onClick={() => setActive("")}>
                     <div className="buttonContent">
-                        <img src="https://consvc.hkjc.com/-/media/Sites/JCBW/MenuIcons/eWinLogo.svg?sc_lang=zh-HK" alt="eWin Logo"/>
+                        <img src="https://consvc.hkjc.com/-/media/Sites/JCBW/MenuIcons/eWinLogo.svg?sc_lang=zh-HK" alt="eWin" className="nav-icon"/>
                     </div>
                 </button>
             </li>
-
-          {menuItems.map((item) => (
-            <li key={item.name}>
-              <button
-                className={`match-nav-button ${active === item.name ? "active" : ""}`}
-                style={{
-                  backgroundColor: active === item.name ? item.color : "transparent",
-                  color: active === item.name ? "white" : "black",
-                }}
-                onClick={() => setActive(item.name)}
-              >
-                <div className="buttonContent">
-                    <img src={item.icon} alt={item.name} className="nav-icon" />
-                    <span>{item.name}</span>
-                </div>
-              </button>
+            <li>
+                <button className={`match-nav-button racing ${active === "賽馬" ? "active" : ""}`} onClick={() => setActive("賽馬")}>
+                    <div className="buttonContent">
+                        <img src="https://consvc.hkjc.com/-/media/Sites/JCBW/MenuIcons/eWinLogo/horse_svg/Racing/horse.svg?sc_lang=zh-HK" alt="Racing" className="nav-icon"/>
+                        <span>賽馬</span>
+                    </div>
+                </button>
             </li>
-          ))}
+            <li>
+                <button className={`match-nav-button football ${active === "足智彩"? "active" : ""}`} onClick={() => setActive("足智彩")}>
+                    <div className="buttonContent">
+                        <img src="https://consvc.hkjc.com/-/media/Sites/JCBW/MenuIcons/eWinLogo/horse_svg/football_svg.svg?sc_lang=zh-HK" alt="Football" className="nav-icon"/>
+                        <span>足智彩</span>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button className={`match-nav-button mark ${active === "六合彩"? "active" : ""}`} onClick={() => setActive("六合彩")}>
+                    <div className="buttonContent">
+                        <img src="https://consvc.hkjc.com/-/media/Sites/JCBW/MenuIcons/eWinLogo/horse_svg/markSix_svg/MarkSix/MarkSix.svg?sc_lang=zh-HK" alt="Mark" className="nav-icon"/>
+                        <span>六合彩</span>
+                    </div>
+                </button>
+            </li>
         </ul>
 
         {/* Right-side Buttons */}

@@ -18,7 +18,7 @@ const SideBar = () => {
           決賽組合
           <img
             src="https://consvc.hkjc.com//consvc.hkjc.com/-/media/Sites/JCBW/MenuIcons/cup.svg?sc_lang=zh-HK"
-            style={{ marginLeft: '5px' }}
+            className="sidebar-icon"
             alt="Cup"
           />
         </li>
@@ -26,7 +26,7 @@ const SideBar = () => {
           派彩快
           <img
             src="https://consvc.hkjc.com//consvc.hkjc.com/-/media/Sites/JCBW/MenuIcons/icon-betslip/earlySettlement_svg.svg?sc_lang=zh-HK"
-            style={{ marginLeft: '5px' }}
+            className="sidebar-icon"
             alt="Early Settlement"
           />
         </li>
@@ -44,7 +44,7 @@ const SideBar = () => {
             {item === "冠軍" && (
               <img
                 src="https://consvc.hkjc.com//consvc.hkjc.com/-/media/Sites/JCBW/MenuIcons/cup.svg?sc_lang=zh-HK"
-                style={{ marginLeft: '5px' }}
+                className="sidebar-icon"
                 alt="Cup"
               />
             )}

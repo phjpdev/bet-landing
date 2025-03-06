@@ -61,30 +61,29 @@
     gap: 5px;
 }
 
-.match-nav-button.active {
+.racing:hover,
+.racing.active{
     color: white;
-    background-color: inherit; /* Don't change background when active */
+    background-color: #173e96;
+}
+.football:hover,
+.football.active{
+    color: white;
+    background-color: #00c06c;
+}
+.mark:hover,
+.mark.active{
+    color: white;
+    background-color: #d62d2d;
 }
 
-/* Hover Effect */
-.match-nav-button:hover {
-    background-color: rgba(0, 0, 0, 0.1); /* Light background on hover */
+.match-nav-button:hover .nav-icon,
+.match-nav-button.active .nav-icon {
+    filter: invert(100%) sepia(0) saturate(0) hue-rotate(350deg) brightness(137%) contrast(101%);
 }
-
-/* If the button is active, keep the same color when hovering */
-.match-nav-button.active:hover {
-    background-color: inherit; /* Keep the active background color when hovering */
-}
-
-/* Specific hover for individual buttons */
-.match-nav-button:hover:not(.active) {
-    background-color: rgba(0, 0, 0, 0.1); /* This makes hover work for non-active buttons */
-}
-
-/* Navigation Icons */
-.nav-icon {
-    width: 20px;
-    height: 20px;
+.ewin:hover .nav-icon,
+.ewin.active .nav-icon {
+    filter: brightness(0) saturate(100%) invert(14%) sepia(35%) saturate(7205%) hue-rotate(204deg) brightness(92%) contrast(101%);
 }
 
 /* Logo */

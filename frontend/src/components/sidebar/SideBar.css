@@ -34,11 +34,17 @@
 .sidebar-list li {
     color: #333;
 }
-.sidebar-top-list li:hover, .sidebar-list li:hover {
+.sidebar-top-list li:hover, .sidebar-list li:hover,.sidebar-top-list li.active, .sidebar-list li.active {
     background-color: #00c06c;
     color: white;
 }
-.sidebar-top-list li.active, .sidebar-list li.active {
-    background-color: #00c06c;
-    color: white;
+.sidebar-top-list li:hover .sidebar-icon,
+.sidebar-top-list li.active .sidebar-icon,
+.sidebar-list li:hover .sidebar-icon,
+.sidebar-list li.active .sidebar-icon {
+    filter: invert(100%) sepia(0) saturate(0) hue-rotate(350deg) brightness(137%) contrast(101%);
+}
+
+.sidebar-icon {
+    margin-left: 5px;
 }

@@ -7,6 +7,7 @@ import ImageSlider from './components/image-slider/ImageSlider';
 import Tabs from './components/tabs/Tabs';
 import SideBar from './components/sidebar/SideBar';
 import MatchHeader from './components/match-header/MatchHeader';
+import Match from './components/match/Match';
 
 function App() {
   return (
@@ -24,8 +25,9 @@ function App() {
           </div>
           <div className='third-div'>
             <SideBar />
-            <div className='match-container'>
+            <div className='match-section'>
               <MatchHeader />
+              <Match />
             </div>
           </div>
         </div>

@@ -15,24 +15,28 @@ function App() {
       <Navbar />
       <MatchNavbar />
       <div className='main'>
-        <div className='main-div'>
-          <div className='first-div'>
-            <TabList />
-            <ImageSlider />
-          </div>
-          <div className='second-div'>
-            <Tabs />
-          </div>
-          <div className='third-div'>
-            <SideBar />
-            <div className='match-section'>
-              <MatchHeader />
-              <Match />
+        <div>
+          
+          <div className='main-div'>
+            <div className='first-div'>
+              <TabList />
+              <ImageSlider />
             </div>
-          </div>
+            <div className='second-div'>
+              <Tabs />
+            </div>
+            <div className='third-div'>
+              <SideBar />
+                <div className='match-section'>
+                  <MatchHeader />
+                  <Match />
+                </div>
+              </div>
+            </div>
         </div>
         <Login />
       </div>
+      
     </div>
   );
 }

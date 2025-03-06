@@ -1,11 +1,11 @@
 .main {
-    padding: 8px 0 8px 8px;
     display: flex;
     justify-content: space-between;
     gap: 8px;
 }
 .main-div {
     width: calc(100vw - 380px);
+    padding: 8px 0 8px 8px;
 }
 .first-div, .third-div {
     display: flex;

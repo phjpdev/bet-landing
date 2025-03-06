@@ -1,64 +1,52 @@
 /* Slider container */
 .slider-container {
-    position: relative;
-    width: calc(100% - 320px);
-    height: 300px;
-    overflow: hidden;
-  }
-  
-  /* Slider layout */
-  .slider {
-    display: flex;
-    position: relative;
-    transition: transform 1s ease-in-out;
-    width: 100%;
-    gap: 8px;
-  }
-  
-  /* Image styles */
-  .slider-image {
-    height: 300px;
-    transition: opacity 1s ease;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-  
-  .current-image {
-    transform: translate(-65%, 0%);
-  }
-  
-  .prev-image {
-    transform: translate(-65%, 0%);
-  }
-  
-  .next-image {
-    transform: translate(-65%, 0%);
-  }
-  
-  /* Button styles */
-  .prev-btn,
-  .next-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: white;
-    border: none;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border-radius: 50%;
-    z-index: 10;
-  }
-  
-  .prev-btn {
-    left: 50px; /* Position the button on the left */
-  }
-  
-  .next-btn {
-    right: 50px; /* Position the button on the right */
-  }
-  
-  
+  position: relative;
+  width: calc(100% - 320px);
+  height: 300px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Slider layout */
+.slider {
+  display: flex;
+  transition: transform 1s ease-in-out;
+  width: fit-content;
+  gap: 8px;
+}
+
+/* Image styles */
+.slider-image {
+  height: 300px;
+  transition: opacity 1s ease;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Button styles */
+.prev-btn,
+.next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.prev-btn {
+  left: 50px; /* Adjust button position */
+}
+
+.next-btn {
+  right: 50px; /* Adjust button position */
+}

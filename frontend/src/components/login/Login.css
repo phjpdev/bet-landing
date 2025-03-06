@@ -1,6 +1,11 @@
 /* Container */
+.login-section {
+  top: 44px;
+  position: sticky;
+  height: calc(100dvh - 92px);
+  width: 380px;
+}
 .login-container {
-    width: 380px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

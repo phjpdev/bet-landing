@@ -6,7 +6,7 @@ const Match = () => {
     const [matches, setMatches] = useState([]); // Store the match data
     const [matchNumbers, setMatchNumbers] = useState(0); // Store the total number of matches
 
-    useEffect(() => {
+    const fetchMatches = () => {
         axios.get('http://localhost:5000/api/matches') // Request data from the backend
             .then(response => {
                 const matchesData = response.data.matchData;
@@ -16,6 +16,14 @@ const Match = () => {
             .catch(error => {
                 console.error('Error fetching match count:', error);
             });
+    };
+
+    useEffect(() => {
+        fetchMatches();
+        const interval = setInterval(() => {
+            fetchMatches();
+        }, 60000);
+        return () => clearInterval(interval);
     }, []); 
 
     const formatDate = (dateString) => {
@@ -55,7 +63,7 @@ const Match = () => {
                 <div className="match-id">球賽編號</div>
                 <div className="match-tournament" style={{cursor:'pointer'}}><img src="/image/header-flag.svg" width={20}></img></div>
                 <div className="match-teams">
-                    <div className="match-teams-flex" style={{color:'rgb(51, 51, 51)'}}>
+                    <div className="match-teams-flex" style={{color:'rgb(51, 51, 51)', padding: '0'}}>
                         <div className="match-header-teams-wid">
                             <div>主隊</div>
                             <div>客隊</div>

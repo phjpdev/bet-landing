@@ -47,13 +47,14 @@ const ImageSlider = () => {
           alt={`Next Slide`}
           className="slider-image next-image"
         />
-        <button className="prev-btn" onClick={goToPrevious}>
-          <img src='/image/arrow-left.svg' alt='set-icon' width={26}></img>
-        </button>
-        <button className="next-btn" onClick={goToNext}>
-          <img src='/image/arrow-right.svg' alt='set-icon' width={26}></img>
-        </button>
+        
       </div>
+      <button className="prev-btn" onClick={goToPrevious}>
+        <img src='/image/arrow-left.svg' alt='set-icon' width={26}></img>
+      </button>
+      <button className="next-btn" onClick={goToNext}>
+        <img src='/image/arrow-right.svg' alt='set-icon' width={26}></img>
+      </button>
     </div>
   );
 };

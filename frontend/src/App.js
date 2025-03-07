@@ -1,7 +1,7 @@
 import './App.css';
 import Navbar from './components/navbar/Navbar';
 import MatchNavbar from './components/match-navbar/MatchNavbar';
-import Login from './components/login/Login';
+import UserLogin from './components/user-login/UserLogin';
 import TabList from './components/tab-list/TabList';
 import ImageSlider from './components/image-slider/ImageSlider';
 import Tabs from './components/tabs/Tabs';
@@ -34,7 +34,7 @@ function App() {
               </div>
             </div>
         </div>
-        <Login />
+        <UserLogin />
       </div>
       
     </div>

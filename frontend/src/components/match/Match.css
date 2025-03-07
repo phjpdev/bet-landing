@@ -178,3 +178,27 @@
     background-color: #bdbdbd;
     margin: 6px 0;
 }
+.match-date-header {
+    background-color: #405a55;
+    border-radius: 4px 4px 0 0;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 500;
+    height: 34px;
+    padding-left: 12px;
+    display: flex;
+    align-items: center;
+}
+.match-date-header-arrow {
+    margin-right: 6px;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    background-color: #569171;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.match-date-header-arrow-img {
+    filter: invert(100%) sepia(0) saturate(0) hue-rotate(350deg) brightness(137%) contrast(101%);
+}

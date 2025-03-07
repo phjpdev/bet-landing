@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './Login.css';
+import './UserLogin.css';
 
-const Login = () => {
+const UserLogin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -11,13 +11,13 @@ const Login = () => {
   };
 
   return (
-    <div className='login-section'>
-        <div className="login-container">
-            <div className='login-box'>
-                <div className="login-basic-form">
+    <div className='user-login-section'>
+        <div className="user-login-container">
+            <div className='user-login-box'>
+                <div className="user-login-basic-form">
                     <form onSubmit={handleLogin}>
-                        <div className='login-form'>
-                            <div className='login-input'>
+                        <div className='user-login-form'>
+                            <div className='user-login-input'>
                                 <div className="input-group">
                                     <input
                                         type="text"
@@ -39,7 +39,7 @@ const Login = () => {
                                     />
                                 </div>
                             </div>
-                            <button type="submit" className="login-btn">登入</button>
+                            <button type="submit" className="user-login-btn">登入</button>
                         </div>
                     </form>
                 </div>
@@ -53,7 +53,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-            <div className='login-manage'>
+            <div className='user-login-manage'>
                 <div className='manage-text'>
                     <div>總注數:</div>
                     <div>0</div>
@@ -72,4 +72,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default UserLogin;

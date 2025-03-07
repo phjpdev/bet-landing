@@ -5,6 +5,7 @@ import './Match.css';
 const Match = () => {
     const [matches, setMatches] = useState([]); // Store the match data
     const [matchNumbers, setMatchNumbers] = useState(0); // Store the total number of matches
+    
 
     const fetchMatches = () => {
         axios.get('http://localhost:5000/api/matches') // Request data from the backend
@@ -26,6 +27,24 @@ const Match = () => {
         return () => clearInterval(interval);
     }, []); 
 
+    const formatGroupDate = (dateString) => {
+        const options = { 
+            year: 'numeric', 
+            month: '2-digit', 
+            day: '2-digit',
+            weekday: 'short', 
+            timeZone: 'Asia/Hong_Kong' // Ensure the correct timezone
+        };
+    
+        const date = new Date(dateString); // Convert to Date object
+        const formattedDate = new Intl.DateTimeFormat('zh-HK', options).format(date);
+        
+        // Extract the numeric date and Chinese weekday separately
+        const [datePart, weekday] = formattedDate.split('（');
+        
+        const shortWeekday = weekday.replace('週', '').replace(')', ''); 
+        return `${datePart}（${shortWeekday}`;
+    };
     const formatDate = (dateString) => {
         const options = { 
             year: 'numeric', 
@@ -37,8 +56,7 @@ const Match = () => {
         const date = new Date(dateString); // Convert to Date object
         const formattedDate = new Intl.DateTimeFormat('en-GB', options).format(date);
         return formattedDate;
-    };
-
+    }
     const formatHour = (dateString) => {
         const options = { 
             hour: '2-digit', 
@@ -50,6 +68,30 @@ const Match = () => {
         const date = new Date(dateString); // Convert to Date object
         const formattedTime = new Intl.DateTimeFormat('en-GB', options).format(date);
         return formattedTime;
+    };
+
+    // Group matches by date
+    const groupedMatches = matches.reduce((acc, match) => {
+        const dateKey = formatGroupDate(match.time);
+        if (!acc[dateKey]) {
+            acc[dateKey] = [];
+        }
+        acc[dateKey].push(match);
+        return acc;
+    }, {});
+
+    const [openDates, setOpenDates] = useState([]);
+    useEffect(() => {
+        if (openDates.length === 0) { // Only set once to prevent overwriting user interactions
+            setOpenDates(Object.keys(groupedMatches));
+        }
+    }, [groupedMatches]); 
+    
+    console.log(openDates, '.............')
+    const toggleDateGroup = (date) => {
+        setOpenDates((prev) =>
+            prev.includes(date) ? prev.filter((d) => d !== date) : [...prev, date]
+        );
     };
 
     return (
@@ -93,70 +135,85 @@ const Match = () => {
                 </div>
             </div>
 
-            {matches.map((match, index) => {
-                return (
-                    <div key={index} className={index % 2 === 0 ? "match-white-row" : "match-grey-row"}>
-                        <div className="match-row">
-                            <div className="match-time-wid">
-                                <div className="match-time">{formatDate(match.time)}</div>
-                                <div className="match-time">{formatHour(match.time)}</div>
-                            </div>
-                            <div className="match-vertical-line"></div>
-                            <div className="match-id">{match.id}</div>
-                            <div className="match-vertical-line"></div>
-                            <div className="match-tournament"><img src={match.tournament}></img></div>
-                            <div className="match-vertical-line"></div>
-                            <div className="match-teams">
-                                <div className="match-teams-flex">
-                                    <div className="match-teams-wid">
-                                        <div>{match.homeName}</div>
-                                        <div>{match.awayName}</div>
-                                    </div>
-                                    <div className="match-tv">
-                                        <img src="/image/early_settlement_icon.svg" width={20}></img>
-                                        {match.tvChannel ? (
-                                            <div className="match-tvchannel">{match.tvChannel}</div>
-                                        ) : (
-                                            ""
-                                        )}
-                                    </div>
+            {Object.keys(groupedMatches).sort().map((date, index) => (
+                <div key={index} style={{marginBottom:'12px'}}>
+                    {/* Date Header */}
+                    <div className="match-date-header" onClick={() => toggleDateGroup(date)}>
+                        <div className="match-date-header-arrow">
+                        <img 
+                            src={openDates.includes(date) ? "/image/arrow-up.svg" : "/image/arrow-down.svg"} 
+                            alt="arrow-toggle" 
+                            width={24} 
+                            className="match-date-header-arrow-img"
+                        />
+                        </div>
+                        {date} 賽事
+                    </div>
+
+                    {openDates.includes(date) && groupedMatches[date].map((match, matchIndex) => (
+                        <div key={matchIndex} className={matchIndex % 2 === 0 ? "match-white-row" : "match-grey-row"}>
+                            <div className="match-row">
+                                <div className="match-time-wid">
+                                    <div className="match-time">{formatDate(match.time)}</div>
+                                    <div className="match-time">{formatHour(match.time)}</div>
                                 </div>
-                                {match.inPlay ? (
-                                    <div className="match-inplay">
-                                        <div className="match-vertical-line"></div>
-                                        <div style={{margin:'auto'}}>
-                                            <img src="/image/icon_clock_red.svg"></img>
+                                <div className="match-vertical-line"></div>
+                                <div className="match-id">{match.id}</div>
+                                <div className="match-vertical-line"></div>
+                                <div className="match-tournament"><img src={match.tournament} alt="tournament" /></div>
+                                <div className="match-vertical-line"></div>
+                                <div className="match-teams">
+                                    <div className="match-teams-flex">
+                                        <div className="match-teams-wid">
+                                            <div>{match.homeName}</div>
+                                            <div>{match.awayName}</div>
+                                        </div>
+                                        <div className="match-tv">
+                                            <img src="/image/early_settlement_icon.svg" width={20} alt="icon"/>
+                                            {match.tvChannel ? (
+                                                <div className="match-tvchannel">{match.tvChannel}</div>
+                                            ) : (
+                                                ""
+                                            )}
                                         </div>
                                     </div>
-                                ) : (
-                                    ""
-                                )}
-                            </div>
-                            <div className="match-vertical-line"></div>
-                            <div className="match-odd">
-                                <label className="custom-checkbox">
-                                    <input type="checkbox" />
-                                    <span></span>
-                                </label>
-                                <span>{match.homeOdd}</span>
-                                <label className="custom-checkbox">
-                                    <input type="checkbox" />
-                                    <span></span>
-                                </label>
-                                <span>{match.drawOdd}</span>
-                                <label className="custom-checkbox">
-                                    <input type="checkbox" />
-                                    <span></span>
-                                </label>
-                                <span>{match.awayOdd}</span>
-                            </div>
-                            <div className="match-list-icon">
-                                <img src="/image/list.svg"></img>
+                                    {match.inPlay ? (
+                                        <div className="match-inplay">
+                                            <div className="match-vertical-line"></div>
+                                            <div style={{margin:'auto'}}>
+                                                <img src="/image/icon_clock_red.svg" alt="clock" />
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
+                                </div>
+                                <div className="match-vertical-line"></div>
+                                <div className="match-odd">
+                                    <label className="custom-checkbox">
+                                        <input type="checkbox" />
+                                        <span></span>
+                                    </label>
+                                    <span>{match.homeOdd}</span>
+                                    <label className="custom-checkbox">
+                                        <input type="checkbox" />
+                                        <span></span>
+                                    </label>
+                                    <span>{match.drawOdd}</span>
+                                    <label className="custom-checkbox">
+                                        <input type="checkbox" />
+                                        <span></span>
+                                    </label>
+                                    <span>{match.awayOdd}</span>
+                                </div>
+                                <div className="match-list-icon">
+                                    <img src="/image/list.svg" alt="list" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                );
-            })}
+                    ))}
+                </div>
+            ))}
         </div>
     );
 };

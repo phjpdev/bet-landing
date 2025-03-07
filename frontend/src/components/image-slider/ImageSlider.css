@@ -50,3 +50,13 @@
 .next-btn {
   right: 50px; /* Adjust button position */
 }
+
+@media (max-width: 1450px) {
+  .slider-container {
+    width: calc(100% - 250px) !important;
+    height: 180px !important;
+  }
+  .slider-image {
+    height: 180px;
+  }
+}

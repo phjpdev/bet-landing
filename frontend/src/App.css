@@ -15,3 +15,12 @@
     margin-top: 8px;
     width: calc(100% - 320px);
 }
+
+@media (max-width: 1450px) { 
+    .main-div {
+        width: calc(100vw - 334px) !important;
+    }
+    .match-section {
+        width: calc(100% - 200px) !important;
+    }
+}

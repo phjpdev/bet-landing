@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef  } from "react";
 import axios from "axios";
 import './Match.css';
 
 const Match = () => {
     const [matches, setMatches] = useState([]); // Store the match data
     const [matchNumbers, setMatchNumbers] = useState(0); // Store the total number of matches
+    const [showBottomBar, setShowBottomBar] = useState(false);
+    const matchContainerRef = useRef(null);
+
     const app_url = process.env.REACT_APP_APP_URL;
     const fetchMatches = () => {
         axios.get(`${app_url}/api/matches`) // Request data from the backend
@@ -92,8 +95,26 @@ const Match = () => {
         );
     };
 
+    useEffect(() => {
+        const handleScroll = () => {
+            if (matchContainerRef.current) {
+                const { top } = matchContainerRef.current.getBoundingClientRect();
+                if (top <= 0) {
+                    setShowBottomBar(true);
+                } else {
+                    setShowBottomBar(false);
+                }
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
     return (
-        <div className="match-container">
+        <div ref={matchContainerRef} className="match-container">
             <div className="match-pagination">共有 {matchNumbers} 場賽事</div>
             <div className="match-header-row">
                 <div className="match-time-wid">
@@ -162,17 +183,19 @@ const Match = () => {
                                 <div className="match-vertical-line"></div>
                                 <div className="match-teams">
                                     <div className="match-teams-flex">
-                                        <div className="match-teams-wid">
-                                            <div>{match.homeName}</div>
-                                            <div>{match.awayName}</div>
-                                        </div>
-                                        <div className="match-tv">
-                                            <img src="/image/early_settlement_icon.svg" width={20} alt="icon"/>
-                                            {match.tvChannel ? (
-                                                <div className="match-tvchannel">{match.tvChannel}</div>
-                                            ) : (
-                                                ""
-                                            )}
+                                        <div className="match-team-tv">
+                                            <div className="match-teams-wid">
+                                                <div>{match.homeName}</div>
+                                                <div>{match.awayName}</div>
+                                            </div>
+                                            <div className="match-tv">
+                                                <img src="/image/early_settlement_icon.svg" width={20} alt="icon"/>
+                                                {match.tvChannel ? (
+                                                    <div className="match-tvchannel">{match.tvChannel}</div>
+                                                ) : (
+                                                    ""
+                                                )}
+                                            </div>
                                         </div>
                                         {match.homeScore !== null && match.homeScore !== undefined ? (
                                             <div className="match-score-div">
@@ -195,11 +218,9 @@ const Match = () => {
                                                 <div className="match-corner">
                                                     <img src="/image/icon-corner.svg"></img>
                                                     <div>{match.corner}({match.homeCorner}:{match.awayCorner})</div>
-                                                    {match.status === "SECONDHALF" ? (
-                                                        <div className="match-status">下半</div>
-                                                    ) : (
-                                                        ""
-                                                    )}
+                                                    <div className="match-status">
+                                                        {match.status === "FIRSTHALF" ? "上半" : match.status === "SECONDHALF" ? "下半" : ""}
+                                                    </div>
                                                     <img src="/image/icon_clock_green.svg"></img>
                                                 </div>
                                             ) : (
@@ -218,21 +239,27 @@ const Match = () => {
                                 <div className="match-vertical-line"></div>
                                 {match.homeOdd ? (
                                     <div className="match-odd">
-                                        <label className="custom-checkbox">
-                                            <input type="checkbox" />
-                                            <span></span>
-                                        </label>
-                                        <span>{match.homeOdd}</span>
-                                        <label className="custom-checkbox">
-                                            <input type="checkbox" />
-                                            <span></span>
-                                        </label>
-                                        <span>{match.drawOdd}</span>
-                                        <label className="custom-checkbox">
-                                            <input type="checkbox" />
-                                            <span></span>
-                                        </label>
-                                        <span>{match.awayOdd}</span>
+                                        <div className="match-odd-block">
+                                            <label className="custom-checkbox">
+                                                <input type="checkbox" />
+                                                <span></span>
+                                            </label>
+                                            <span>{match.homeOdd}</span>
+                                        </div>
+                                        <div className="match-odd-block">
+                                            <label className="custom-checkbox">
+                                                <input type="checkbox" />
+                                                <span></span>
+                                            </label>
+                                            <span>{match.drawOdd}</span>
+                                        </div>
+                                        <div className="match-odd-block">
+                                            <label className="custom-checkbox">
+                                                <input type="checkbox" />
+                                                <span></span>
+                                            </label>
+                                            <span>{match.awayOdd}</span>
+                                        </div>
                                     </div>
                                 ) : (
                                     <div className="match-no-odd">
@@ -248,6 +275,12 @@ const Match = () => {
                     ))}
                 </div>
             ))}
+
+            <div className={`match-add-bottom ${showBottomBar ? "visible" : "hidden"}`}>
+                <button className="match-add-bottom-btn">
+                    添加到投注區
+                </button>
+            </div>
         </div>
     );
 };

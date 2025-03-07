@@ -6,6 +6,7 @@
   width: 380px;
 }
 .user-login-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -132,8 +133,8 @@
     border-radius: 25px;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1450px) {
   .user-login-section {
-    width: 300px; 
+    width: 300px !important;
   }
 }

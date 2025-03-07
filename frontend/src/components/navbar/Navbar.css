@@ -38,7 +38,11 @@
   .nav-links a:hover {
     border-bottom: 1px solid white;
   }
-  
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
   /* Language Switch */
   .lang-switch button {
     background: none;
@@ -57,6 +61,13 @@
   }
   
   .lang-switch span:hover {
+    border-bottom: 1px solid white;
+  }
+  .logout-btn {
+    font-size: 16px !important;
+    line-height: 16px;
+  }
+  .logout-btn:hover {
     border-bottom: 1px solid white;
   }
   

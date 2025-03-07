@@ -1,8 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { AiOutlineGlobal } from "react-icons/ai";
 import "./Navbar.css"; // Import the CSS file
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Remove token
+    navigate("/login"); // Redirect to login page
+  };
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -20,6 +26,9 @@ const Navbar = () => {
         {/* Right Side - Language Switch */}
         <div className="lang-switch">
           <button><AiOutlineGlobal /><span>ENG</span></button>
+          <button className="logout-btn" onClick={handleLogout}>
+            登出
+          </button>
         </div>
       </div>
     </nav>

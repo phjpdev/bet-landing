@@ -5,10 +5,9 @@ import './Match.css';
 const Match = () => {
     const [matches, setMatches] = useState([]); // Store the match data
     const [matchNumbers, setMatchNumbers] = useState(0); // Store the total number of matches
-    
-
+    const app_url = process.env.REACT_APP_APP_URL;
     const fetchMatches = () => {
-        axios.get('http://localhost:5000/api/matches') // Request data from the backend
+        axios.get(`${app_url}/api/matches`) // Request data from the backend
             .then(response => {
                 const matchesData = response.data.matchData;
                 setMatches(matchesData); // Set match data to state
@@ -87,7 +86,6 @@ const Match = () => {
         }
     }, [groupedMatches]); 
     
-    console.log(openDates, '.............')
     const toggleDateGroup = (date) => {
         setOpenDates((prev) =>
             prev.includes(date) ? prev.filter((d) => d !== date) : [...prev, date]

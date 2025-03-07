@@ -22,7 +22,7 @@ const Match = () => {
         fetchMatches();
         const interval = setInterval(() => {
             fetchMatches();
-        }, 60000);
+        }, 20000);
         return () => clearInterval(interval);
     }, []); 
 
@@ -174,36 +174,72 @@ const Match = () => {
                                                 ""
                                             )}
                                         </div>
+                                        {match.homeScore !== null && match.homeScore !== undefined ? (
+                                            <div className="match-score-div">
+                                                <div className="match-score" style={{borderBottom:'0.5px solid #aaa'}}>{match.homeScore}</div>
+                                                <div className="match-score">{match.awayScore}</div>
+                                            </div>
+                                        ) : (
+                                            <div className="match-score-div"></div>
+                                        )}
+                                        {match.homeScore !== null && match.homeScore !== undefined ? (
+                                            <div className="match-vertical-line"></div>
+                                        ) : (
+                                            <div style={{width:'1px'}}></div>
+                                        )}
+                                        
                                     </div>
                                     {match.inPlay ? (
-                                        <div className="match-inplay">
-                                            <div className="match-vertical-line"></div>
-                                            <div style={{margin:'auto'}}>
-                                                <img src="/image/icon_clock_red.svg" alt="clock" />
-                                            </div>
+                                        <div>
+                                            {match.corner ? (
+                                                <div className="match-corner">
+                                                    <img src="/image/icon-corner.svg"></img>
+                                                    <div>{match.corner}({match.homeCorner}:{match.awayCorner})</div>
+                                                    {match.status === "SECONDHALF" ? (
+                                                        <div className="match-status">下半</div>
+                                                    ) : (
+                                                        ""
+                                                    )}
+                                                    <img src="/image/icon_clock_green.svg"></img>
+                                                </div>
+                                            ) : (
+                                                <div className="match-inplay">
+                                                    <div className="match-vertical-line"></div>
+                                                    <div style={{marginLeft: '15px'}}>
+                                                        <img src="/image/icon_clock_red.svg" alt="clock" />
+                                                    </div>
+                                                </div>
+                                            )}
                                         </div>
                                     ) : (
                                         ""
                                     )}
                                 </div>
                                 <div className="match-vertical-line"></div>
-                                <div className="match-odd">
-                                    <label className="custom-checkbox">
-                                        <input type="checkbox" />
-                                        <span></span>
-                                    </label>
-                                    <span>{match.homeOdd}</span>
-                                    <label className="custom-checkbox">
-                                        <input type="checkbox" />
-                                        <span></span>
-                                    </label>
-                                    <span>{match.drawOdd}</span>
-                                    <label className="custom-checkbox">
-                                        <input type="checkbox" />
-                                        <span></span>
-                                    </label>
-                                    <span>{match.awayOdd}</span>
-                                </div>
+                                {match.homeOdd ? (
+                                    <div className="match-odd">
+                                        <label className="custom-checkbox">
+                                            <input type="checkbox" />
+                                            <span></span>
+                                        </label>
+                                        <span>{match.homeOdd}</span>
+                                        <label className="custom-checkbox">
+                                            <input type="checkbox" />
+                                            <span></span>
+                                        </label>
+                                        <span>{match.drawOdd}</span>
+                                        <label className="custom-checkbox">
+                                            <input type="checkbox" />
+                                            <span></span>
+                                        </label>
+                                        <span>{match.awayOdd}</span>
+                                    </div>
+                                ) : (
+                                    <div className="match-no-odd">
+                                        <div className="match-no-odd-black">按此顯示其他即場投注種類</div>
+                                        <div className="match-no-odd-red">(主客和現已暫停受注)</div>
+                                    </div>
+                                )}
                                 <div className="match-list-icon">
                                     <img src="/image/list.svg" alt="list" />
                                 </div>

@@ -131,3 +131,9 @@
     height: 45px;
     border-radius: 25px;
 }
+
+@media (max-width: 1400px) {
+  .user-login-section {
+    width: 300px; 
+  }
+}

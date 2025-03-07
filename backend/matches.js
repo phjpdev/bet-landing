@@ -182,10 +182,20 @@ async function HKData() {
   try {
     const response = await axios.post(url, data);
     const matches = response.data.data.matches;
-    // console.log(JSON.stringify(matches[1], null, 2))
+    // console.log(JSON.stringify(matches[0], null, 2))
     matchData = matches.map(match => {
         const tournament = match.tournament?.name_ch;
         const tournamentImage = tournamentIcons.find(icon => icon.key === tournament)?.value || '';
+        const combinations = match.foPools[0]?.lines[0]?.combinations;
+        let homeOdds = null, awayOdds = null, drawOdds = null;
+        if(combinations) {
+          combinations.forEach((combination) => {
+            if(combination.str === "H") {homeOdds = combination.currentOdds}
+            else if (combination.str === "A") {awayOdds = combination.currentOdds}
+            else if (combination.str === "D") {drawOdds = combination.currentOdds}
+          })
+        }
+       
         return {
           time: match.kickOffTime,
           id: match.frontEndId,
@@ -199,15 +209,17 @@ async function HKData() {
           corner: match.runningResult?.corner,
           homeCorner: match.runningResult?.homeCorner,
           awayCorner: match.runningResult?.awayCorner,
-          homeOdd: match.foPools[0]?.lines[0]?.combinations[0]?.currentOdds,
-          awayOdd: match.foPools[0]?.lines[0]?.combinations[1]?.currentOdds,
-          drawOdd: match.foPools[0]?.lines[0]?.combinations[2]?.currentOdds
+          poolStatus: match.foPools[0]?.status,
+          status: match.status,
+          homeOdd: homeOdds,
+          awayOdd: awayOdds,
+          drawOdd: drawOdds,
         };
     });
     return matchData;
-    // console.log("Match Data:", matchData);
   } catch (error) {
     console.error("Error occurred:", error.message); // Handle errors
   }
 }
+HKData();
 module.exports = HKData ;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Football/Icon/20x20px/Clock</title>
+    <g id="Asset" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon/20x20px/Clock">
+            <rect id="Rectangle" x="0" y="0" width="20" height="20"></rect>
+            <g id="Icons/48px/Pre-Match-Clock/ic_clock_prematch" transform="translate(2.000000, 2.000000)">
+                <circle id="Oval-8" fill="#CCF2E2" cx="8" cy="8" r="8"></circle>
+                <path d="M8,16 C3.581722,16 0,12.418278 0,8 C0,3.581722 3.581722,0 8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 Z M8,14.3006689 C11.6149547,14.3006689 14.2804277,11.6149547 14.2804277,8 C14.2804277,4.38504527 11.6149547,1.737435 8,1.737435 C4.38504527,1.737435 1.7322687,4.38504527 1.7322687,8 C1.7322687,11.6149547 4.38504527,14.3006689 8,14.3006689 Z" id="Oval-16" fill="#00C06C" fill-rule="nonzero"></path>
+                <line x1="8" y1="4" x2="8" y2="8" id="Line" stroke="#333333" stroke-width="1.75" stroke-linecap="round"></line>
+                <line x1="9.34169502" y1="6.67735693" x2="9.32264307" y2="9.34169502" id="Line" stroke="#333333" stroke-width="1.75" stroke-linecap="round" transform="translate(9.332169, 8.009526) rotate(-90.000000) translate(-9.332169, -8.009526) "></line>
+            </g>
+        </g>
+        <g id="Group-3" transform="translate(-109.000000, -637.000000)"></g>
+    </g>
+</svg>

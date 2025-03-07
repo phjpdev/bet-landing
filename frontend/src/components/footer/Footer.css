@@ -1,0 +1,66 @@
+.footer-container {
+    background-color: white;
+    margin-top: 15px;
+    padding: 21px 25px 0;
+    color: #333;
+}
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.footer-banner-media {
+    background: #ecedef;
+    border-radius: 4px;
+    display: flex;
+    height: 50px;
+    justify-content: flex-start;
+    margin-right: 24px;
+    width: 195px;
+    padding: 12px;
+    cursor: pointer;
+}
+.footer-banner-media-content {
+    align-items: center;
+    color: #6a6d73;
+    display: flex;
+    font-weight: 700;
+    margin-left: 20px;
+}
+.footer-play-responsibly {
+    color: #003c84;
+    font-weight: 700;
+    margin-bottom: 13px;
+}
+.footer-bottom {
+    border-top: 1px solid #a3a3a3;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    line-height: 14px;
+}
+.rgpLinks {
+    color: #003c84;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.footer-link {
+    border-right: 1px solid #003c84;
+    padding-right: 10px;
+    font-weight: 400;
+    cursor: pointer;
+}
+.footer-link:hover {
+    color: dodgerblue;
+}
+
+.copyRight-link {
+    text-decoration: none;
+    color: #333;
+}
+.copyRight-link:hover {
+    color: dodgerblue;
+}

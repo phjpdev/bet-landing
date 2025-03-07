@@ -10,6 +10,7 @@ import Tabs from './components/tabs/Tabs';
 import SideBar from './components/sidebar/SideBar';
 import MatchHeader from './components/match-header/MatchHeader';
 import Match from './components/match/Match';
+import Footer from "./components/footer/Footer";
 
 function Home() {
     const navigate = useNavigate();
@@ -44,6 +45,7 @@ function Home() {
                 </div>
                 <UserLogin />
             </div>
+            <Footer />
         </div>
     );
 }

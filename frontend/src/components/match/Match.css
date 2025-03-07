@@ -288,6 +288,9 @@
     margin-right: 12px;
     width: 100px;
 }
+.match-add-bottom-btn:hover {
+    background-color: #d98f00;
+}
 
 .match-team-tv {
     display: flex;
@@ -295,8 +298,15 @@
     align-items: center;
     gap: 16px;
 }
-
-
+.match-text {
+    margin: 16px 8px 24px;
+}
+.match-text-link {
+    color: #61a06f;
+}
+.match-text-link:hover {
+    color:#00c06c;
+}
 
 
 
@@ -312,7 +322,7 @@
     }
 }
 @media (max-width: 1450px) { 
-    .match-odd {
+    .match-odd, .match-no-odd {
         width: auto !important; 
     }
     .match-odd-block {

@@ -276,6 +276,11 @@ const Match = () => {
                 </div>
             ))}
 
+            <div className="match-pagination">共有 {matchNumbers} 場賽事</div>
+            <div className="match-text">
+                <span style={{fontWeight:'700'}}>重要事項:</span> 頁面所示的賠率謹供參考，最終賠率將於投注獲接納時確定。此等頁面上所示的任何數據、文章和其他資料皆以「現況」形式提供，並只作提供資訊之用。若閣下使用該等資料，此<a href="#" className="match-text-link">免責聲明</a>將適用。
+            </div>
+
             <div className={`match-add-bottom ${showBottomBar ? "visible" : "hidden"}`}>
                 <button className="match-add-bottom-btn">
                     添加到投注區

@@ -1,0 +1,29 @@
+.mobile-navbar {
+    background-color: #375850;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+}
+.mobile-navbar-container, .mobile-navbar-user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.mobile-navbar-container {
+    gap: 8px;
+}
+.mobile-nav-img {
+    filter: invert(100%) sepia(0) saturate(0) hue-rotate(350deg) brightness(137%) contrast(101%);
+}
+.mobile-navbar-user button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

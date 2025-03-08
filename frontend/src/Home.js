@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import './App.css';
-import Navbar from './components/navbar/Navbar';
-import MatchNavbar from './components/match-navbar/MatchNavbar';
+import Navbar from './components/desktop/navbar/Navbar';
+import MatchNavbar from './components/desktop/match-navbar/MatchNavbar';
 import UserLogin from './components/user-login/UserLogin';
-import TabList from './components/tab-list/TabList';
+import TabList from './components/desktop/tab-list/TabList';
 import ImageSlider from './components/image-slider/ImageSlider';
-import Tabs from './components/tabs/Tabs';
-import SideBar from './components/sidebar/SideBar';
-import MatchHeader from './components/match-header/MatchHeader';
-import Match from './components/match/Match';
+import Tabs from './components/desktop/tabs/Tabs';
+import SideBar from './components/desktop/sidebar/SideBar';
+import MatchHeader from './components/desktop/match-header/MatchHeader';
+import Match from './components/desktop/match/Match';
 import Footer from "./components/footer/Footer";
 
 function Home() {

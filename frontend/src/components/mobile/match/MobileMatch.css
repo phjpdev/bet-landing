@@ -1,0 +1,186 @@
+.mobile-match-header-tabs {
+    align-items: center;
+    background-color: #333;
+    display: flex;
+    height: 52px;
+    justify-content: space-between;
+}
+.mobile-match-header-btns {
+    align-items: center;
+    border-radius: 2px;
+    cursor: pointer;
+    display: flex;
+    height: 36px;
+    margin-left: 8px;
+    gap: 8px;
+}
+.mobile-match-tab-btn {
+    align-items: center;
+    background-color: rgb(117, 117, 117);
+    border-radius: 2px;
+    display: flex;
+    flex: 1 1;
+    height: 100%;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+}
+.mobile-match-vertical-bar {
+    height: 46px;
+    width: 1px;
+    background-color: #ddd;
+}
+.mobile-match-header-right, .mobile-match-header-right-text {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.mobile-match-header-right {
+    width: 140px;
+}
+.mobile-match-header-right-text {
+    color: white;
+    font-weight: 500;
+}
+.mobile-match-header-right-icon {
+    cursor: pointer;
+    margin: 0 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    background-color: #fecf13;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mobile-match-pagination {
+    line-height: 16px;
+    font-weight: 500;
+}
+.mobile-match-dis {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+}
+.mobile-match-time {
+    font-size: 12px;
+}
+.mobile-match-time-img {
+    filter: invert(100%) sepia(0) saturate(0) hue-rotate(350deg) brightness(104%) contrast(101%);
+}
+.mobile-match-time-div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.mobile-match-date-header {
+    background-color: #405a55;
+    border-radius: 4px 4px 0 0;
+    color: #fff;
+    cursor: pointer;
+    height: 34px;
+    padding-left: 12px;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+}
+.mobile-match-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.mobile-match-id, .tournamentText {
+    font-size: 12px;
+}
+.tournamentText {
+    margin-left: 12px;
+    margin-right: 4px;
+}
+.mobile-match-teams-wid {
+    color: rgb(64, 90, 85);
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.match-flex {
+    display: flex;
+    align-items: center;
+}
+.mobile-match-time-wid {
+    display: flex;
+}
+.mobile-match-odd {
+    color: rgb(64, 90, 85);
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    justify-content: center;
+    line-height: 14px;
+    gap: 12px;
+}
+.mobile-custom-checkbox input {
+    display: none; 
+}
+
+.mobile-custom-checkbox span {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #999;
+    border-radius: 2px;
+}
+
+/* When checked */
+.mobile-custom-checkbox input:checked + span {
+    background-color: #00c06c;
+    color: white;
+    position: relative;
+    border: 1px solid #00c06c;
+}
+
+/* Add checkmark */
+.mobile-custom-checkbox input:checked + span::after {
+    content: "✔";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+}
+.mobile-match-odd-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+.mobile-match-time-can {
+    display: flex;
+    font-size: 11px;
+    align-items: center;
+}
+.mobile-match-time-can-square {
+    display: flex;
+    align-items: center;
+    background-color: #e7e7e7;
+    width: 70px;
+    height: 20px;
+    padding-left: 20px;
+}
+.mobile-match-time-can-triangle {
+    width: 0;
+    height: 0;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid #e7e7e7;
+}
+.mobile-match-pagination {
+    padding: 0 24px;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 500;
+}
+.mobile-match-text {
+    font-size: 12px;
+    margin: 32px 8px 64px 8px;
+}

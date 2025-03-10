@@ -200,6 +200,7 @@ async function HKData() {
           time: match.kickOffTime,
           id: match.frontEndId,
           tournament: tournamentImage,
+          tournamentText: tournament,
           homeName: match.homeTeam.name_ch,
           awayName: match.awayTeam.name_ch,
           tvChannel: match.tvChannels[0]?.code,

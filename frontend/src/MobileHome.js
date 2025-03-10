@@ -5,6 +5,7 @@ import UserLogin from './components/user-login/UserLogin';
 import Footer from "./components/footer/Footer";
 import MobileNavbar from "./components/mobile/navbar/MobileNavbar";
 import MobileImageSlider from "./components/mobile/image-slider/MobileImageSlider";
+import MobileMatch from "./components/mobile/match/MobileMatch";
 
 function MobileHome() {
     const navigate = useNavigate();
@@ -20,6 +21,8 @@ function MobileHome() {
         <div>
             <MobileNavbar />
             <MobileImageSlider />
+            <MobileMatch />
+            <Footer />
         </div>
     );
 }

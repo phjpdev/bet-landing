@@ -44,8 +44,8 @@ const Match = () => {
         // Extract the numeric date and Chinese weekday separately
         const [datePart, weekday] = formattedDate.split('（');
         
-        const shortWeekday = weekday.replace('週', '').replace(')', ''); 
-        return `${datePart}（${shortWeekday}`;
+        const shortWeekday = weekday.replace('週', '').replace('）', '');
+        return `${datePart} (${shortWeekday})`;
     };
     const formatDate = (dateString) => {
         const options = { 

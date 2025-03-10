@@ -10,7 +10,7 @@ import Tabs from './components/desktop/tabs/Tabs';
 import SideBar from './components/desktop/sidebar/SideBar';
 import MatchHeader from './components/desktop/match-header/MatchHeader';
 import Match from './components/desktop/match/Match';
-import Footer from "./components/footer/Footer";
+import Footer from "./components/desktop/footer/Footer";
 
 function Home() {
     const navigate = useNavigate();

@@ -1,0 +1,45 @@
+.mobile-footer-container {
+    background-color: white;
+    margin-top: 15px;
+    padding: 12px 8px;
+    color: #333;
+}
+.mobile-footer-banner-media {
+    background: #ecedef;
+    border-radius: 4px;
+    display: flex;
+    height: 40px;
+    justify-content: flex-start;
+    padding: 12px;
+    cursor: pointer;
+}
+.mobile-footer-bottom {
+    border-top: 1px solid #a3a3a3;
+    padding: 15px 0;
+    font-size: 14px;
+    line-height: 14px;
+}
+.mobile-copyRight {
+    text-decoration: none;
+    color: #333;
+    font-size: 12px;
+    margin-top: 14px;
+}
+
+.mobile-rgpLinks {
+    color: #003c84;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    line-height: 4px;
+}
+.mobile-footer-link {
+    font-weight: 400;
+    cursor: pointer;
+}
+.mobile-footer-line-bar {
+    width: 1px;
+    height: 12px;
+    background-color: #003c84;
+}

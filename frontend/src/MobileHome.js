@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import './App.css';
 import UserLogin from './components/user-login/UserLogin';
-import Footer from "./components/footer/Footer";
 import MobileNavbar from "./components/mobile/navbar/MobileNavbar";
 import MobileImageSlider from "./components/mobile/image-slider/MobileImageSlider";
 import MobileMatch from "./components/mobile/match/MobileMatch";
+import MobileFooter from "./components/mobile/footer/MobileFooter";
 
 function MobileHome() {
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ function MobileHome() {
             <MobileNavbar />
             <MobileImageSlider />
             <MobileMatch />
-            <Footer />
+            <MobileFooter />
         </div>
     );
 }

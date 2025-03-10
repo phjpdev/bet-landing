@@ -20,11 +20,6 @@ const users = [
 
 const SECRET_KEY = process.env.SECRET_KEY || "fallback_secret";
 
-app.get('/api/login', (req, res) => {
-
-  console.log("This is a test root.")
-  res.json({success: true})
-})
 // Login route
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body;

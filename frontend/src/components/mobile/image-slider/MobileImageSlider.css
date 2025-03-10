@@ -1,0 +1,47 @@
+/* Slider container */
+.mobile-slider-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0;
+}
+
+/* Image layout */
+.mobile-slider {
+  display: flex;
+  transition: transform 1s ease-in-out;
+  width: fit-content;
+  gap: 8px;
+}
+
+/* Image styles */
+.mobile-slider-image {
+  height: 130px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Image Indicator */
+.mobile-slider-indicator {
+  display: flex;
+  gap: 6px;
+  margin-top: 5px;
+}
+
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  background-color: gray;
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.indicator-dot.active {
+  background-color: green;
+  opacity: 1;
+}

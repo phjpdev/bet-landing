@@ -15,6 +15,8 @@ const Login = () => {
         try {
             const response = await axios.post(`${app_url}/api/login`, { username, password });
             localStorage.setItem("token", response.data.token);
+            localStorage.removeItem("user-token"); // Removes the user token
+            localStorage.removeItem("user-question");
             navigate("/home"); // Redirect after login
         } catch (error) {
             setError("用户名或密码无效");

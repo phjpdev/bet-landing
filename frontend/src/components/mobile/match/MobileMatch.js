@@ -209,7 +209,7 @@ const MobileMatch = () => {
                                             <div className="mobile-match-time-can-triangle"></div>
                                         </div>
                                         {match.tvChannel ? (
-                                            <div className="match-tvchannel">{match.tvChannel}</div>
+                                            <div className="mobile-match-tvchannel">{match.tvChannel}</div>
                                         ) : (
                                             ""
                                         )}

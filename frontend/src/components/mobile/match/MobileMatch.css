@@ -101,10 +101,12 @@
     color: rgb(64, 90, 85);
     font-weight: 500;
     margin-bottom: 4px;
+    padding-left: 8px;
 }
 .match-flex {
     display: flex;
     align-items: center;
+    padding-left: 8px;
 }
 .mobile-match-time-wid {
     display: flex;
@@ -182,4 +184,24 @@
 .mobile-match-text {
     font-size: 12px;
     margin: 32px 8px 64px 8px;
+}
+.match-list-icon {
+    padding-right: 8px;
+}
+.mobile-match-tvchannel {
+    align-items: center;
+    color: rgb(102, 102, 102);
+    cursor: pointer;
+    display: flex;
+    font-size: 8px;
+    font-weight: 700;
+    height: 12px;
+    justify-content: center;
+    min-width: 28px;
+    border-width: 0.5px;
+    border-style: solid;
+    border-color: rgb(51, 51, 51);
+    border-image: initial;
+    border-radius: 2px;
+    white-space: nowrap;
 }

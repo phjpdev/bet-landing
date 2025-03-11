@@ -94,7 +94,7 @@
   
   .extra-links a {
     color: #fff;
-    font-size: 13px;
+    font-size: 12px;
     text-decoration: none;
     padding: 0 12px;
   }
@@ -115,6 +115,7 @@
     justify-content: space-between;
     align-items: center;
     line-height: 28px;
+    color: #333;
 }
 .manage-button {
     display: flex;
@@ -165,6 +166,7 @@
   font-weight: 500;
   line-height: 14px;
   margin: 12px 0;
+  color: #333;
 }
 .user-login-answer-content {
   background-color: #fff;
@@ -172,7 +174,7 @@
   padding: 16px 12px;
 }
 .login-question {
-  /* margin-bottom: 12px; */
+  color: #333;
 }
 .forgot-answer {
   cursor: pointer;
@@ -259,6 +261,7 @@
 .loggedin-detail-row {
   position: relative;
   font-size: 14px;
+  color: #333;
   margin-bottom: 12px;
 }
 .loggedin-detail-row-num {
@@ -273,7 +276,7 @@
   background-color: #fefefe;
   display: flex;
   flex-direction: row-reverse;
-  height: 120px;
+  height: 80px;
   padding-right: 15px;
 }
 .loggedin-detail-btn {
@@ -301,6 +304,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 9999;
 }
 
 .modal-content {
@@ -313,6 +317,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  color: #333;
 }
 
 .modal-actions {
@@ -370,5 +375,14 @@
 @media (max-width: 1450px) {
   .user-login-section {
     width: 300px !important;
+  }
+}
+
+@media (max-width: 800px) {
+  .user-login-container {
+    height: 100vh !important;
+  }
+  .user-loggedin-detail-container-div {
+    height: calc(100vh - 260px);
   }
 }

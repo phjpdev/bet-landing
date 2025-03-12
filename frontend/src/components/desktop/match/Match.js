@@ -73,7 +73,7 @@ const Match = () => {
     };
 
     // Group matches by date
-    const groupedMatches = matches.reduce((acc, match) => {
+    const groupedMatches = (matches ?? []).reduce((acc, match) => {
         const dateKey = formatGroupDate(match.time);
         if (!acc[dateKey]) {
             acc[dateKey] = [];

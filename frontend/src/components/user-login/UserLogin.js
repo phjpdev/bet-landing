@@ -73,6 +73,14 @@ const UserLogin = () => {
         setShowModal(false);
         setReadTerm(false);
     }
+    const openNewWindow = () => {
+        const width = 800;  // Set window width
+        const height = 770;
+        const left = (window.screen.width - width) / 2;
+        const top = (window.screen.height - height) / 2;
+        // window.open(`${app_url}/account-record`, "_blank", "width=600,height=600,noopener,noreferrer");
+        window.open("http://localhost:3000/account-record", "_blank", `width=${width},height=${height},top=${top},left=${left},noopener,noreferrer`);
+    };
 
   return (
     <div className='user-login-section'>
@@ -145,7 +153,7 @@ const UserLogin = () => {
                         </div>
                         <div className="extra-links">
                             <div>
-                                <a href="#">戶口紀錄</a> | 
+                                <a href="#" onClick={(e) => { e.preventDefault(); openNewWindow(); }}>戶口紀錄</a> | 
                                 <a href="#">轉賬服務</a>
                             </div>
                             <div className='extra-link-icons'>

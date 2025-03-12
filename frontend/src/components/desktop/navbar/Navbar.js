@@ -7,7 +7,10 @@ const Navbar = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("token"); // Remove token
+    localStorage.removeItem("user-token"); // Remove token
+    localStorage.removeItem("user-question"); // Remove token
     navigate("/login"); // Redirect to login page
+    window.location.reload();
   };
   return (
     <nav className="navbar">

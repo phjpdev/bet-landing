@@ -1,0 +1,80 @@
+.record-header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #003c84;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
+.record-header-tabs {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.record-header-tab {
+    cursor: pointer;
+    font-weight: 400;
+    text-align: center;
+    width: 100%;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-bottom: 4px solid transparent;
+}
+.record-header-tab.active {
+    color: #003c84;
+    border-bottom: 4px solid #fecf13;
+}
+.record-info-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff7d5; /* Light beige background */
+    padding: 10px 0;
+    color: #333;
+}
+
+.record-info-item {
+    border-left: 1px solid #333;
+    padding-left: 5px;
+    font-weight: 500;
+}
+
+.balance {
+    color: #003c84; /* Dark blue for balance */
+}
+.record-info-container-header {
+    align-items: center;
+    display: flex;
+    font-weight: 700;
+    height: 50px;
+    justify-content: space-between;
+    padding: 0 10px;
+    position: sticky;
+}
+.record-info-container-date {
+    font-weight: 700;
+}
+.record-info-container-button {
+    align-items: center;
+    border-radius: 14px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    height: 28px;
+    justify-content: center;
+    width: 100px;
+    background-color: #003c84;
+}
+.record-info-container-button:hover {
+    background-color: #01316a;
+}
+.record-info-container-content {
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+}

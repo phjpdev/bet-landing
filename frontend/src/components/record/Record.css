@@ -89,6 +89,9 @@
     padding: 15px 0;
     width: 100%;
 }
+.record-info-search input {
+    width: 500px;
+}
 .record-info-search-top {
     padding-bottom: 12px;
 }
@@ -122,20 +125,6 @@
     color: #003c84;
 }
 
-.confirm-btn {
-    width: 100%;
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #003366;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.confirm-btn:hover {
-    background-color: #002244;
-}
 .record-search-btn-div {
     display: flex;
     justify-content: flex-end;
@@ -157,4 +146,84 @@
 }
 .record-search-btn:hover {
     background-color: #e4b910;
+}
+.upload-record-table {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+.upload-record-table span {
+    font-size: 12px;
+}
+.record-modal-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+}
+.modal-container {
+    padding: 20px;
+}
+.modal-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.modal-input label {
+    width: 30%;
+}
+.modal-input input {
+    width: 70%;
+    height: 30px;
+    padding: 0 8px;
+    border: 1px solid #aaa;
+}
+.modal-input textarea {
+    width: 70%;
+    padding: 4px 8px;
+    border: 1px solid #aaa;
+    font-size: 14px;
+}
+.modal-input input:focus,
+.modal-input textarea:focus {
+    border: 1px solid #003c84;
+    outline: none;
+    background-color: rgb(255, 251, 230);
+}
+
+.transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.transaction-header {
+    background-color: #757575; /* Dark Gray */
+    color: white;
+    text-align: left;
+    padding: 10px;
+}
+
+.table-label {
+    background-color: white;
+    width: 100px;
+    padding: 4px 12px;
+    text-align: left;
+    border-right: 1px solid #ccc;
+}
+
+.table-value {
+    background-color: white;
+    padding: 4px 12px;
+    text-align: left;
+    line-height: 15px;
+}
+
+tr:last-child .table-label,
+tr:last-child .table-value {
+    border-bottom: none; /* Remove bottom border for last row */
 }

@@ -3,10 +3,10 @@ import './ImageSlider.css';
 
 const ImageSlider = () => {
   const images = [
-    "https://common.hkjc.com/bannerad/images/banner/BEC_productQ1-2025_19/4E_tc.jpg",
-    "https://common.hkjc.com/bannerad/images/banner/FLM_UECMOTD-2025_09/UEC_SP4E_ch_mu.jpg",
-    "https://common.hkjc.com/bannerad/images/banner/FLM_UCLExpert-2025_31/1_ucl_20250304_c.jpg",
-    "https://common.hkjc.com/bannerad/images/banner/BEC_productQ1-2025_13/bannerAdImagePreview_CHI.jpg",
+    { src: "/image/slider1.jpg", alt: "同場過關：沙卡勢助兵工廠雙喜臨門" },
+    { src: "/image/slider2.jpg", alt: "世盃決賽組合有得玩" },
+    { src: "/image/slider3.jpg", alt: "適可而止 時刻自律" },
+    { src: "/image/slider4.jpg", alt: "世盃冠軍、小組首名及一二名有得玩" },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -21,30 +21,30 @@ const ImageSlider = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      goToNext();
-    }, 10000); // Change image every 10 seconds
+      setCurrentIndex((prevIndex) =>
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 10000);
 
-    return () => {
-      clearInterval(interval); // Clean up the interval when the component is unmounted
-    };
-  }, []);
+    return () => clearInterval(interval);
+  }, [images.length]);
 
   return (
     <div className="slider-container">
       <div className="slider" >
         <img
-          src={images[(currentIndex - 1 + images.length) % images.length]}
-          alt={`Previous Slide`}
+          src={images[(currentIndex - 1 + images.length) % images.length].src}
+          alt={images[(currentIndex - 1 + images.length) % images.length].alt}
           className="slider-image prev-image"
         />
         <img
-          src={images[currentIndex]}
-          alt={`Current Slide`}
+          src={images[currentIndex].src}
+          alt={images[currentIndex].alt}
           className="slider-image current-image"
         />
         <img
-          src={images[(currentIndex + 1) % images.length]}
-          alt={`Next Slide`}
+          src={images[(currentIndex + 1) % images.length].src}
+          alt={images[(currentIndex + 1) % images.length].alt}
           className="slider-image next-image"
         />
         

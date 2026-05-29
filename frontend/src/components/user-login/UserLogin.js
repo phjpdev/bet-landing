@@ -19,7 +19,7 @@ const UserLogin = () => {
     const [resendSeconds, setResendSeconds] = useState(96);
     const otpInputRefs = useRef([]);
     const [eye, setEye] = useState(true);
-    const actualBalance = "925.20"; // Store the actual balance separately
+    const actualBalance = "4.40"; // Store the actual balance separately
     const [balance, setBalance] = useState(actualBalance);
     const [readTerm, setReadTerm] = useState(false);
     const [showModal, setShowModal] = useState(false);

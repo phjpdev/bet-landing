@@ -111,7 +111,7 @@ const Record = () => {
 
                     <div className="record-info-item" style={{width:'28%'}}>
                         <div className="record-info-label">結餘:</div>
-                        <div className="record-info-value balance">$925.20</div>
+                        <div className="record-info-value balance">$4.40</div>
                     </div>
                 </div>
                 {showRecordContainer === false ? (

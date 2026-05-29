@@ -353,49 +353,27 @@ const Record = ({ embedded = false }) => {
                     <div className="record-hkjc-topbar">戶口紀錄</div>
 
                     <div className="record-hkjc-tabs">
-
                         <button
-
                             type="button"
-
-                            className={`record-hkjc-tab ${activeTab === 'record-header-tab1' ? 'active' : ''}`}
-
+                            className={`record-hkjc-tab record-hkjc-tab--left ${activeTab === 'record-header-tab1' ? 'active' : ''}`}
                             onClick={() => handleTabClick('record-header-tab1')}
-
                         >
-
                             是次交易紀錄
-
                         </button>
-
                         <button
-
                             type="button"
-
-                            className={`record-hkjc-tab ${activeTab === 'record-header-tab2' ? 'active' : ''}`}
-
+                            className={`record-hkjc-tab record-hkjc-tab--center ${activeTab === 'record-header-tab2' ? 'active' : ''}`}
                             onClick={() => handleTabClick('record-header-tab2')}
-
                         >
-
                             交易紀錄
-
                         </button>
-
                         <button
-
                             type="button"
-
-                            className={`record-hkjc-tab ${activeTab === 'record-header-tab3' ? 'active' : ''}`}
-
+                            className={`record-hkjc-tab record-hkjc-tab--right ${activeTab === 'record-header-tab3' ? 'active' : ''}`}
                             onClick={() => handleTabClick('record-header-tab3')}
-
                         >
-
                             戶口紀錄
-
                         </button>
-
                     </div>
 
 

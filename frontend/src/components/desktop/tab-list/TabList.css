@@ -1,6 +1,6 @@
 .tab-list-container {
   width: 320px;
-  height: 300px;
+  height: auto;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -46,8 +46,7 @@
 .tab-list-container .tab-content {
   background-color: #fff;
   padding: 4px 0 8px;
-  overflow-y: auto;
-  max-height: calc(100% - 44px);
+  overflow: visible;
   box-sizing: border-box;
 }
 
@@ -89,16 +88,11 @@
 @media (max-width: 1450px) {
   .tab-list-container {
     width: 250px !important;
-    height: 180px !important;
   }
 
   .tab-list-container .tab {
     height: 40px;
     font-size: 13px;
-  }
-
-  .tab-list-container .tab-content {
-    max-height: calc(100% - 40px);
   }
 
   .tab-list-container .list li {

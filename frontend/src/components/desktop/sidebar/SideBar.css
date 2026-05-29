@@ -23,8 +23,7 @@
   flex-direction: column;
   padding: 0;
   margin: 0;
-  max-height: calc(100vh - 420px);
-  overflow-y: auto;
+  overflow: visible;
 }
 
 .sidebar-list li {

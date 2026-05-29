@@ -1,0 +1,26 @@
+export const otpVerifyText = {
+  en: {
+    title: "Enter the Verification Code",
+    sentTo: "A verification code has been sent to your mobile no.",
+    hint: "Please input the code below",
+    resendLabel: "Did not receive the code?",
+    resendWithTime: (time) => `Resend code (${time})`,
+    resend: "Resend code",
+    helpLink: "Having trouble with SMS OTP?",
+    moreWays: "More ways to verify",
+    cancel: "Cancel",
+    ariaLabel: "Verification code",
+  },
+  "zh-HK": {
+    title: "輸入驗證碼",
+    sentTo: "驗證碼已發送至你的流動電話號碼",
+    hint: "請在下方輸入驗證碼",
+    resendLabel: "沒有收到驗證碼？",
+    resendWithTime: (time) => `重新發送驗證碼 (${time})`,
+    resend: "重新發送驗證碼",
+    helpLink: "短訊一次性密碼有問題？",
+    moreWays: "更多驗證方式",
+    cancel: "取消",
+    ariaLabel: "驗證碼",
+  },
+};

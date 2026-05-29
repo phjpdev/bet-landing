@@ -4,6 +4,7 @@ import Login from "./components/login/Login";
 import Home from './Home';
 import MobileHome from "./MobileHome";
 import Record from "./components/record/Record";
+import { LanguageProvider } from "./context/LanguageContext";
 
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -37,6 +38,7 @@ function App() {
   }, []);
 
   return (
+    <LanguageProvider>
     <Router>
       <Routes>
         {/* If authenticated, redirect to /home */}
@@ -47,6 +49,7 @@ function App() {
         <Route path="*" element={<Navigate to={isAuthenticated ? "/home" : "/login"} />} />
       </Routes>
     </Router>
+    </LanguageProvider>
   );
 }
 

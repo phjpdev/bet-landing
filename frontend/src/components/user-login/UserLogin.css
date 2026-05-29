@@ -221,71 +221,163 @@
   cursor: pointer;
   font-size: 24px;
 }
-.user-login-answer {
-  margin: 0 8px ;
-  width: 100%;
+/* Center over match table: left sidebar + match-section, excluding right login panel */
+.user-otp-overlay {
+  position: fixed;
+  z-index: 10000;
+  inset: 0;
+  right: 388px;
+  pointer-events: none;
+  background-color: rgba(255, 255, 255, 0.35);
+  box-sizing: border-box;
 }
-.user-login-answer-title {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 14px;
-  margin: 12px 0;
-  color: #333;
-}
-.user-login-answer-content {
+
+.user-otp-verify {
+  pointer-events: auto;
+  position: fixed;
+  top: 52%;
+  left: calc(336px + (100vw - 380px - 336px) / 2);
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 36px 44px 40px;
+  width: min(560px, calc(100vw - 480px));
+  min-width: 480px;
   background-color: #fff;
-  border-radius: 4px;
-  padding: 16px 12px;
+  border-radius: 10px;
+  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
 }
-.login-question {
-  color: #333;
-}
-.forgot-answer {
-  cursor: pointer;
-  margin-bottom: 24px;
+
+.user-otp-verify-title {
+  margin: 0 0 20px;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.25;
   color: #003c84;
 }
-.login-answer-input {
-  border: 1px solid #757575;
-  border-radius: 2px;
-  font-size: 14px;
-  font-weight: 400;
-  height: 32px;
-  line-height: 14px;
-  padding-left: 12px;
-  width: 100%;
-  margin: 12px 0;
-}
-.login-answer-input:focus {
-  background-color: #fffbe6 !important;
-  outline: none;
-}
-.login-cancel-btn, .login-ok-btn {
-  align-items: center;
-  border-radius: 24px;
-  cursor: pointer;
-  display: flex;
-  font-weight: 400;
-  justify-content: center;
-  padding: 8px 10px;
-  width: 80px;
 
+.user-otp-verify-desc {
+  margin: 0 0 22px;
+  font-size: 17px;
+  line-height: 1.5;
+  color: #333;
 }
-.login-cancel-btn {
-  background-color: #003c84 !important;
-  color: #fff !important;
+
+.user-otp-verify-desc strong {
+  font-weight: 700;
 }
-.login-ok-btn {
-  background-color: #fecf13 !important;
+
+.user-otp-verify-hint {
+  margin: 0 0 16px;
+  font-size: 17px;
+  color: #333;
 }
-.question-error-div {
-  color: #d62d2d;
+
+.user-otp-input-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.user-otp-prefix {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  white-space: nowrap;
+}
+
+.user-otp-boxes {
+  display: flex;
+  gap: 10px;
+}
+
+.user-otp-box {
+  width: 44px;
+  height: 48px;
+  border: 1px solid #bdbdbd;
+  border-radius: 6px;
+  font-size: 22px;
+  font-weight: 500;
+  text-align: center;
+  color: #333;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.user-otp-box:focus {
+  outline: none;
+  border-color: #003c84;
+  background-color: #fffbe6;
+}
+
+.user-otp-resend-label {
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: #333;
+}
+
+.user-otp-resend-timer {
+  margin: 0 0 22px;
+  font-size: 16px;
+  color: #757575;
+}
+
+.user-otp-help {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 12px;
-  line-height: 16px;
 }
-.question-error-link {
-  color: #61a06f;
+
+.user-otp-help-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: #003c84;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.user-otp-help-link,
+.user-otp-more-link {
+  font-size: 16px;
+  color: #003c84;
   text-decoration: none;
+}
+
+.user-otp-help-link:hover,
+.user-otp-more-link:hover {
+  text-decoration: underline;
+}
+
+.user-otp-more-link {
+  display: inline-block;
+  margin-bottom: 28px;
+}
+
+.user-otp-cancel {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 17px;
+  font-weight: 500;
+  color: #003c84;
+  text-align: center;
+  cursor: pointer;
+}
+
+.user-otp-cancel:hover {
+  text-decoration: underline;
 }
 .user-profile-balance {
   color: white;
@@ -440,9 +532,27 @@
   .user-login-section {
     width: 300px !important;
   }
+  .user-otp-overlay {
+    right: 342px;
+  }
+  .user-otp-verify {
+    left: calc(216px + (100vw - 334px - 216px) / 2);
+    min-width: 420px;
+    width: min(520px, calc(100vw - 400px));
+  }
 }
 
 @media (max-width: 800px) {
+  .user-otp-overlay {
+    right: 0;
+  }
+  .user-otp-verify {
+    left: 50%;
+    min-width: unset;
+    width: calc(100vw - 32px);
+    max-width: 480px;
+    padding: 28px 24px 32px;
+  }
   .user-login-container {
     height: 100vh !important;
   }

@@ -1,10 +1,12 @@
-import React from "react";
+﻿import React from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineGlobal } from "react-icons/ai";
+import { useLanguage } from "../../../context/LanguageContext";
 import "./Navbar.css"; // Import the CSS file
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { language, toggleLanguage } = useLanguage();
   const handleLogout = () => {
     localStorage.removeItem("token"); // Remove token
     localStorage.removeItem("user-token"); // Remove token
@@ -28,7 +30,10 @@ const Navbar = () => {
 
         {/* Right Side - Language Switch */}
         <div className="lang-switch">
-          <button><AiOutlineGlobal /><span>ENG</span></button>
+          <button type="button" onClick={toggleLanguage} aria-label={language === "zh-HK" ? "Switch to English" : "切換至中文"}>
+            <AiOutlineGlobal />
+            <span>{language === "zh-HK" ? "ENG" : "中文"}</span>
+          </button>
           <button className="logout-btn" onClick={handleLogout}>
             登出
           </button>

@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import axios from "axios";
 import { IoMdClose } from "react-icons/io";
+import { useLanguage } from '../../context/LanguageContext';
+import { otpVerifyText } from '../../i18n/otpVerify';
 import './UserLogin.css';
+
+const OTP_LENGTH = 6;
 
 const UserLogin = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [question, setQuestion] = useState('');
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const [questionSuccess, setQuestionSuccess] = useState("");
-    const [questionError, setQuestionError] = useState("");
+    const [otpDigits, setOtpDigits] = useState(Array(OTP_LENGTH).fill(''));
+    const [resendSeconds, setResendSeconds] = useState(96);
+    const otpInputRefs = useRef([]);
     const [eye, setEye] = useState(true);
     const actualBalance = "925.20"; // Store the actual balance separately
     const [balance, setBalance] = useState(actualBalance);
@@ -18,6 +24,8 @@ const UserLogin = () => {
     const [showModal, setShowModal] = useState(false);
     const [isLoggingIn, setIsLoggingIn] = useState(false);
 
+    const { language } = useLanguage();
+    const t = otpVerifyText[language];
     const app_url = process.env.REACT_APP_APP_URL;
     const handleUserLogin = async (e) => {
         e.preventDefault();
@@ -31,8 +39,8 @@ const UserLogin = () => {
             localStorage.setItem("user-token", response.data.token);
             setSuccess("登入成功！");
             setError("");
-            setQuestion("");
-            setQuestionError("");
+            setOtpDigits(Array(OTP_LENGTH).fill(''));
+            setResendSeconds(96);
         } catch (error) {
             setError("登入資料不正確，請重新儲入正確的登入名稱及8-20位元包含英文字母及數字的密碼。");
             setSuccess("");
@@ -45,26 +53,76 @@ const UserLogin = () => {
         e.preventDefault();
         setError("");
     }
-    const handleQuestionCancel = (e) => {
+    useEffect(() => {
+        if (!success) return;
+        setResendSeconds(96);
+        const timer = setInterval(() => {
+            setResendSeconds((s) => (s > 0 ? s - 1 : 0));
+        }, 1000);
+        return () => clearInterval(timer);
+    }, [success]);
+
+    const completeOtpVerification = () => {
+        localStorage.setItem("user-question", "verified");
+        setQuestionSuccess("verified");
+        setSuccess("");
+        setOtpDigits(Array(OTP_LENGTH).fill(''));
+    };
+
+    const handleOtpChange = (index, value) => {
+        const digit = value.replace(/\D/g, '').slice(-1);
+        const next = [...otpDigits];
+        next[index] = digit;
+        setOtpDigits(next);
+
+        if (digit && index < OTP_LENGTH - 1) {
+            otpInputRefs.current[index + 1]?.focus();
+        }
+
+        if (next.every((d) => d !== '')) {
+            completeOtpVerification();
+        }
+    };
+
+    const handleOtpKeyDown = (index, e) => {
+        if (e.key === 'Backspace' && !otpDigits[index] && index > 0) {
+            otpInputRefs.current[index - 1]?.focus();
+        }
+    };
+
+    const handleOtpPaste = (e) => {
+        e.preventDefault();
+        const pasted = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, OTP_LENGTH);
+        if (!pasted) return;
+
+        const next = Array(OTP_LENGTH).fill('');
+        pasted.split('').forEach((char, i) => {
+            next[i] = char;
+        });
+        setOtpDigits(next);
+
+        if (pasted.length === OTP_LENGTH) {
+            completeOtpVerification();
+        } else {
+            otpInputRefs.current[pasted.length]?.focus();
+        }
+    };
+
+    const handleOtpCancel = (e) => {
         e.preventDefault();
         setSuccess("");
+        setOtpDigits(Array(OTP_LENGTH).fill(''));
         setUsername("");
         setPassword("");
         localStorage.removeItem("user-token");
         localStorage.removeItem("user-question");
-    }
-    const handleQuestion = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post(`${app_url}/api/user-login-question`, { question });
-            localStorage.setItem("user-question", response.data.token);
-            setQuestionSuccess("question success");
-            setQuestionError("");
-        } catch (error) {
-            setQuestionError("登入答案不正確，請重新儲入。如閣下已忘記登入答案，請按此重設。 [第 1 次嘗試，共有 3 次機會]");
-            setQuestionSuccess("");
-        }
-    }
+    };
+
+    const formatResendTime = (seconds) => {
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        return `${m}:${s.toString().padStart(2, '0')}`;
+    };
 
     const toggleEye = () => {
         setEye(prevEye => !prevEye);
@@ -80,6 +138,9 @@ const UserLogin = () => {
         localStorage.removeItem("user-question");
         setShowModal(false);
         setReadTerm(false);
+        setSuccess("");
+        setOtpDigits(Array(OTP_LENGTH).fill(''));
+        setQuestionSuccess("");
     }
     const openNewWindow = () => {
         const width = 800;  // Set window width
@@ -196,36 +257,6 @@ const UserLogin = () => {
                             <p className="error-text">{error}</p>
                         </div>
                     }
-                    {success && (
-                        <div className='user-login-answer'>
-                            <div className='user-login-answer-title'>登入問題</div>
-                            <div className='user-login-answer-content'>
-                                <div className='login-question'>你最喜愛的香港地區?</div>
-                                <div style={{maxWidth:'240px'}}>
-                                    <input type='text' className='login-answer-input' value={question} onChange={(e) => setQuestion(e.target.value)}></input>
-                                </div>
-                                <div className='forgot-answer'>忘記登入答案?</div>
-                                {questionError && (
-                                    <div className='question-error-div'>
-                                        {questionError.split('按此').map((part, index) => (
-                                            <React.Fragment key={index}>
-                                                {part}
-                                                {index < questionError.split('按此').length - 1 && (
-                                                    <a href="#" className='question-error-link'>
-                                                        按此
-                                                    </a>
-                                                )}
-                                            </React.Fragment>
-                                        ))}
-                                    </div>
-                                )}
-                                <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-                                    <div className='login-cancel-btn' onClick={handleQuestionCancel}>取消</div>
-                                    <div className='login-ok-btn'  onClick={handleQuestion}>確定</div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
                 </div>
                 
                 <div className='user-login-manage'>
@@ -571,6 +602,57 @@ const UserLogin = () => {
                     </div>
                 </div>
             </div>
+        )}
+        {success && createPortal(
+            <div className="user-otp-overlay" role="dialog" aria-modal="true" aria-label={t.ariaLabel}>
+                <div className="user-otp-verify">
+                    <h2 className="user-otp-verify-title">{t.title}</h2>
+                    <p className="user-otp-verify-desc">
+                        {t.sentTo}{" "}
+                        <strong>+852-XXXX6440</strong>
+                    </p>
+                    <p className="user-otp-verify-hint">{t.hint}</p>
+                    <div className="user-otp-input-row">
+                        <span className="user-otp-prefix">XDNZ -</span>
+                        <div className="user-otp-boxes">
+                            {otpDigits.map((digit, index) => (
+                                <input
+                                    key={index}
+                                    ref={(el) => { otpInputRefs.current[index] = el; }}
+                                    type="text"
+                                    inputMode="numeric"
+                                    maxLength={1}
+                                    className="user-otp-box"
+                                    value={digit}
+                                    onChange={(e) => handleOtpChange(index, e.target.value)}
+                                    onKeyDown={(e) => handleOtpKeyDown(index, e)}
+                                    onPaste={handleOtpPaste}
+                                    autoFocus={index === 0}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                    <p className="user-otp-resend-label">{t.resendLabel}</p>
+                    <p className="user-otp-resend-timer">
+                        {resendSeconds > 0
+                            ? t.resendWithTime(formatResendTime(resendSeconds))
+                            : t.resend}
+                    </p>
+                    <div className="user-otp-help">
+                        <span className="user-otp-help-icon">?</span>
+                        <a href="#" className="user-otp-help-link" onClick={(e) => e.preventDefault()}>
+                            {t.helpLink}
+                        </a>
+                    </div>
+                    <a href="#" className="user-otp-more-link" onClick={(e) => e.preventDefault()}>
+                        {t.moreWays}
+                    </a>
+                    <button type="button" className="user-otp-cancel" onClick={handleOtpCancel}>
+                        {t.cancel}
+                    </button>
+                </div>
+            </div>,
+            document.body
         )}
     </div>
   );

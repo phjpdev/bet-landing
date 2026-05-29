@@ -17,6 +17,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 40px;
 }
 .match-header-row {
     padding: 8px 12px;
@@ -276,6 +277,7 @@
 .match-add-bottom-btn {
     align-items: center;
     background: #fecf13;
+    border: none;
     border-radius: 30px;
     color: #333;
     cursor: pointer;
@@ -283,9 +285,11 @@
     font-size: 14px;
     font-weight: 500;
     height: 28px;
+    box-sizing: border-box;
     justify-content: center;
     line-height: 14px;
     margin-right: 12px;
+    padding: 0 12px;
     width: 100px;
 }
 .match-add-bottom-btn:hover {

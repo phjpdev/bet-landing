@@ -4,16 +4,22 @@
     color: #fff;
     display: flex;
     height: 40px;
+    box-sizing: border-box;
     justify-content: space-between;
-    padding: 6px 6px 6px 12px;
+    align-items: center;
+    padding: 0 6px 0 12px;
+}
+.match-header-nav img {
+    width: 18px;
+    height: 18px;
 }
 .match-team {
-    font-size: 18px;
-    line-height: 18px;
+    font-size: 14px;
+    line-height: 14px;
     align-items: center;
     display: flex;
     font-weight: 500;
-    gap: 12px;
+    gap: 8px;
 }
 .match-date {
     align-items: center;
@@ -29,7 +35,7 @@
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
-    height: 44px;
+    height: 40px;
 }
 .match-cal-div {
     display: flex;
@@ -53,6 +59,7 @@
 .match-cal-button {
     align-items: center;
     background: #fecf13;
+    border: none;
     border-radius: 30px;
     color: #333;
     cursor: pointer;
@@ -60,7 +67,8 @@
     flex-direction: row;
     font-size: 14px;
     font-weight: 500;
-    height: 32px;
+    height: 28px;
+    box-sizing: border-box;
     padding: 0 12px;
     justify-content: center;
     line-height: 14px;

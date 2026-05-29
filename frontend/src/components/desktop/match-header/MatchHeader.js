@@ -40,15 +40,15 @@ const MatchHeader = () => {
         <div className="match-team">
           <div>主客和</div>
           <div style={{cursor:'pointer'}}>
-            <img src="/image/help.svg" alt="help" width={24}></img>
+            <img src="/image/help.svg" alt="help" width={18}></img>
           </div>
           <div>[單項+過關(兩至八關)]</div>
         </div>
         <div className="match-date">
-          <div style={{cursor:'pointer'}}><img src="/image/print.svg" alt="print" width={24}></img></div>
+          <div style={{cursor:'pointer'}}><img src="/image/print.svg" alt="print" width={18}></img></div>
           <div style={{cursor:'pointer'}}>列印</div>
           <div>更新時間: {currentTime}</div>
-          <div style={{cursor:'pointer'}}><img src="/image/refresh.svg" alt="refresh" width={24}></img></div>
+          <div style={{cursor:'pointer'}}><img src="/image/refresh.svg" alt="refresh" width={18}></img></div>
         </div>
       </div>
       <div className="match-header-calculation">

@@ -494,6 +494,16 @@ tr:last-child .table-value {
 .record-hkjc-table-header th:nth-child(7) { width: 10%; }
 .record-hkjc-table-header th:nth-child(8) { width: 10%; }
 
+.record-hkjc-hint-bar {
+    flex-shrink: 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #333;
+    background: #ebebeb;
+    border-bottom: 1px solid #ddd;
+    line-height: 1.4;
+}
+
 .record-hkjc-empty {
     flex: 1;
     display: flex;
@@ -502,7 +512,12 @@ tr:last-child .table-value {
     min-height: 140px;
     font-size: 14px;
     color: #757575;
-    background: #e7e7e7 ;
+    background: #e7e7e7;
+}
+
+.record-hkjc-empty--session,
+.record-hkjc-empty--transaction {
+    background: #e7e7e7;
 }
 
 .record-hkjc-table-body {

@@ -71,9 +71,10 @@ const Record = ({ embedded = false }) => {
 
 
     const handleTabClick = (tab) => {
-
         setActiveTab(tab);
-
+        if (tab !== 'record-header-tab3') {
+            setShowRecordContainer(false);
+        }
     };
 
 
@@ -342,16 +343,88 @@ const Record = ({ embedded = false }) => {
 
 
 
+    const renderAccountRecordTab = () => (
+        <>
+            <div className="record-hkjc-date-row">
+                <span className="record-hkjc-date-text">
+                    日期範圍 {initialDateTime} - {initialDateTime}
+                </span>
+                <button
+                    type="button"
+                    className="record-hkjc-search-btn"
+                    onClick={() => setShowRecordContainer(true)}
+                >
+                    重新搜尋
+                </button>
+            </div>
+            <div className="record-hkjc-table-area">
+                <div className="record-hkjc-table-header-wrap">
+                    <table className="record-hkjc-table-header">
+                        <thead>
+                            <tr>
+                                {TABLE_COLUMNS.map((col) => (
+                                    <th key={col}>{col}</th>
+                                ))}
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                {showTable && transactions.length > 0 ? (
+                    <div className="record-hkjc-table-body">
+                        {transactions.map((tx, index) => (
+                            <table key={index} className="record-hkjc-data-row">
+                                <tbody>
+                                    <tr>
+                                        <td>{tx.transactionId}</td>
+                                        <td>{tx.dateTime}</td>
+                                        <td>{tx.eventDate}</td>
+                                        <td>{tx.betType}</td>
+                                        <td>{tx.details}</td>
+                                        <td>{tx.receipt}</td>
+                                        <td>{tx.expense}</td>
+                                        <td>{tx.deposit}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="record-hkjc-empty">沒有交易紀錄</div>
+                )}
+            </div>
+        </>
+    );
+
+    const renderEmbeddedTabContent = () => {
+        if (activeTab === 'record-header-tab1') {
+            return (
+                <>
+                    <div className="record-hkjc-hint-bar">
+                        複查是次登入之每項交易細節。客戶登出「投注區」後，此處紀錄亦將被清除。
+                    </div>
+                    <div className="record-hkjc-empty record-hkjc-empty--session">是次未有交易紀錄。</div>
+                </>
+            );
+        }
+
+        if (activeTab === 'record-header-tab2') {
+            return (
+                <div className="record-hkjc-empty record-hkjc-empty--transaction">沒有被接納交易。</div>
+            );
+        }
+
+        if (showRecordContainer) {
+            return renderSearchOverlay();
+        }
+
+        return renderAccountRecordTab();
+    };
+
     if (embedded) {
-
         return (
-
             <div className="record-root record-root--embedded">
-
                 <div className="record-hkjc-page">
-
                     <div className="record-hkjc-topbar">戶口紀錄</div>
-
                     <div className="record-hkjc-tabs">
                         <button
                             type="button"
@@ -375,159 +448,27 @@ const Record = ({ embedded = false }) => {
                             戶口紀錄
                         </button>
                     </div>
-
-
-
                     <div className="record-hkjc-summary">
-
                         <div className="record-hkjc-summary-item record-hkjc-summary-item--first">
-
                             <span>時間:</span>
-
                             <span className="record-hkjc-summary-value">{currentDateTime}</span>
-
                         </div>
-
                         <div className="record-hkjc-summary-item">
-
                             <span>投注戶口號碼:</span>
-
                             <span className="record-hkjc-summary-value">15339692</span>
-
                         </div>
-
                         <div className="record-hkjc-summary-item">
-
                             <span className="record-hkjc-summary-label">結餘:</span>
-
                             <span className="record-hkjc-balance">$4.40</span>
-
                         </div>
-
                     </div>
-
-
-
                     <div className="record-hkjc-main">
-
-                        {showRecordContainer ? (
-
-                            renderSearchOverlay()
-
-                        ) : (
-
-                            <>
-
-                                <div className="record-hkjc-date-row">
-
-                                    <span className="record-hkjc-date-text">
-
-                                        日期範圍 {initialDateTime} - {initialDateTime}
-
-                                    </span>
-
-                                    <button
-
-                                        type="button"
-
-                                        className="record-hkjc-search-btn"
-
-                                        onClick={() => setShowRecordContainer(true)}
-
-                                    >
-
-                                        重新搜尋
-
-                                    </button>
-
-                                </div>
-
-
-
-                                <div className="record-hkjc-table-area">
-
-                                    <div className="record-hkjc-table-header-wrap">
-
-                                        <table className="record-hkjc-table-header">
-
-                                            <thead>
-
-                                                <tr>
-
-                                                    {TABLE_COLUMNS.map((col) => (
-
-                                                        <th key={col}>{col}</th>
-
-                                                    ))}
-
-                                                </tr>
-
-                                            </thead>
-
-                                        </table>
-
-                                    </div>
-
-                                    {showTable && transactions.length > 0 ? (
-
-                                        <div className="record-hkjc-table-body">
-
-                                            {transactions.map((tx, index) => (
-
-                                                <table key={index} className="record-hkjc-data-row">
-
-                                                    <tbody>
-
-                                                        <tr>
-
-                                                            <td>{tx.transactionId}</td>
-
-                                                            <td>{tx.dateTime}</td>
-
-                                                            <td>{tx.eventDate}</td>
-
-                                                            <td>{tx.betType}</td>
-
-                                                            <td>{tx.details}</td>
-
-                                                            <td>{tx.receipt}</td>
-
-                                                            <td>{tx.expense}</td>
-
-                                                            <td>{tx.deposit}</td>
-
-                                                        </tr>
-
-                                                    </tbody>
-
-                                                </table>
-
-                                            ))}
-
-                                        </div>
-
-                                    ) : (
-
-                                        <div className="record-hkjc-empty">沒有交易紀錄</div>
-
-                                    )}
-
-                                </div>
-
-                            </>
-
-                        )}
-
+                        {renderEmbeddedTabContent()}
                     </div>
-
                 </div>
-
                 {renderExportModal()}
-
             </div>
-
         );
-
     }
 
 

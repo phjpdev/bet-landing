@@ -5,6 +5,7 @@ import { IoMdClose } from "react-icons/io";
 import { useLanguage } from '../../context/LanguageContext';
 import { otpVerifyText } from '../../i18n/otpVerify';
 import TermsContent from './TermsContent';
+import AccountRecordModal from '../record/AccountRecordModal';
 import './UserLogin.css';
 
 const OTP_LENGTH = 6;
@@ -23,6 +24,7 @@ const UserLogin = () => {
     const [balance, setBalance] = useState(actualBalance);
     const [readTerm, setReadTerm] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [showAccountRecordModal, setShowAccountRecordModal] = useState(false);
     const [isLoggingIn, setIsLoggingIn] = useState(false);
 
     const { language } = useLanguage();
@@ -138,18 +140,15 @@ const UserLogin = () => {
         localStorage.removeItem("user-token");
         localStorage.removeItem("user-question");
         setShowModal(false);
+        setShowAccountRecordModal(false);
         setReadTerm(false);
         setShowTermsModal(false);
         setSuccess("");
         setOtpDigits(Array(OTP_LENGTH).fill(''));
     };
-    const openNewWindow = () => {
-        const width = 800;  // Set window width
-        const height = 770;
-        const left = (window.screen.width - width) / 2;
-        const top = (window.screen.height - height) / 2;
-        // window.open(`${app_url}/account-record`, "_blank", "width=600,height=600,noopener,noreferrer");
-        window.open("http://localhost:3000/account-record", "_blank", `width=${width},height=${height},top=${top},left=${left},noopener,noreferrer`);
+    const openAccountRecord = (e) => {
+        e.preventDefault();
+        setShowAccountRecordModal(true);
     };
 
   return (
@@ -181,7 +180,7 @@ const UserLogin = () => {
                         </div>
                         <div className="extra-links">
                             <div>
-                                <a href="#" onClick={(e) => { e.preventDefault(); openNewWindow(); }}>戶口紀錄</a> | 
+                                <a href="#" onClick={openAccountRecord}>戶口紀錄</a> | 
                                 <a href="#">轉賬服務</a>
                             </div>
                             <div className='extra-link-icons'>
@@ -303,6 +302,9 @@ const UserLogin = () => {
                     </div>
                 </div>
             </div>
+        )}
+        {showAccountRecordModal && (
+            <AccountRecordModal onClose={() => setShowAccountRecordModal(false)} />
         )}
         {success && createPortal(
             <div className="user-otp-overlay" role="dialog" aria-modal="true" aria-label={t.ariaLabel}>

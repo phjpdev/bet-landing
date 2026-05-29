@@ -7,12 +7,15 @@
     color: white;
     font-size: 16px;
     font-weight: 500;
+    position: relative;
+    flex-shrink: 0;
 }
 .record-header-tabs {
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-around;
+    flex-shrink: 0;
 }
 .record-header-tab {
     cursor: pointer;
@@ -37,6 +40,7 @@
     color: #333;
     height: 60px;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .record-info-item {
@@ -82,6 +86,35 @@
 .record-info-sec {
     background-color: rgba(0,0,0,.5);
     height: calc(100vh - 180px);
+}
+
+.record-root--embedded .record-info-sec {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    height: auto;
+}
+
+.record-root--embedded .record-info-search {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+.record-root--embedded .record-info-container {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.record-root--embedded .record-info-container-content {
+    flex: 1;
+    align-items: center;
+    padding-top: 24px;
 }
 .record-info-search {
     position: absolute;
@@ -226,4 +259,276 @@
 tr:last-child .table-label,
 tr:last-child .table-value {
     border-bottom: none; /* Remove bottom border for last row */
+}
+
+.date-input-box-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.record-search-hint {
+    font-size: 12px;
+    margin-top: 8px;
+    margin-left: 24px;
+}
+
+.date-picker-container--last {
+    border-bottom: none;
+}
+
+.date-input-box--spaced {
+    margin-top: 12px;
+}
+
+/* ===== HKJC embedded modal layout ===== */
+.record-root--embedded {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
+    font-size: 13px;
+    color: #333;
+}
+
+.record-hkjc-page {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    background: #f0f0f0;
+}
+
+/* Blue header — title only */
+.record-hkjc-topbar {
+    height: 44px;
+    min-height: 44px;
+    background: #003c84;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    flex-shrink: 0;
+}
+
+/* Light grey tab bar — HKJC style */
+.record-hkjc-tabs {
+    display: flex;
+    align-items: stretch;
+    height: 48px;
+    min-height: 48px;
+    background: #e8e8e8;
+    flex-shrink: 0;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.record-hkjc-tab {
+    flex: 1;
+    border: none;
+    background: transparent;
+    color: #333;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: inherit;
+    cursor: pointer;
+    position: relative;
+    padding: 0 6px;
+    border-bottom: 4px solid transparent;
+    margin-bottom: -1px;
+}
+
+.record-hkjc-tab.active {
+    color: #333;
+    border-bottom-color: #fecf13;
+    font-weight: 400;
+}
+
+/* Cream account summary */
+.record-hkjc-summary {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    background: #fff9e1;
+    border-bottom: 1px solid #c8c8c8;
+    flex-shrink: 0;
+}
+
+.record-hkjc-summary-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 14px;
+    border-left: 1px solid #b0b0b0;
+    font-size: 13px;
+    font-weight: 400;
+    color: #333;
+    white-space: nowrap;
+}
+
+.record-hkjc-summary-item--first {
+    border-left: none;
+    flex: 1.05;
+}
+
+.record-hkjc-summary-value {
+    font-weight: 400;
+    color: #333;
+}
+
+.record-hkjc-summary-label {
+    font-weight: 400;
+    color: #333;
+}
+
+.record-hkjc-balance {
+    color: #0066b3;
+    font-weight: 400;
+}
+
+.record-hkjc-main {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: #f0f0f0;
+}
+
+.record-hkjc-date-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 42px;
+    min-height: 42px;
+    padding: 0 14px;
+    background: #f0f0f0;
+    flex-shrink: 0;
+}
+
+.record-hkjc-date-text {
+    font-size: 13px;
+    font-weight: 400;
+    color: #333;
+}
+
+.record-hkjc-search-btn {
+    height: 28px;
+    min-width: 96px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 14px;
+    background: #003c84;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.record-hkjc-search-btn:hover {
+    background: #01316a;
+}
+
+.record-hkjc-table-area {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    background: #f5f5f5;
+    margin: 0 0 0 0;
+}
+
+.record-hkjc-table-header-wrap {
+    flex-shrink: 0;
+    background: #e8e8e8;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.record-hkjc-table-header {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: transparent;
+}
+
+.record-hkjc-table-header th {
+    padding: 7px 6px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #333;
+    text-align: left;
+    border: none;
+    vertical-align: middle;
+    line-height: 1.25;
+}
+
+.record-hkjc-table-header th:nth-child(1) { width: 10%; }
+.record-hkjc-table-header th:nth-child(2) { width: 14%; }
+.record-hkjc-table-header th:nth-child(3) { width: 10%; }
+.record-hkjc-table-header th:nth-child(4) { width: 12%; }
+.record-hkjc-table-header th:nth-child(5) { width: 24%; }
+.record-hkjc-table-header th:nth-child(6) { width: 8%; }
+.record-hkjc-table-header th:nth-child(7) { width: 11%; }
+.record-hkjc-table-header th:nth-child(8) { width: 11%; }
+
+.record-hkjc-empty {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    font-size: 14px;
+    color: #666;
+    background: #f5f5f5;
+}
+
+.record-hkjc-table-body {
+    flex: 1;
+    overflow-y: auto;
+    background: #fff;
+}
+
+.record-hkjc-data-row {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.record-hkjc-data-row td {
+    padding: 6px 4px;
+    font-size: 12px;
+    border-right: 1px solid #e8e8e8;
+    vertical-align: top;
+    word-break: break-word;
+}
+
+.record-hkjc-data-row td:nth-child(1) { width: 11%; }
+.record-hkjc-data-row td:nth-child(2) { width: 13%; }
+.record-hkjc-data-row td:nth-child(3) { width: 10%; }
+.record-hkjc-data-row td:nth-child(4) { width: 12%; }
+.record-hkjc-data-row td:nth-child(5) { width: 22%; }
+.record-hkjc-data-row td:nth-child(6) { width: 8%; }
+.record-hkjc-data-row td:nth-child(7) { width: 12%; }
+.record-hkjc-data-row td:nth-child(8) { width: 12%; }
+
+.record-root--embedded .record-info-sec {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.record-root--embedded .record-info-search {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    max-height: 100%;
+    overflow-y: auto;
 }

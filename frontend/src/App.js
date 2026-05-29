@@ -44,7 +44,8 @@ function App() {
         {/* If authenticated, redirect to /home */}
         <Route path="/login" element={isAuthenticated ? <Navigate to="/home" /> : <Login />} />
         <Route path="/home" element={isMobile ? <MobileHome /> : <Home />} />
-        <Route path="/account-record" element={isUserAuthenticated && isUserQuestionAuthenticated ? <Record /> : <Navigate to="/home" />} />
+        <Route path="/ch/betslip/acctstmt" element={isUserAuthenticated && isUserQuestionAuthenticated ? <Record /> : <Navigate to="/home" />} />
+        <Route path="/account-record" element={<Navigate to="/ch/betslip/acctstmt" replace />} />
         {/* Redirect all other routes to login */}
         <Route path="*" element={<Navigate to={isAuthenticated ? "/home" : "/login"} />} />
       </Routes>

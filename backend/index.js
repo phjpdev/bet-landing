@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5003;
 const HKMatches = require("./matches"); // This should correctly import the function
 
 const app = express();

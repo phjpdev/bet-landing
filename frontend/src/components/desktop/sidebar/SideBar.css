@@ -23,7 +23,9 @@
   flex-direction: column;
   padding: 0;
   margin: 0;
-  overflow: visible;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .sidebar-list li {

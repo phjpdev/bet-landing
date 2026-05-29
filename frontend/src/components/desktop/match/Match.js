@@ -182,7 +182,16 @@ const Match = () => {
                                 <div className="match-vertical-line"></div>
                                 <div className="match-id">{match.id}</div>
                                 <div className="match-vertical-line"></div>
-                                <div className="match-tournament"><img src={match.tournament} alt="tournament" /></div>
+                                <div className="match-tournament">
+                                    <img
+                                        src={match.tournament || "/image/header-flag.svg"}
+                                        alt={match.tournamentText || "tournament"}
+                                        onError={(e) => {
+                                            e.currentTarget.onerror = null;
+                                            e.currentTarget.src = "/image/header-flag.svg";
+                                        }}
+                                    />
+                                </div>
                                 <div className="match-vertical-line"></div>
                                 <div className="match-teams">
                                     <div className="match-teams-flex">

@@ -144,8 +144,28 @@ const tournamentIcons = [
     { "key": "女子世盃", "value": "https://consvc.hkjc.com/-/media/Sites/JCBW/TournIcon/flag_WWC.svg?sc_lang=zh-HK" },
     { "key": "世青盃", "value": "https://consvc.hkjc.com/-/media/Sites/JCBW/TournIcon/flag_WYC.svg?sc_lang=zh-HK" },
     { "key": "女子世青盃", "value": "https://consvc.hkjc.com/-/media/Sites/JCBW/TournIcon/flag_WU20.svg?sc_lang=zh-HK" },
+    { "key": "烏拉圭甲組聯賽", "value": "https://consvc.hkjc.com/-/media/Sites/JCBW/TournIcon/flag_UD1.svg?sc_lang=zh-HK" },
+    { "key": "日職百年構想聯賽", "value": "https://consvc.hkjc.com/-/media/Sites/JCBW/TournIcon/flag_JV1.svg?sc_lang=zh-HK" },
+    { "key": "日乙日丙百年構想聯賽", "value": "https://consvc.hkjc.com/-/media/Sites/JCBW/TournIcon/flag_JV2.svg?sc_lang=zh-HK" },
+    { "key": "澳洲全國聯賽 - 維多利亞", "value": "https://consvc.hkjc.com/-/media/Sites/JCBW/TournIcon/flag_AVC.svg?sc_lang=zh-HK" },
+    { "key": "澳洲全國聯賽 - 新南威爾斯", "value": "https://consvc.hkjc.com/-/media/Sites/JCBW/TournIcon/flag_ANS.svg?sc_lang=zh-HK" },
+    { "key": "澳洲全國聯賽 - 昆士蘭", "value": "https://consvc.hkjc.com/-/media/Sites/JCBW/TournIcon/flag_AQL.svg?sc_lang=zh-HK" },
+    { "key": "南韓乙組聯賽", "value": "https://consvc.hkjc.com/-/media/Sites/JCBW/TournIcon/flag_KD2.svg?sc_lang=zh-HK" },
+    { "key": "女子俄羅斯超級聯賽", "value": "https://consvc.hkjc.com/-/media/Sites/JCBW/TournIcon/flag_RPLW.svg?sc_lang=zh-HK" },
+    { "key": "盃賽", "value": "https://consvc.hkjc.com/-/media/Sites/JCBW/TournIcon/flag_CUP.svg?sc_lang=zh-HK" },
 ]
-  
+
+const TOURN_ICON_BASE = "https://consvc.hkjc.com/-/media/Sites/JCBW/TournIcon/";
+
+function getTournamentIconUrl(tournament) {
+    if (!tournament) return "";
+    const byName = tournamentIcons.find((icon) => icon.key === tournament.name_ch)?.value;
+    if (byName) return byName;
+    if (tournament.code) {
+        return `${TOURN_ICON_BASE}flag_${tournament.code}.svg?sc_lang=zh-HK`;
+    }
+    return "";
+}
 
 // Function to send a POST request
 async function HKData() {
@@ -184,8 +204,9 @@ async function HKData() {
     const matches = response.data.data.matches;
     // console.log(JSON.stringify(matches[0], null, 2))
     matchData = matches.map(match => {
-        const tournament = match.tournament?.name_ch;
-        const tournamentImage = tournamentIcons.find(icon => icon.key === tournament)?.value || '';
+        const tournament = match.tournament;
+        const tournamentImage = getTournamentIconUrl(tournament);
+        const tournamentName = tournament?.name_ch;
         const combinations = match.foPools[0]?.lines[0]?.combinations;
         let homeOdds = null, awayOdds = null, drawOdds = null;
         if(combinations) {
@@ -200,7 +221,7 @@ async function HKData() {
           time: match.kickOffTime,
           id: match.frontEndId,
           tournament: tournamentImage,
-          tournamentText: tournament,
+          tournamentText: tournamentName,
           homeName: match.homeTeam.name_ch,
           awayName: match.awayTeam.name_ch,
           tvChannel: match.tvChannels[0]?.code,

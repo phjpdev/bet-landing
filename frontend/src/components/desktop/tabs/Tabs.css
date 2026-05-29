@@ -1,12 +1,14 @@
 .tab-container {
     margin-top: 8px;
 }
-.tabs {
+
+.tab-container .tabs {
     display: flex;
     justify-content: space-around;
     align-items: center;
     background-color: #f4f4f4;
-    border-radius: 5px;
+    border-radius: 4px;
+    overflow: hidden;
   }
   
   .tab {
@@ -25,6 +27,16 @@
   .tab:hover {
     background-color: #00c06c;
     color: white;
+  }
+
+  .tab-container .tab:first-child.active,
+  .tab-container .tab:first-child:hover {
+    border-radius: 4px 0 0 4px;
+  }
+
+  .tab-container .tab:last-child.active,
+  .tab-container .tab:last-child:hover {
+    border-radius: 0 4px 4px 0;
   }
   .tab.active .span-icon,
   .tab:hover .span-icon {

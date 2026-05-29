@@ -72,7 +72,7 @@ const AccountRecordModal = ({ onClose }) => {
                             aria-label="網站設定"
                         >
                             <img
-                                src="/image/google-view-info.png"
+                                src="/image/google-view-info.svg"
                                 alt=""
                                 className="chrome-omnibox-img chrome-omnibox-img--site-info"
                             />

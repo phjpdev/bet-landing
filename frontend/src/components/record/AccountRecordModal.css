@@ -131,26 +131,20 @@
 
 /* Chrome address bar */
 .chrome-toolbar {
-    height: 40px;
-    min-height: 40px;
-    background: #dee1e6;
+    height: 35px;
+    background: #e7e7e7;
     border-bottom: 1px solid #c8ccd0;
     display: flex;
     align-items: center;
-    padding: 0 10px 6px;
 }
 
 .chrome-address-bar {
+    height: 35px;
     flex: 1;
-    height: 30px;
-    background: #fff;
-    border-radius: 16px;
     display: flex;
     align-items: center;
-    padding: 0 8px 0 10px;
+    padding: 2px 8px;
     gap: 4px;
-    border: 1px solid transparent;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
     transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
@@ -176,9 +170,16 @@
     flex-shrink: 0;
 }
 
+.chrome-omnibox-btn:first-of-type {
+    background: transparent;
+    border-radius: 50%;
+    overflow: visible;
+}
+
 .chrome-omnibox-img--site-info {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
+    background: transparent;
 }
 
 .chrome-omnibox-img--translate {

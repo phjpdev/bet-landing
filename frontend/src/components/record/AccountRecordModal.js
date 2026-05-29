@@ -1,9 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Record from './Record';
 import './AccountRecordModal.css';
 
+const DEFAULT_URL = 'bet.hkjc.com/ch/betslip/acctstmt';
+
 const AccountRecordModal = ({ onClose }) => {
+    const [url, setUrl] = useState(DEFAULT_URL);
+
+    const handleUrlFocus = (e) => {
+        e.target.select();
+    };
+
+    const handleUrlBlur = () => {
+        if (!url.trim()) {
+            setUrl(DEFAULT_URL);
+        }
+    };
+
+    const handleUrlKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.target.blur();
+        }
+    };
+
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.key === 'Escape') {
@@ -45,21 +65,45 @@ const AccountRecordModal = ({ onClose }) => {
                 </div>
                 <div className="chrome-toolbar">
                     <div className="chrome-address-bar">
-                        <img src="/favicon.ico" alt="" className="chrome-url-favicon" />
-                        <span className="chrome-url">bet.hkjc.com/ch/betslip/acctstmt</span>
+                        <button
+                            type="button"
+                            className="chrome-omnibox-btn"
+                            tabIndex={-1}
+                            aria-label="網站設定"
+                        >
+                            <img
+                                src="/image/google-view-info.png"
+                                alt=""
+                                className="chrome-omnibox-img chrome-omnibox-img--site-info"
+                            />
+                        </button>
+                        <input
+                            type="text"
+                            className="chrome-url-input"
+                            value={url}
+                            onChange={(e) => setUrl(e.target.value)}
+                            onFocus={handleUrlFocus}
+                            onBlur={handleUrlBlur}
+                            onKeyDown={handleUrlKeyDown}
+                            spellCheck={false}
+                            autoComplete="off"
+                            aria-label="網址"
+                        />
                         <div className="chrome-toolbar-right">
-                            <span className="chrome-translate-icon" aria-hidden="true">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                    <path d="M4 10h5.5M7.25 6.5 9.5 10l-2.25 3.5M11 6h2.2c1.5 0 2.7 1.1 2.7 2.5S14.7 11 13.2 11H11" stroke="#5f6368" strokeWidth="1.2" strokeLinecap="round" />
-                                    <text x="12" y="15" fontSize="7" fill="#34a853" fontFamily="Arial">文</text>
-                                </svg>
-                            </span>
-                            <span className="chrome-install-icon" aria-hidden="true">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                                    <path d="M12 3v10M8.5 9.5 12 13l3.5-3.5" stroke="#5f6368" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M4 17h16" stroke="#5f6368" strokeWidth="1.4" strokeLinecap="round" />
-                                </svg>
-                            </span>
+                            <button type="button" className="chrome-omnibox-btn" tabIndex={-1} aria-label="翻譯">
+                                <img
+                                    src="/image/translate.png"
+                                    alt=""
+                                    className="chrome-omnibox-img chrome-omnibox-img--translate"
+                                />
+                            </button>
+                            <button type="button" className="chrome-omnibox-btn" tabIndex={-1} aria-label="下載">
+                                <img
+                                    src="/image/download.png"
+                                    alt=""
+                                    className="chrome-omnibox-img chrome-omnibox-img--download"
+                                />
+                            </button>
                         </div>
                     </div>
                 </div>

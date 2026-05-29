@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef  } from "react";
+﻿import React, { useState, useEffect, useRef  } from "react";
 import axios from "axios";
+import { sortMatchDateKeys } from "../../../utils/matchDates";
 import './MobileMatch.css'
 
 const MobileMatch = () => {
@@ -82,10 +83,12 @@ const MobileMatch = () => {
         return acc;
     }, {});
 
+    const sortedDateKeys = sortMatchDateKeys(groupedMatches);
+
     const [openDates, setOpenDates] = useState([]);
     useEffect(() => {
         if (openDates.length === 0) { // Only set once to prevent overwriting user interactions
-            setOpenDates(Object.keys(groupedMatches));
+            setOpenDates(sortMatchDateKeys(groupedMatches));
         }
     }, [groupedMatches]); 
     
@@ -181,7 +184,7 @@ const MobileMatch = () => {
                 </div>
             </div>
 
-            {Object.keys(groupedMatches).sort().map((date, index) => (
+            {sortedDateKeys.map((date, index) => (
                 <div key={index} style={{margin: '0 8px 12px 8px'}}>
                     {/* Date Header */}
                     <div className="mobile-match-date-header">

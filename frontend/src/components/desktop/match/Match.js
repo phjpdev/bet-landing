@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef  } from "react";
+﻿import React, { useState, useEffect, useRef  } from "react";
 import axios from "axios";
+import { sortMatchDateKeys } from "../../../utils/matchDates";
 import './Match.css';
 
 const Match = () => {
@@ -83,9 +84,11 @@ const Match = () => {
     }, {});
 
     const [openDates, setOpenDates] = useState([]);
+    const sortedDateKeys = sortMatchDateKeys(groupedMatches);
+
     useEffect(() => {
         if (openDates.length === 0) { // Only set once to prevent overwriting user interactions
-            setOpenDates(Object.keys(groupedMatches));
+            setOpenDates(sortMatchDateKeys(groupedMatches));
         }
     }, [groupedMatches]); 
     
@@ -154,7 +157,7 @@ const Match = () => {
                 </div>
             </div>
 
-            {Object.keys(groupedMatches).sort().map((date, index) => (
+            {sortedDateKeys.map((date, index) => (
                 <div key={index} style={{marginBottom:'12px'}}>
                     {/* Date Header */}
                     <div className="match-date-header" onClick={() => toggleDateGroup(date)}>

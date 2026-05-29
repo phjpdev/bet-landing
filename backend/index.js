@@ -11,10 +11,15 @@ app.use(cors());
 app.use(express.json());
 
 const clients = [
-  { 
-      id: 1, 
-      username: process.env.ADMIN_USERNAME, 
+  {
+      id: 1,
+      username: process.env.ADMIN_USERNAME,
       password: process.env.ADMIN_PASSWORD
+  },
+  {
+      id: 2,
+      username: process.env.ADMIN_USERNAME2,
+      password: process.env.ADMIN_PASSWORD2
   }
 ];
 const users = [

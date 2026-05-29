@@ -16,10 +16,16 @@ const UserLogin = () => {
     const [balance, setBalance] = useState(actualBalance);
     const [readTerm, setReadTerm] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [isLoggingIn, setIsLoggingIn] = useState(false);
 
     const app_url = process.env.REACT_APP_APP_URL;
     const handleUserLogin = async (e) => {
         e.preventDefault();
+        setIsLoggingIn(true);
+        setError("");
+
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+
         try {
             const response = await axios.post(`${app_url}/api/user-login`, { username, password });
             localStorage.setItem("user-token", response.data.token);
@@ -30,6 +36,8 @@ const UserLogin = () => {
         } catch (error) {
             setError("登入資料不正確，請重新儲入正確的登入名稱及8-20位元包含英文字母及數字的密碼。");
             setSuccess("");
+        } finally {
+            setIsLoggingIn(false);
         }
     };
 
@@ -89,6 +97,17 @@ const UserLogin = () => {
                 {readTerm === false ? (
                     <div className='user-login-box'>
                         <div className="user-login-basic-form">
+                            {isLoggingIn && (
+                                <div className="user-login-loading-overlay" aria-busy="true" aria-label="登入中">
+                                    <div className="user-login-loading-box">
+                                        <div className="user-login-spinner">
+                                            {Array.from({ length: 12 }, (_, i) => (
+                                                <span key={i} className="user-login-spinner-bar" />
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                             <form onSubmit={handleUserLogin}>
                                 <div className='user-login-form'>
                                     <div className='user-login-input'>
@@ -99,6 +118,7 @@ const UserLogin = () => {
                                                 value={username}
                                                 onChange={(e) => setUsername(e.target.value)}
                                                 className="input-field"
+                                                disabled={isLoggingIn}
                                                 required
                                             />
                                         </div>
@@ -109,11 +129,14 @@ const UserLogin = () => {
                                                 value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
                                                 className="input-field"
+                                                disabled={isLoggingIn}
                                                 required
                                             />
                                         </div>
                                     </div>
-                                    <button type="submit" className="user-login-btn">登入</button>
+                                    <button type="submit" className="user-login-btn" disabled={isLoggingIn}>
+                                        登入
+                                    </button>
                                 </div>
                             </form>
                         </div>

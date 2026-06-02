@@ -27,23 +27,25 @@ function Home() {
             <Navbar />
             <MatchNavbar />
             <div className='main'>
-                <div className='main-div'>
-                    <div className='first-div'>
-                        <TabList />
-                        <ImageSlider />
-                    </div>
-                    <div className='second-div'>
-                        <Tabs />
-                    </div>
-                    <div className='third-div'>
-                        <SideBar />
-                        <div className='match-section'>
-                            <MatchHeader />
-                            <Match />
+                <div className='main-layout'>
+                    <div className='main-div'>
+                        <div className='first-div'>
+                            <TabList />
+                            <ImageSlider />
+                        </div>
+                        <div className='second-div'>
+                            <Tabs />
+                        </div>
+                        <div className='third-div'>
+                            <SideBar />
+                            <div className='match-section'>
+                                <MatchHeader />
+                                <Match />
+                            </div>
                         </div>
                     </div>
+                    <UserLogin />
                 </div>
-                <UserLogin />
             </div>
             <Footer />
         </div>

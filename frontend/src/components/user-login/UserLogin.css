@@ -4,6 +4,7 @@
   position: sticky;
   height: calc(100dvh - 92px);
   width: 380px;
+  flex-shrink: 0;
 }
 .user-login-container {
     width: 100%;
@@ -11,7 +12,7 @@
     flex-direction: column;
     justify-content: space-between;
     background-color: #e7e7e7;
-    float: right;
+    flex-shrink: 0;
     height: calc(100vh - 52px);
     position: relative;
     top: -44px;

@@ -1,13 +1,22 @@
 .main {
     display: flex;
-    justify-content: space-between;
-    gap: 8px;
+    justify-content: center;
+    padding: 8px 0;
 }
-.main-div {
+
+.main-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
     max-width: 1680px;
-    width: calc(100vw - 480px);
-    padding: 8px 0 8px 0;
-    margin-left: 100px;
+    padding: 0 8px;
+    box-sizing: border-box;
+}
+
+.main-div {
+    flex: 1 1 auto;
+    min-width: 0;
 }
 .first-div {
     display: flex;
@@ -40,11 +49,6 @@
 }
 
 @media (max-width: 1450px) {
-    .main-div {
-        width: calc(100vw - 334px) !important;
-        margin-left: 0;
-    }
-
     .third-div {
         padding-left: 208px;
     }

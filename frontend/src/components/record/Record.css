@@ -429,7 +429,7 @@ tr:last-child .table-value {
     padding: 0 10px;
     border-left: 1px solid #333;
     font-size: 13px;
-    font-weight: 400;
+    font-weight: 700;
     color: #333;
     white-space: nowrap;
     line-height: 1.2;
@@ -441,18 +441,18 @@ tr:last-child .table-value {
 }
 
 .record-hkjc-summary-value {
-    font-weight: 400;
+    font-weight: 700;
     color: #333;
 }
 
 .record-hkjc-summary-label {
-    font-weight: 400;
+    font-weight: 700;
     color: #333;
 }
 
 .record-hkjc-balance {
     color: #003c84;
-    font-weight: 400;
+    font-weight: 700;
 }
 
 .record-balance-editable {

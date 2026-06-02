@@ -12,9 +12,9 @@ export const otpVerifyText = {
     ariaLabel: "Verification code",
   },
   "zh-HK": {
-    title: "輸入驗證碼",
+    title: "鍵入驗證碼",
     sentTo: "驗證碼已發送至你的流動電話號碼",
-    hint: "請在下方輸入驗證碼",
+    hint: "請在下方鍵入驗證碼",
     resendLabel: "沒有收到驗證碼？",
     resendWithTime: (time) => `重新發送驗證碼 (${time})`,
     resend: "重新發送驗證碼",

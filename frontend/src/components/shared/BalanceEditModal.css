@@ -1,0 +1,84 @@
+.balance-edit-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10150;
+}
+
+.balance-edit-modal-content {
+    background: #fff;
+    width: 400px;
+    max-width: calc(100vw - 32px);
+    padding: 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.balance-edit-modal-title {
+    color: #003c84;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.balance-edit-modal-field {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+    gap: 8px;
+}
+
+.balance-edit-modal-field label {
+    width: 30%;
+    flex-shrink: 0;
+}
+
+.balance-edit-modal-field input {
+    flex: 1;
+    height: 30px;
+    padding: 0 8px;
+    border: 1px solid #aaa;
+    font-size: 14px;
+}
+
+.balance-edit-modal-field input:focus {
+    border: 1px solid #003c84;
+    outline: none;
+    background-color: rgb(255, 251, 230);
+}
+
+.balance-edit-modal-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.balance-edit-confirm-btn,
+.balance-edit-cancel-btn {
+    align-items: center;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    display: flex;
+    font-weight: 500;
+    height: 32px;
+    justify-content: center;
+    min-width: 84px;
+    padding: 0 15px;
+    font-size: 14px;
+}
+
+.balance-edit-confirm-btn {
+    background-color: #fecf13;
+    color: #212529;
+}
+
+.balance-edit-cancel-btn {
+    background-color: #6176a0;
+    color: #fff;
+}

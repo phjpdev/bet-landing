@@ -407,6 +407,14 @@ tr:last-child .table-value {
     font-weight: 400;
 }
 
+.record-balance-editable {
+    cursor: pointer;
+}
+
+.record-balance-editable:hover {
+    text-decoration: underline;
+}
+
 .record-hkjc-main {
     flex: 1;
     min-height: 0;

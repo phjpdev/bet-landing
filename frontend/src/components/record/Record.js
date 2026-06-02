@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import './Record.css';
 
 import { IoIosArrowDown } from "react-icons/io";
+import { useDisplayBalance } from '../../hooks/useDisplayBalance';
+import BalanceEditModal from '../shared/BalanceEditModal';
 
 import DatePicker from "react-datepicker";
 
@@ -47,6 +49,10 @@ const Record = ({ embedded = false }) => {
     const [startDate, endDate] = dateRange;
 
     const [showModal, setShowModal] = useState(false);
+
+    const [showBalanceModal, setShowBalanceModal] = useState(false);
+
+    const { balance, setBalance, formattedBalance } = useDisplayBalance();
 
     const [showTable, setShowTable] = useState(false);
 
@@ -269,6 +275,17 @@ const Record = ({ embedded = false }) => {
 
 
 
+    const openBalanceModal = () => setShowBalanceModal(true);
+
+    const renderBalanceModal = () => (
+        <BalanceEditModal
+            isOpen={showBalanceModal}
+            initialValue={balance}
+            onSave={setBalance}
+            onClose={() => setShowBalanceModal(false)}
+        />
+    );
+
     const renderExportModal = () => showModal && (
 
         <div className="modal-overlay">
@@ -459,7 +476,16 @@ const Record = ({ embedded = false }) => {
                         </div>
                         <div className="record-hkjc-summary-item">
                             <span className="record-hkjc-summary-label">結餘:</span>
-                            <span className="record-hkjc-balance">$4.40</span>
+                            <span
+                                className="record-hkjc-balance record-balance-editable"
+                                onClick={openBalanceModal}
+                                onKeyDown={(e) => e.key === 'Enter' && openBalanceModal()}
+                                role="button"
+                                tabIndex={0}
+                                title="點擊編輯結餘"
+                            >
+                                {formattedBalance}
+                            </span>
                         </div>
                     </div>
                     <div className="record-hkjc-main">
@@ -467,6 +493,7 @@ const Record = ({ embedded = false }) => {
                     </div>
                 </div>
                 {renderExportModal()}
+                {renderBalanceModal()}
             </div>
         );
     }
@@ -525,7 +552,16 @@ const Record = ({ embedded = false }) => {
 
                         <div className="record-info-label">結餘:</div>
 
-                        <div className="record-info-value balance">$4.40</div>
+                        <div
+                            className="record-info-value balance record-balance-editable"
+                            onClick={openBalanceModal}
+                            onKeyDown={(e) => e.key === 'Enter' && openBalanceModal()}
+                            role="button"
+                            tabIndex={0}
+                            title="點擊編輯結餘"
+                        >
+                            {formattedBalance}
+                        </div>
 
                     </div>
 
@@ -642,6 +678,8 @@ const Record = ({ embedded = false }) => {
             </div>
 
             {renderExportModal()}
+
+            {renderBalanceModal()}
 
         </div>
 

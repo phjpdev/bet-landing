@@ -6,6 +6,8 @@ import { useLanguage } from '../../context/LanguageContext';
 import { otpVerifyText } from '../../i18n/otpVerify';
 import TermsContent from './TermsContent';
 import AccountRecordModal from '../record/AccountRecordModal';
+import BalanceEditModal from '../shared/BalanceEditModal';
+import { useDisplayBalance } from '../../hooks/useDisplayBalance';
 import './UserLogin.css';
 
 const OTP_LENGTH = 6;
@@ -20,8 +22,8 @@ const UserLogin = () => {
     const [resendSeconds, setResendSeconds] = useState(96);
     const otpInputRefs = useRef([]);
     const [eye, setEye] = useState(true);
-    const actualBalance = "4.40"; // Store the actual balance separately
-    const [balance, setBalance] = useState(actualBalance);
+    const { balance, setBalance } = useDisplayBalance();
+    const [showBalanceModal, setShowBalanceModal] = useState(false);
     const [readTerm, setReadTerm] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [showAccountRecordModal, setShowAccountRecordModal] = useState(false);
@@ -128,8 +130,7 @@ const UserLogin = () => {
     };
 
     const toggleEye = () => {
-        setEye(prevEye => !prevEye);
-        setBalance(prevBalance => (prevBalance === "*****" ? actualBalance : "*****"));
+        setEye((prevEye) => !prevEye);
     };
     const agreeTerms = () => {
         setReadTerm(true);
@@ -169,7 +170,14 @@ const UserLogin = () => {
                                         </div>
                                     </div>
                                     <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                                        <div style={{fontSize:'16px', fontWeight:'500', minWidth:'100px'}}>$ {balance}</div>
+                                        <div
+                                            className="user-balance-editable"
+                                            style={{fontSize:'16px', fontWeight:'500', minWidth:'100px', cursor:'pointer'}}
+                                            onClick={() => setShowBalanceModal(true)}
+                                            title="點擊編輯結餘"
+                                        >
+                                            $ {eye ? balance : '*****'}
+                                        </div>
                                         <div style={{cursor:'pointer'}}><img src='/image/refresh.svg' alt='refresh'></img></div>
                                     </div>
                                 </div>
@@ -306,6 +314,12 @@ const UserLogin = () => {
         {showAccountRecordModal && (
             <AccountRecordModal onClose={() => setShowAccountRecordModal(false)} />
         )}
+        <BalanceEditModal
+            isOpen={showBalanceModal}
+            initialValue={balance}
+            onSave={setBalance}
+            onClose={() => setShowBalanceModal(false)}
+        />
         {success && createPortal(
             <div className="user-otp-overlay" role="dialog" aria-modal="true" aria-label={t.ariaLabel}>
                 <div className="user-otp-verify">

@@ -11,7 +11,7 @@
 
 .account-record-modal-window {
     width: 800px;
-    height: 800px;
+    height: 860px;
     max-width: calc(100vw - 12px);
     max-height: calc(100vh - 12px);
     display: flex;

@@ -439,10 +439,6 @@ const Record = ({ embedded = false }) => {
         <td
             className="record-hkjc-details-cell"
             onClick={() => openEditTransaction(tx)}
-            onKeyDown={(e) => e.key === 'Enter' && openEditTransaction(tx)}
-            role="button"
-            tabIndex={0}
-            title="點擊編輯細節"
         >
             {tx.details}
         </td>
@@ -459,10 +455,6 @@ const Record = ({ embedded = false }) => {
                                     key={col}
                                     className={col === '細節' ? 'record-hkjc-th-details' : ''}
                                     onClick={col === '細節' ? openAddTransaction : undefined}
-                                    onKeyDown={col === '細節' ? (e) => e.key === 'Enter' && openAddTransaction() : undefined}
-                                    role={col === '細節' ? 'button' : undefined}
-                                    tabIndex={col === '細節' ? 0 : undefined}
-                                    title={col === '細節' ? '點擊新增記錄' : undefined}
                                 >
                                     {col}
                                 </th>
@@ -620,10 +612,6 @@ const Record = ({ embedded = false }) => {
                                 <span
                                     className="record-hkjc-balance record-balance-editable"
                                     onClick={openBalanceModal}
-                                    onKeyDown={(e) => e.key === 'Enter' && openBalanceModal()}
-                                    role="button"
-                                    tabIndex={0}
-                                    title="點擊編輯結餘"
                                 >
                                     {formattedBalance}
                                 </span>
@@ -699,10 +687,6 @@ const Record = ({ embedded = false }) => {
                         <div
                             className="record-info-value balance record-balance-editable"
                             onClick={openBalanceModal}
-                            onKeyDown={(e) => e.key === 'Enter' && openBalanceModal()}
-                            role="button"
-                            tabIndex={0}
-                            title="點擊編輯結餘"
                         >
                             {formattedBalance}
                         </div>

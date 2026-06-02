@@ -380,6 +380,14 @@
 .user-otp-cancel:hover {
   text-decoration: underline;
 }
+.user-balance-editable {
+  cursor: default;
+}
+
+.user-balance-editable:hover {
+  text-decoration: none;
+}
+
 .user-profile-balance {
   color: white;
   margin-left: 8px;

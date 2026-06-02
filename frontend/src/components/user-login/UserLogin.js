@@ -172,9 +172,8 @@ const UserLogin = () => {
                                     <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                                         <div
                                             className="user-balance-editable"
-                                            style={{fontSize:'16px', fontWeight:'500', minWidth:'100px', cursor:'pointer'}}
+                                            style={{fontSize:'16px', fontWeight:'500', minWidth:'100px'}}
                                             onClick={() => setShowBalanceModal(true)}
-                                            title="點擊編輯結餘"
                                         >
                                             $ {eye ? balance : '*****'}
                                         </div>

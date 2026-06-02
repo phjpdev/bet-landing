@@ -456,11 +456,12 @@ tr:last-child .table-value {
 }
 
 .record-balance-editable {
-    cursor: pointer;
+    cursor: default;
 }
 
 .record-balance-editable:hover {
-    text-decoration: underline;
+    color: #003c84;
+    text-decoration: none;
 }
 
 .record-hkjc-main {
@@ -588,11 +589,12 @@ tr:last-child .table-value {
 .record-hkjc-table td:nth-child(8) { width: 10%; }
 
 .record-hkjc-th-details {
-    cursor: pointer;
+    cursor: default;
 }
 
 .record-hkjc-th-details:hover {
-    color: #003c84;
+    color: #333;
+    text-decoration: none;
 }
 
 .record-hkjc-balance-summary-row td {
@@ -622,13 +624,15 @@ tr:last-child .table-value {
 .record-hkjc-details-cell {
     white-space: pre-line;
     line-height: var(--hkjc-details-lh);
-    cursor: pointer;
+    cursor: default;
     padding-top: var(--hkjc-cell-py);
     padding-bottom: var(--hkjc-cell-py);
 }
 
 .record-hkjc-details-cell:hover {
-    background: #fafafa;
+    color: #333;
+    background: transparent;
+    text-decoration: none;
 }
 
 .record-hkjc-expense-cell,

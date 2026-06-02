@@ -519,7 +519,7 @@ const Record = ({ embedded = false }) => {
     const renderAccountRecordTab = () => renderHkjcTransactionTable();
 
     const renderHkjcDateRow = () => (
-        <div style={{ padding: '0 15px', background: '#e7e7e7' }}>
+        <div className="record-hkjc-date-row-wrapper">
             <div className="record-hkjc-date-row">
                 <span className="record-hkjc-date-text">
                     日期範圍 {initialDateTime} - {initialDateTime}

@@ -492,6 +492,11 @@ tr:last-child .table-value {
     background: #e7e7e7;
 }
 
+.record-hkjc-date-row-wrapper {
+    padding: 0 15px;
+    background: #e7e7e7;
+}
+
 .record-hkjc-date-row {
     display: flex;
     align-items: center;

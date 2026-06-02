@@ -1,17 +1,29 @@
+/* Shared horizontal bounds — matches HKJC centered content column */
+.hkjc-page-inner {
+    width: 100%;
+    max-width: 1680px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
+}
+
 .main {
-    display: flex;
-    justify-content: center;
     padding: 8px 0;
 }
 
 .main-layout {
     display: flex;
     align-items: flex-start;
-    gap: 8px;
+    gap: 0;
     width: 100%;
-    max-width: 1680px;
-    padding: 0 8px;
     box-sizing: border-box;
+}
+
+/* Login panel flush against main content (HKJC) */
+.main-layout > .user-login-section {
+    margin-left: 0;
 }
 
 .main-div {

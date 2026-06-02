@@ -26,7 +26,7 @@ const MatchNavbar = () => {
 
   return (
     <nav className="match-navbar">
-      <div className="match-navbar-container">
+      <div className="match-navbar-container hkjc-page-inner">
         {/* Navigation Buttons */}
         <ul className="match-nav-list">
             <li>

@@ -16,7 +16,7 @@ const Navbar = () => {
   };
   return (
     <nav className="navbar">
-      <div className="navbar-container">
+      <div className="navbar-container hkjc-page-inner">
         {/* Left Side - Navigation Links */}
         <ul className="nav-links">
           <li><a href="#">主頁</a></li>

@@ -2,17 +2,14 @@
 .navbar {
     background-color: #375850;
     color: white;
-    padding: 6px 24px;
+    padding: 6px 0;
   }
   
   .navbar-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1680px;
     width: 100%;
-    margin: 0 auto;
-    padding: 0 8px;
     box-sizing: border-box;
   }
   

@@ -23,11 +23,11 @@ function Home() {
     }, [navigate]);
 
     return (
-        <div>
+        <div className="home-page">
             <Navbar />
             <MatchNavbar />
-            <div className='main'>
-                <div className='main-layout'>
+            <div className="main hkjc-page-inner">
+                <div className="main-layout">
                     <div className='main-div'>
                         <div className='first-div'>
                             <TabList />
@@ -47,7 +47,9 @@ function Home() {
                     <UserLogin />
                 </div>
             </div>
-            <Footer />
+            <div className="hkjc-page-inner">
+                <Footer />
+            </div>
         </div>
     );
 }

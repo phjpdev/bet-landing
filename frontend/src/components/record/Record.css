@@ -571,22 +571,12 @@ tr:last-child .table-value {
     box-sizing: border-box;
 }
 
-.record-hkjc-table th:nth-child(1),
-.record-hkjc-table td:nth-child(1) { width: 11%; }
-.record-hkjc-table th:nth-child(2),
-.record-hkjc-table td:nth-child(2) { width: 13%; }
-.record-hkjc-table th:nth-child(3),
-.record-hkjc-table td:nth-child(3) { width: 10%; }
-.record-hkjc-table th:nth-child(4),
-.record-hkjc-table td:nth-child(4) { width: 11%; }
-.record-hkjc-table th:nth-child(5),
-.record-hkjc-table td:nth-child(5) { width: 28%; }
-.record-hkjc-table th:nth-child(6),
-.record-hkjc-table td:nth-child(6) { width: 7%; }
-.record-hkjc-table th:nth-child(7),
-.record-hkjc-table td:nth-child(7) { width: 10%; }
-.record-hkjc-table th:nth-child(8),
-.record-hkjc-table td:nth-child(8) { width: 10%; }
+/* Col widths 1–5: 75 / 85 / 65 / 75 / 290 px via <colgroup> in Record.js */
+.record-hkjc-table col:nth-child(1) { width: 75px; }
+.record-hkjc-table col:nth-child(2) { width: 85px; }
+.record-hkjc-table col:nth-child(3) { width: 65px; }
+.record-hkjc-table col:nth-child(4) { width: 75px; }
+.record-hkjc-table col:nth-child(5) { width: 290px; }
 
 .record-hkjc-th-details {
     cursor: default;

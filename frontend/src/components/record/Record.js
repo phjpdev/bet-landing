@@ -39,6 +39,9 @@ const TABLE_COLUMNS = [
 
 ];
 
+/** Fixed column widths (px) for HKJC account record table */
+const TABLE_COLUMN_WIDTHS_PX = [75, 85, 65, 75, 290];
+
 
 
 const Record = ({ embedded = false }) => {
@@ -448,6 +451,18 @@ const Record = ({ embedded = false }) => {
         <div className="record-hkjc-table-area">
             <div className="record-hkjc-table-scroll">
                 <table className="record-hkjc-table">
+                    <colgroup>
+                        {TABLE_COLUMNS.map((col, index) => (
+                            <col
+                                key={col}
+                                style={
+                                    TABLE_COLUMN_WIDTHS_PX[index] != null
+                                        ? { width: `${TABLE_COLUMN_WIDTHS_PX[index]}px` }
+                                        : undefined
+                                }
+                            />
+                        ))}
+                    </colgroup>
                     <thead>
                         <tr>
                             {TABLE_COLUMNS.map((col) => (
@@ -473,10 +488,6 @@ const Record = ({ embedded = false }) => {
                                 <React.Fragment key={tx.id}>
                                     {tx.balanceSnapshot !== '' && tx.dateTime && (
                                         <tr className="record-hkjc-balance-summary-row">
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
                                             <td colSpan={8}>
                                                 {formatBalanceSummaryRow(tx.dateTime, tx.balanceSnapshot)}
                                             </td>

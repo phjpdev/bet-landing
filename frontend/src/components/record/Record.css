@@ -359,7 +359,7 @@ tr:last-child .table-value {
     font-weight: 400;
     font-family: inherit;
     cursor: pointer;
-    padding: 0;
+    padding-right: 16px;
     line-height: 1;
 }
 

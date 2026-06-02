@@ -90,18 +90,18 @@ const AccountRecordModal = ({ onClose }) => {
                             aria-label="網址"
                         />
                         <div className="chrome-toolbar-right">
-                            <button type="button" className="chrome-omnibox-btn" tabIndex={-1} aria-label="翻譯">
+                            {/* <button type="button" className="chrome-omnibox-btn" tabIndex={-1} aria-label="翻譯">
                                 <img
                                     src="/image/translate.png"
                                     alt=""
                                     className="chrome-omnibox-img chrome-omnibox-img--translate"
                                 />
-                            </button>
-                            <button type="button" className="chrome-omnibox-btn" tabIndex={-1} aria-label="下載">
+                            </button> */}
+                            <button type="button" className="chrome-omnibox-btn" tabIndex={-1} aria-label="隱藏密碼">
                                 <img
-                                    src="/image/download.png"
+                                    src="/image/chrome-eye-off.svg"
                                     alt=""
-                                    className="chrome-omnibox-img chrome-omnibox-img--download"
+                                    className="chrome-omnibox-img chrome-omnibox-img--visibility"
                                 />
                             </button>
                         </div>

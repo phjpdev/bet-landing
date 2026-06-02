@@ -10,8 +10,8 @@
 }
 
 .account-record-modal-window {
-    width: 900px;
-    height: 700px;
+    width: 800px;
+    height: 800px;
     max-width: calc(100vw - 12px);
     max-height: calc(100vh - 12px);
     display: flex;
@@ -187,9 +187,10 @@
     height: 20px;
 }
 
-.chrome-omnibox-img--download {
+.chrome-omnibox-img--visibility {
     width: 18px;
     height: 18px;
+    background: transparent;
 }
 
 .chrome-url-input {

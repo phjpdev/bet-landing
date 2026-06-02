@@ -75,11 +75,11 @@ app.post('/api/user-login-question', (req, res) => {
 // Endpoint to fetch matches
 app.get('/api/matches', async (req, res) => {
   try {
-    const data = await HKMatches(); // Get the match data
-    res.json({ matchData: data });  // Send the data as a response
+    const data = await HKMatches();
+    res.json({ matchData: Array.isArray(data) ? data : [] });
   } catch (error) {
     console.error('Error fetching matches:', error);
-    res.status(500).json({ error: 'Failed to fetch matches' });
+    res.status(503).json({ matchData: [], error: 'Failed to fetch matches' });
   }
 });
 

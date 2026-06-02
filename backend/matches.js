@@ -1,5 +1,12 @@
 const axios = require("axios");
+
 let matchData = [];
+let lastUpdated = 0;
+let refreshPromise = null;
+
+const CACHE_TTL_MS = 15_000;
+const REFRESH_INTERVAL_MS = 20_000;
+const HKJC_REQUEST_TIMEOUT_MS = 25_000;
 
 const tournamentIcons = [
     { "key": "阿根廷甲組聯賽", "value": "https://consvc.hkjc.com/-/media/Sites/JCBW/TournIcon/flag_APL.svg?sc_lang=zh-HK" },
@@ -167,8 +174,7 @@ function getTournamentIconUrl(tournament) {
     return "";
 }
 
-// Function to send a POST request
-async function HKData() {
+async function fetchMatchesFromHKJC() {
     const url = "https://info.cld.hkjc.com/graphql/base/";
     const data = {
         "query":"\n      query matchList($startIndex: Int, $endIndex: Int,$startDate: String, $endDate: String, $matchIds: [String], $tournIds: [String], $fbOddsTypes: [FBOddsType]!, $fbOddsTypesM: [FBOddsType]!, $inplayOnly: Boolean, $featuredMatchesOnly: Boolean, $frontEndIds: [String], $earlySettlementOnly: Boolean, $showAllMatch: Boolean) {\n        matches(startIndex: $startIndex,endIndex: $endIndex, startDate: $startDate, endDate: $endDate, matchIds: $matchIds, tournIds: $tournIds, fbOddsTypes: $fbOddsTypesM, inplayOnly: $inplayOnly, featuredMatchesOnly: $featuredMatchesOnly, frontEndIds: $frontEndIds, earlySettlementOnly: $earlySettlementOnly, showAllMatch: $showAllMatch) {\n          id\n          frontEndId\n          matchDate\n          kickOffTime\n          status\n          updateAt\n          sequence\n          esIndicatorEnabled\n          homeTeam {\n            id\n            name_en\n            name_ch\n          }\n          awayTeam {\n            id\n            name_en\n            name_ch\n          }\n          tournament {\n            id\n            frontEndId\n            nameProfileId\n            isInteractiveServiceAvailable\n            code\n            name_en\n            name_ch\n          }\n          isInteractiveServiceAvailable\n          inplayDelay\n          venue {\n            code\n            name_en\n            name_ch\n          }\n          tvChannels {\n            code\n            name_en\n            name_ch\n          }\n          liveEvents {\n            id\n            code\n          }\n          featureStartTime\n          featureMatchSequence\n          poolInfo {\n            normalPools\n            inplayPools\n            sellingPools\n            ntsInfo\n            entInfo\n            definedPools\n          }\n          runningResult {\n            homeScore\n            awayScore\n            corner\n            homeCorner\n            awayCorner\n          }\n          runningResultExtra {\n            homeScore\n            awayScore\n            corner\n            homeCorner\n            awayCorner\n          }\n          adminOperation {\n            remark {\n              typ\n            }\n          }\n          foPools(fbOddsTypes: $fbOddsTypes) {\n            id\n            status\n            oddsType\n            instNo\n            inplay\n            name_ch\n            name_en\n            updateAt\n            expectedSuspendDateTime\n            lines {\n              lineId\n              status\n              condition\n              main\n              combinations {\n                combId\n                str\n                status\n                offerEarlySettlement\n                currentOdds\n                selections {\n                  selId\n                  str\n                  name_ch\n                  name_en\n                }\n              }\n            }\n          }\n        }\n      }\n      ",
@@ -200,8 +206,11 @@ async function HKData() {
     };
 
   try {
-    const response = await axios.post(url, data);
-    const matches = response.data.data.matches;
+    const response = await axios.post(url, data, { timeout: HKJC_REQUEST_TIMEOUT_MS });
+    const matches = response.data?.data?.matches;
+    if (!matches) {
+      throw new Error("HKJC response missing matches");
+    }
     // console.log(JSON.stringify(matches[0], null, 2))
     matchData = matches.map(match => {
         const tournament = match.tournament;
@@ -240,8 +249,54 @@ async function HKData() {
     });
     return matchData;
   } catch (error) {
-    console.error("Error occurred:", error.message); // Handle errors
+    console.error("Error fetching matches from HKJC:", error.message);
+    throw error;
   }
 }
-HKData();
-module.exports = HKData ;
+
+async function refreshMatches() {
+  if (refreshPromise) {
+    return refreshPromise;
+  }
+
+  refreshPromise = (async () => {
+    try {
+      const fresh = await fetchMatchesFromHKJC();
+      if (Array.isArray(fresh) && fresh.length > 0) {
+        matchData = fresh;
+        lastUpdated = Date.now();
+      }
+      return matchData;
+    } catch (error) {
+      return matchData;
+    } finally {
+      refreshPromise = null;
+    }
+  })();
+
+  return refreshPromise;
+}
+
+async function getMatches() {
+  const cacheAge = Date.now() - lastUpdated;
+
+  if (matchData.length > 0 && cacheAge < CACHE_TTL_MS) {
+    return matchData;
+  }
+
+  if (matchData.length > 0) {
+    if (!refreshPromise) {
+      refreshMatches().catch(() => {});
+    }
+    return matchData;
+  }
+
+  return refreshMatches();
+}
+
+refreshMatches().catch(() => {});
+setInterval(() => {
+  refreshMatches().catch(() => {});
+}, REFRESH_INTERVAL_MS);
+
+module.exports = getMatches;

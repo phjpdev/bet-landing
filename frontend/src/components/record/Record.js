@@ -4,7 +4,14 @@ import './Record.css';
 
 import { IoIosArrowDown } from "react-icons/io";
 import { useDisplayBalance } from '../../hooks/useDisplayBalance';
+import { useAccountTransactions, createTransactionId } from '../../hooks/useAccountTransactions';
 import BalanceEditModal from '../shared/BalanceEditModal';
+import TransactionRecordModal from '../shared/TransactionRecordModal';
+import {
+    EMPTY_TRANSACTION_FORM,
+    formatBalanceSummaryRow,
+    formatCurrency,
+} from '../../utils/transactionFormat';
 
 import DatePicker from "react-datepicker";
 
@@ -54,9 +61,18 @@ const Record = ({ embedded = false }) => {
 
     const { balance, setBalance, formattedBalance } = useDisplayBalance();
 
+    const { transactions, saveTransaction } = useAccountTransactions();
+
     const [showTable, setShowTable] = useState(false);
 
-    const [transactions, setTransactions] = useState([]);
+    const [legacyTransactions, setLegacyTransactions] = useState([]);
+
+    const [transactionModal, setTransactionModal] = useState({
+        open: false,
+        mode: 'add',
+        id: null,
+        data: EMPTY_TRANSACTION_FORM,
+    });
 
     const [formData, setFormData] = useState({
 
@@ -177,11 +193,70 @@ const Record = ({ embedded = false }) => {
 
 
 
-        setTransactions([...transactions, newTransaction]);
+        setLegacyTransactions([...legacyTransactions, newTransaction]);
 
         setFormData({ transactionId: "", eventDate: "", betType: "", details: "", expense: "", deposit: "" });
 
     };
+
+    const openAddTransaction = () => {
+        setTransactionModal({
+            open: true,
+            mode: 'add',
+            id: null,
+            data: { ...EMPTY_TRANSACTION_FORM, dateTime: currentDateTime },
+        });
+    };
+
+    const openEditTransaction = (tx) => {
+        setTransactionModal({
+            open: true,
+            mode: 'edit',
+            id: tx.id,
+            data: {
+                referenceNo: tx.referenceNo || '',
+                dateTime: tx.dateTime || '',
+                eventDate: tx.eventDate || '',
+                betType: tx.betType || '',
+                details: tx.details || '',
+                receipt: tx.receipt || '',
+                expense: tx.expense || '',
+                deposit: tx.deposit || '',
+                showShareBet: Boolean(tx.showShareBet),
+                balanceSnapshot: tx.balanceSnapshot || '',
+            },
+        });
+    };
+
+    const closeTransactionModal = () => {
+        setTransactionModal((prev) => ({ ...prev, open: false }));
+    };
+
+    const handleSaveTransaction = (form) => {
+        saveTransaction({
+            id: transactionModal.id || createTransactionId(),
+            referenceNo: form.referenceNo,
+            dateTime: form.dateTime,
+            eventDate: form.eventDate || '',
+            betType: form.betType,
+            details: form.details,
+            receipt: form.receipt || '',
+            expense: form.expense,
+            deposit: form.deposit,
+            showShareBet: form.showShareBet,
+            balanceSnapshot: form.balanceSnapshot || balance,
+        });
+    };
+
+    const renderTransactionModal = () => (
+        <TransactionRecordModal
+            isOpen={transactionModal.open}
+            mode={transactionModal.mode}
+            initialData={transactionModal.data}
+            onSave={handleSaveTransaction}
+            onClose={closeTransactionModal}
+        />
+    );
 
 
 
@@ -360,8 +435,88 @@ const Record = ({ embedded = false }) => {
 
 
 
-    const renderAccountRecordTab = () => (
-        <>
+    const renderDetailsCell = (tx) => (
+        <td
+            className="record-hkjc-details-cell"
+            onClick={() => openEditTransaction(tx)}
+            onKeyDown={(e) => e.key === 'Enter' && openEditTransaction(tx)}
+            role="button"
+            tabIndex={0}
+            title="點擊編輯細節"
+        >
+            {tx.details}
+        </td>
+    );
+
+    const renderHkjcTransactionTable = () => (
+        <div className="record-hkjc-table-area">
+            <div className="record-hkjc-table-scroll">
+                <table className="record-hkjc-table">
+                    <thead>
+                        <tr>
+                            {TABLE_COLUMNS.map((col) => (
+                                <th
+                                    key={col}
+                                    className={col === '細節' ? 'record-hkjc-th-details' : ''}
+                                    onClick={col === '細節' ? openAddTransaction : undefined}
+                                    onKeyDown={col === '細節' ? (e) => e.key === 'Enter' && openAddTransaction() : undefined}
+                                    role={col === '細節' ? 'button' : undefined}
+                                    tabIndex={col === '細節' ? 0 : undefined}
+                                    title={col === '細節' ? '點擊新增記錄' : undefined}
+                                >
+                                    {col}
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {transactions.length === 0 ? (
+                            <tr>
+                                <td colSpan={8} className="record-hkjc-empty-cell">
+                                    沒有交易紀錄
+                                </td>
+                            </tr>
+                        ) : (
+                            transactions.map((tx) => (
+                                <React.Fragment key={tx.id}>
+                                    {tx.balanceSnapshot !== '' && tx.dateTime && (
+                                        <tr className="record-hkjc-balance-summary-row">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td colSpan={8}>
+                                                {formatBalanceSummaryRow(tx.dateTime, tx.balanceSnapshot)}
+                                            </td>
+                                        </tr>
+                                    )}
+                                    <tr className="record-hkjc-transaction-row">
+                                        <td>{tx.referenceNo}</td>
+                                        <td>{tx.dateTime}</td>
+                                        <td>{tx.eventDate}</td>
+                                        <td>{tx.betType}</td>
+                                        {renderDetailsCell(tx)}
+                                        <td>{tx.receipt}</td>
+                                        <td className="record-hkjc-expense-cell">
+                                            {tx.expense ? formatCurrency(tx.expense) : ''}
+                                        </td>
+                                        <td className="record-hkjc-deposit-cell">
+                                            {tx.deposit ? formatCurrency(tx.deposit) : ''}
+                                        </td>
+                                    </tr>
+                                </React.Fragment>
+                            ))
+                        )}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
+
+    const renderAccountRecordTab = () => renderHkjcTransactionTable();
+
+    const renderHkjcDateRow = () => (
+        <div style={{ padding: '0 15px', background: '#e7e7e7' }}>
             <div className="record-hkjc-date-row">
                 <span className="record-hkjc-date-text">
                     日期範圍 {initialDateTime} - {initialDateTime}
@@ -374,42 +529,7 @@ const Record = ({ embedded = false }) => {
                     重新搜尋
                 </button>
             </div>
-            <div className="record-hkjc-table-area">
-                <div className="record-hkjc-table-header-wrap">
-                    <table className="record-hkjc-table-header">
-                        <thead>
-                            <tr>
-                                {TABLE_COLUMNS.map((col) => (
-                                    <th key={col}>{col}</th>
-                                ))}
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-                {showTable && transactions.length > 0 ? (
-                    <div className="record-hkjc-table-body">
-                        {transactions.map((tx, index) => (
-                            <table key={index} className="record-hkjc-data-row">
-                                <tbody>
-                                    <tr>
-                                        <td>{tx.transactionId}</td>
-                                        <td>{tx.dateTime}</td>
-                                        <td>{tx.eventDate}</td>
-                                        <td>{tx.betType}</td>
-                                        <td>{tx.details}</td>
-                                        <td>{tx.receipt}</td>
-                                        <td>{tx.expense}</td>
-                                        <td>{tx.deposit}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        ))}
-                    </div>
-                ) : (
-                    <div className="record-hkjc-empty">沒有交易紀錄</div>
-                )}
-            </div>
-        </>
+        </div>
     );
 
     const renderEmbeddedTabContent = () => {
@@ -441,59 +561,83 @@ const Record = ({ embedded = false }) => {
         return (
             <div className="record-root record-root--embedded">
                 <div className="record-hkjc-page">
-                    <div className="record-hkjc-topbar">戶口紀錄</div>
+                    <div className="record-hkjc-topbar">
+                        <span className="record-hkjc-topbar-title">戶口紀錄</span>
+                        <div className="record-hkjc-topbar-actions">
+                            <button
+                                type="button"
+                                className="record-hkjc-topbar-action"
+                                onClick={() => setShowModal(true)}
+                            >
+                                <img src="/image/download-white.svg" alt="" width={18} height={18} />
+                                <span>匯出檔案</span>
+                            </button>
+                            <button
+                                type="button"
+                                className="record-hkjc-topbar-action"
+                                onClick={() => window.print()}
+                            >
+                                <img src="/image/print.svg" alt="" className="record-hkjc-topbar-icon--print" width={18} height={18} />
+                                <span>列印</span>
+                            </button>
+                        </div>
+                    </div>
                     <div className="record-hkjc-tabs">
                         <button
                             type="button"
-                            className={`record-hkjc-tab record-hkjc-tab--left ${activeTab === 'record-header-tab1' ? 'active' : ''}`}
+                            className={`record-hkjc-tab ${activeTab === 'record-header-tab1' ? 'active' : ''}`}
                             onClick={() => handleTabClick('record-header-tab1')}
                         >
                             是次交易紀錄
                         </button>
                         <button
                             type="button"
-                            className={`record-hkjc-tab record-hkjc-tab--center ${activeTab === 'record-header-tab2' ? 'active' : ''}`}
+                            className={`record-hkjc-tab ${activeTab === 'record-header-tab2' ? 'active' : ''}`}
                             onClick={() => handleTabClick('record-header-tab2')}
                         >
                             交易紀錄
                         </button>
                         <button
                             type="button"
-                            className={`record-hkjc-tab record-hkjc-tab--right ${activeTab === 'record-header-tab3' ? 'active' : ''}`}
+                            className={`record-hkjc-tab ${activeTab === 'record-header-tab3' ? 'active' : ''}`}
                             onClick={() => handleTabClick('record-header-tab3')}
                         >
                             戶口紀錄
                         </button>
                     </div>
-                    <div className="record-hkjc-summary">
-                        <div className="record-hkjc-summary-item record-hkjc-summary-item--first">
-                            <span>時間:</span>
-                            <span className="record-hkjc-summary-value">{currentDateTime}</span>
+                    {activeTab === 'record-header-tab3' && (
+                        <div className="record-hkjc-summary">
+                            <div className="record-hkjc-summary-item record-hkjc-summary-item--first">
+                                <span>時間:</span>
+                                <span className="record-hkjc-summary-value">{currentDateTime}</span>
+                            </div>
+                            <div className="record-hkjc-summary-item">
+                                <span>投注戶口號碼:</span>
+                                <span className="record-hkjc-summary-value">15339692</span>
+                            </div>
+                            <div className="record-hkjc-summary-item">
+                                <span className="record-hkjc-summary-label">結餘:</span>
+                                <span
+                                    className="record-hkjc-balance record-balance-editable"
+                                    onClick={openBalanceModal}
+                                    onKeyDown={(e) => e.key === 'Enter' && openBalanceModal()}
+                                    role="button"
+                                    tabIndex={0}
+                                    title="點擊編輯結餘"
+                                >
+                                    {formattedBalance}
+                                </span>
+                            </div>
                         </div>
-                        <div className="record-hkjc-summary-item">
-                            <span>投注戶口號碼:</span>
-                            <span className="record-hkjc-summary-value">15339692</span>
-                        </div>
-                        <div className="record-hkjc-summary-item">
-                            <span className="record-hkjc-summary-label">結餘:</span>
-                            <span
-                                className="record-hkjc-balance record-balance-editable"
-                                onClick={openBalanceModal}
-                                onKeyDown={(e) => e.key === 'Enter' && openBalanceModal()}
-                                role="button"
-                                tabIndex={0}
-                                title="點擊編輯結餘"
-                            >
-                                {formattedBalance}
-                            </span>
-                        </div>
-                    </div>
+                    )}
+                    {activeTab === 'record-header-tab3' && !showRecordContainer && renderHkjcDateRow()}
                     <div className="record-hkjc-main">
                         {renderEmbeddedTabContent()}
                     </div>
                 </div>
                 {renderExportModal()}
                 {renderBalanceModal()}
+                {renderTransactionModal()}
             </div>
         );
     }
@@ -589,7 +733,7 @@ const Record = ({ embedded = false }) => {
 
                                 <div style={{ padding: "0 12px" }}>
 
-                                    {transactions.map((transaction, index) => (
+                                    {legacyTransactions.map((transaction, index) => (
 
                                         <div key={index} style={{ marginBottom: "12px" }}>
 
@@ -680,6 +824,8 @@ const Record = ({ embedded = false }) => {
             {renderExportModal()}
 
             {renderBalanceModal()}
+
+            {renderTransactionModal()}
 
         </div>
 

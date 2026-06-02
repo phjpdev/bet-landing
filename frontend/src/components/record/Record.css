@@ -290,6 +290,14 @@ tr:last-child .table-value {
     font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
     font-size: 13px;
     color: #333;
+    /* HKJC acctstmt row heights (aligned to bet.hkjc.com) */
+    --hkjc-topbar-h: 42px;
+    --hkjc-tabs-h: 38px;
+    --hkjc-summary-h: 44px;
+    --hkjc-date-row-h: 40px;
+    --hkjc-cell-py: 8px;
+    --hkjc-cell-px: 6px;
+    --hkjc-details-lh: 1.45;
 }
 
 .record-hkjc-page {
@@ -301,55 +309,88 @@ tr:last-child .table-value {
 }
 
 .record-hkjc-topbar {
-    height: 42px;
-    min-height: 42px;
+    height: var(--hkjc-topbar-h);
+    min-height: var(--hkjc-topbar-h);
+    max-height: var(--hkjc-topbar-h);
     background: #003c84;
     color: #fff;
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 500;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 0 12px;
     flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.record-hkjc-topbar-title {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1;
+}
+
+.record-hkjc-topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.record-hkjc-topbar-action {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.record-hkjc-topbar-action:hover {
+    opacity: 0.9;
+}
+
+.record-hkjc-topbar-icon--print {
+    filter: brightness(0) invert(1);
 }
 
 .record-hkjc-tabs {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: end;
-    height: 46px;
-    min-height: 46px;
-    background: #e0e0e0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: var(--hkjc-tabs-h);
+    min-height: var(--hkjc-tabs-h);
+    max-height: var(--hkjc-tabs-h);
+    background: #e7e7e7;
     flex-shrink: 0;
-    padding: 0 4px;
+    box-sizing: border-box;
 }
 
 .record-hkjc-tab {
-    width: 100%;
+    flex: 1;
+    min-width: 0;
+    height: 100%;
     border: none;
     background: transparent;
     color: #333;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 400;
     font-family: inherit;
     cursor: pointer;
     position: relative;
-    padding: 10px 8px 10px;
+    padding: 8px 4px 6px;
     white-space: nowrap;
-}
-
-.record-hkjc-tab--left {
-    justify-self: start;
-    padding-left: 10px;
-}
-
-.record-hkjc-tab--center {
-    justify-self: center;
-}
-
-.record-hkjc-tab--right {
-    justify-self: end;
-    padding-right: 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
 .record-hkjc-tab.active {
@@ -369,23 +410,30 @@ tr:last-child .table-value {
 
 .record-hkjc-summary {
     display: flex;
-    align-items: center;
-    min-height: 46px;
-    background: #fff9e1;
+    align-items: stretch;
+    height: var(--hkjc-summary-h);
+    min-height: var(--hkjc-summary-h);
+    max-height: var(--hkjc-summary-h);
+    background: #fff7d5;
     flex-shrink: 0;
+    border-bottom: 1px solid #e0d5b0;
+    box-sizing: border-box;
 }
 
 .record-hkjc-summary-item {
     flex: 1;
+    min-width: 0;
     display: flex;
     align-items: center;
     gap: 4px;
-    padding: 8px 12px;
-    border-left: 1px solid #a8a8a8;
+    padding: 0 10px;
+    border-left: 1px solid #333;
     font-size: 13px;
     font-weight: 400;
     color: #333;
     white-space: nowrap;
+    line-height: 1.2;
+    box-sizing: border-box;
 }
 
 .record-hkjc-summary-item--first {
@@ -416,36 +464,56 @@ tr:last-child .table-value {
 }
 
 .record-hkjc-main {
+    padding: 0 15px;
     flex: 1;
     min-height: 0;
     display: flex;
     flex-direction: column;
     position: relative;
-    background: #fff;
+    background: #e7e7e7;
 }
 
 .record-hkjc-date-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 40px;
-    min-height: 40px;
-    padding: 0 12px;
-    background: #ebebeb;
+    gap: 8px;
+    height: var(--hkjc-date-row-h);
+    min-height: var(--hkjc-date-row-h);
+    max-height: var(--hkjc-date-row-h);
+    padding: 0 10px;
+    background: #e7e7e7;
     flex-shrink: 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ccc;
+}
+
+.record-hkjc-table th:first-child,
+.record-hkjc-table td:first-child {
+    padding-left: 12px;
+}
+
+.record-hkjc-table th:last-child,
+.record-hkjc-table td:last-child {
+    padding-right: 12px;
 }
 
 .record-hkjc-date-text {
     font-size: 13px;
-    font-weight: bold;
+    font-weight: 700;
     color: #333;
-    padding: 0 12px;
+    padding: 0;
+    line-height: 1.2;
+    flex: 1;
+    min-width: 0;
 }
 
 .record-hkjc-search-btn {
     height: 28px;
+    min-height: 28px;
     min-width: 100px;
     padding: 0 16px;
+    flex-shrink: 0;
     border: none;
     border-radius: 14px;
     background: #003c84;
@@ -465,42 +533,117 @@ tr:last-child .table-value {
     min-height: 0;
     display: flex;
     flex-direction: column;
-    background: #fff;
-}
-
-.record-hkjc-table-header-wrap {
-    flex-shrink: 0;
     background: #e7e7e7;
-    border-top: 1px solid #ccc;
-    padding: 0 18px
 }
 
-.record-hkjc-table-header {
+.record-hkjc-table-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 0;
+    background: #e7e7e7;
+}
+
+.record-hkjc-table {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
-    background: transparent;
 }
 
-.record-hkjc-table-header th {
-    padding: 8px 6px;
+.record-hkjc-table thead {
+    background: #e7e7e7;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.record-hkjc-table th {
+    padding: var(--hkjc-cell-py) var(--hkjc-cell-px);
     font-size: 12px;
     font-weight: 400;
     color: #333;
     text-align: left;
     border: none;
     vertical-align: middle;
-    line-height: 1.3;
+    line-height: 1.2;
+    height: 32px;
+    box-sizing: border-box;
 }
 
-.record-hkjc-table-header th:nth-child(1) { width: 11%; }
-.record-hkjc-table-header th:nth-child(2) { width: 13%; }
-.record-hkjc-table-header th:nth-child(3) { width: 10%; }
-.record-hkjc-table-header th:nth-child(4) { width: 11%; }
-.record-hkjc-table-header th:nth-child(5) { width: 28%; }
-.record-hkjc-table-header th:nth-child(6) { width: 7%; }
-.record-hkjc-table-header th:nth-child(7) { width: 10%; }
-.record-hkjc-table-header th:nth-child(8) { width: 10%; }
+.record-hkjc-table th:nth-child(1),
+.record-hkjc-table td:nth-child(1) { width: 11%; }
+.record-hkjc-table th:nth-child(2),
+.record-hkjc-table td:nth-child(2) { width: 13%; }
+.record-hkjc-table th:nth-child(3),
+.record-hkjc-table td:nth-child(3) { width: 10%; }
+.record-hkjc-table th:nth-child(4),
+.record-hkjc-table td:nth-child(4) { width: 11%; }
+.record-hkjc-table th:nth-child(5),
+.record-hkjc-table td:nth-child(5) { width: 28%; }
+.record-hkjc-table th:nth-child(6),
+.record-hkjc-table td:nth-child(6) { width: 7%; }
+.record-hkjc-table th:nth-child(7),
+.record-hkjc-table td:nth-child(7) { width: 10%; }
+.record-hkjc-table th:nth-child(8),
+.record-hkjc-table td:nth-child(8) { width: 10%; }
+
+.record-hkjc-th-details {
+    cursor: pointer;
+}
+
+.record-hkjc-th-details:hover {
+    color: #003c84;
+}
+
+.record-hkjc-balance-summary-row td {
+    padding: var(--hkjc-cell-py) var(--hkjc-cell-px);
+    font-size: 12px;
+    font-weight: 700;
+    color: #333;
+    background: #fff;
+    line-height: 1.2;
+    height: 36px;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+.record-hkjc-transaction-row td {
+    padding: var(--hkjc-cell-py) var(--hkjc-cell-px);
+    font-size: 12px;
+    color: #333;
+    background: #f8f8f8;
+    border-bottom: 1px solid #d5d5d5;
+    vertical-align: top;
+    word-break: break-word;
+    line-height: 1.2;
+    box-sizing: border-box;
+}
+
+.record-hkjc-details-cell {
+    white-space: pre-line;
+    line-height: var(--hkjc-details-lh);
+    cursor: pointer;
+    padding-top: var(--hkjc-cell-py);
+    padding-bottom: var(--hkjc-cell-py);
+}
+
+.record-hkjc-details-cell:hover {
+    background: #fafafa;
+}
+
+.record-hkjc-expense-cell,
+.record-hkjc-deposit-cell {
+    text-align: right;
+}
+
+.record-hkjc-empty-cell {
+    text-align: center;
+    padding: 48px 12px !important;
+    color: #757575;
+    font-size: 14px;
+    background: #e7e7e7 !important;
+    border: none;
+}
 
 .record-hkjc-hint-bar {
     flex-shrink: 0;
@@ -540,35 +683,6 @@ tr:last-child .table-value {
     padding-top: 20px;
 }
 
-.record-hkjc-table-body {
-    flex: 1;
-    overflow-y: auto;
-    background: #fff;
-}
-
-.record-hkjc-data-row {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.record-hkjc-data-row td {
-    padding: 6px 4px;
-    font-size: 12px;
-    border-right: 1px solid #e8e8e8;
-    vertical-align: top;
-    word-break: break-word;
-}
-
-.record-hkjc-data-row td:nth-child(1) { width: 11%; }
-.record-hkjc-data-row td:nth-child(2) { width: 13%; }
-.record-hkjc-data-row td:nth-child(3) { width: 10%; }
-.record-hkjc-data-row td:nth-child(4) { width: 11%; }
-.record-hkjc-data-row td:nth-child(5) { width: 28%; }
-.record-hkjc-data-row td:nth-child(6) { width: 7%; }
-.record-hkjc-data-row td:nth-child(7) { width: 10%; }
-.record-hkjc-data-row td:nth-child(8) { width: 10%; }
 
 .record-root--embedded .record-info-sec {
     position: absolute;

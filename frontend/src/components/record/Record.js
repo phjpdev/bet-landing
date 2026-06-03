@@ -860,9 +860,9 @@ const CustomInput = ({ value, onClick, initialDateTime }) => (
         <div><span>日期</span></div>
 
         <div className="date-input-box-right">
-
-            {value || `${initialDateTime} - ${initialDateTime}`}
-
+            <span className="date-display">
+                {value || `${initialDateTime} - ${initialDateTime}`}
+            </span>
             <span className="arrow-icon"><IoIosArrowDown style={{ fontSize: '20px', display: 'flex' }} /></span>
 
         </div>

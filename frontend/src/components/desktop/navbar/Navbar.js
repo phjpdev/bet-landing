@@ -38,6 +38,15 @@ const Navbar = () => {
           >
             登出
           </button>
+          <button type="button" aria-label="意見/建議">
+            <img
+              src="/image/Survey_desktop_small.7c28abba66881416c7a6.svg"
+              alt=""
+              width={24}
+              height={24}
+            />
+            <span>意見/ 建議</span>
+          </button>
           <button type="button" onClick={toggleLanguage} aria-label={language === "zh-HK" ? "Switch to English" : "切換至中文"}>
             <AiOutlineGlobal />
             <span>{language === "zh-HK" ? "ENG" : "中文"}</span>

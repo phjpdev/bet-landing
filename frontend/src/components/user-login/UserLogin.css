@@ -3,7 +3,7 @@
   top: 44px;
   position: sticky;
   height: calc(100dvh - 92px);
-  width: 380px;
+  width: 352px;
   flex-shrink: 0;
 }
 .user-login-container {

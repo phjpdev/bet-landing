@@ -514,6 +514,10 @@ const Record = ({ embedded = false }) => {
                                 <React.Fragment key={tx.id}>
                                     {tx.balanceSnapshot !== '' && tx.dateTime && (
                                         <tr className="record-hkjc-balance-summary-row">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                             <td colSpan={8}>
                                                 {formatBalanceSummaryRow(tx.dateTime, tx.balanceSnapshot)}
                                             </td>

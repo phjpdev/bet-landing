@@ -15,7 +15,7 @@
     flex-shrink: 0;
     height: calc(100vh - 52px);
     position: relative;
-    top: -44px;
+    top: -52px;
     z-index: 9000;
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;

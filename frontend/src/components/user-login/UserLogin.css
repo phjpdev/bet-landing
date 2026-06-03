@@ -513,7 +513,7 @@
 }
 .extra-link-icons {
   display: flex;
-  gap: 24px;
+  gap: 14px;
 }
 .extra-link-icons img {
   cursor: pointer;

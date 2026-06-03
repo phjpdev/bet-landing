@@ -147,8 +147,9 @@ const UserLogin = () => {
                                 <a href="#">轉賬服務</a>
                             </div>
                             <div className='extra-link-icons'>
-                                <img src='/image/add_note_white.svg' alt='add_note_white' width={26}></img>
-                                <img src='/image/setIcon.svg' alt='set-icon' width={26}></img>
+                                <img src='/image/message_light.07c5dbca3f64d60d19e3.svg' alt='message' width={26} />
+                                <img src='/image/add_note_white.svg' alt='add_note_white' width={26} />
+                                <img src='/image/setIcon.svg' alt='set-icon' width={26} />
                             </div>
                         </div>
                         )}

@@ -27,6 +27,35 @@
     padding: 0 12px;
     padding-bottom: 12px;
     border-top-left-radius: 16px;
+    position: relative;
+  }
+
+  .user-login-header-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  #collapsible-control {
+    width: 24px;
+    height: 24px;
+    background-color: #4c8666;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  #collapsible-control svg {
+    display: block;
+  }
+
+  #collapsible-control.expand svg {
+    transform: rotate(180deg);
   }
   .user-login-basic-form {
     padding: 16px 0 14px;
@@ -244,10 +273,13 @@
   display: flex;
   font-size: 14px;
   font-weight: 500;
-  width: 70px;
-  height: 28px;
+  width: 82px;
+  height: 26px;
   justify-content: center;
-  margin-top: auto;
+}
+
+.user-login-header-actions .user-logout {
+  margin-top: 0;
 }
 .user-loggedin-detail-container  {
   padding: 8px 8px 0 8px;

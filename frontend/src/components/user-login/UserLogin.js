@@ -20,8 +20,10 @@ const UserLogin = () => {
     const [showAccountRecordModal, setShowAccountRecordModal] = useState(false);
     const [isLoggingIn, setIsLoggingIn] = useState(false);
     const [showTermsModal, setShowTermsModal] = useState(false);
+    const [isPanelExpanded, setIsPanelExpanded] = useState(true);
 
     const app_url = process.env.REACT_APP_APP_URL;
+    const isLoggedIn = readTerm || showTermsModal;
 
     const handleUserLogin = async (e) => {
         e.preventDefault();
@@ -66,6 +68,7 @@ const UserLogin = () => {
         setShowAccountRecordModal(false);
         setReadTerm(false);
         setShowTermsModal(false);
+        setIsPanelExpanded(true);
     };
 
     const openAccountRecord = (e) => {
@@ -105,10 +108,39 @@ const UserLogin = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div style={{display:'flex', alignItems:'flex-end'}}>
+                            <div className="user-login-header-actions">
+                                <div
+                                    id="collapsible-control"
+                                    className={isPanelExpanded ? 'expand' : 'collapse'}
+                                    role="button"
+                                    tabIndex={0}
+                                    aria-expanded={isPanelExpanded}
+                                    aria-label={isPanelExpanded ? '收合' : '展開'}
+                                    onClick={() => setIsPanelExpanded((prev) => !prev)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            e.preventDefault();
+                                            setIsPanelExpanded((prev) => !prev);
+                                        }
+                                    }}
+                                >
+                                    <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                                            <g>
+                                                <rect x="0" y="0" width="24" height="24" />
+                                                <path
+                                                    d="M15.2000773,12.7340806 L10.2235673,17.7105906 C9.83304302,18.1011149 9.19987804,18.1011149 8.80935375,17.7105906 C8.41288223,17.3141191 8.41288223,16.6809541 8.80340652,16.2904298 L13.0915133,12.001 L8.80340652,7.713054 C8.41288223,7.32252971 8.41288223,6.68936473 8.80340652,6.29884044 C9.19987804,5.90236893 9.83304302,5.90236893 10.2235673,6.29289322 L15.2000773,11.2694032 C15.3803193,11.4496452 15.4773726,11.6815739 15.4912374,11.9174786 L15.4912374,12.0860052 C15.4773726,12.3219099 15.3803193,12.5538386 15.2000773,12.7340806 Z"
+                                                    fill="#FFFFFF"
+                                                    transform="translate(12.001742, 12.001742) rotate(90.000000) translate(-12.001742, -12.001742)"
+                                                />
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
                                 <div className='user-logout' onClick={() => setShowModal(true)}>登出</div>
                             </div>
                         </div>
+                        {isPanelExpanded && (
                         <div className="extra-links">
                             <div>
                                 <a href="#" onClick={openAccountRecord}>戶口紀錄</a> | 
@@ -119,6 +151,7 @@ const UserLogin = () => {
                                 <img src='/image/setIcon.svg' alt='set-icon' width={26}></img>
                             </div>
                         </div>
+                        )}
                     </div>
                 ) : (
                     <div className='user-login-box'>
@@ -178,6 +211,8 @@ const UserLogin = () => {
                     </div>
                 )}
                 
+                {(!isLoggedIn || isPanelExpanded) && (
+                <>
                 <div className='user-login-detail-container'>
                     {error && 
                         <div className='user-login-error-modal'>
@@ -203,6 +238,8 @@ const UserLogin = () => {
                         <button style={{width:'230px'}}>發送注項</button>
                     </div>
                 </div>
+                </>
+                )}
             </div>
         {showTermsModal && createPortal(
             <div className="terms-modal-overlay" role="dialog" aria-modal="true" aria-label="條款及細則">

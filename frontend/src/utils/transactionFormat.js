@@ -80,17 +80,53 @@ export function computeHkjcTableColumnWidths(transactions) {
     return pxWidths.map((w) => `${((w / total) * 100).toFixed(4)}%`);
 }
 
-export function formatBalanceSummaryRow(dateTime, balanceValue) {
+export function parseBalanceSummaryDateTime(dateTime) {
     if (!dateTime?.trim()) {
-        return '';
+        return null;
     }
-    const [datePart, timePart = ''] = dateTime.trim().split(/\s+/);
+    const [datePart, timePart = '00:00'] = dateTime.trim().split(/\s+/);
     const segments = datePart.split('/');
     if (segments.length !== 3) {
-        return '';
+        return null;
     }
     const [day, month, year] = segments;
-    return `${year}年${month}月${day}日 ${timePart}之戶口結餘: ${formatCurrency(balanceValue)}`;
+    const [hour = '00', minute = '00'] = timePart.split(':');
+    return { year, month, day, hour, minute };
+}
+
+export function buildBalanceSummaryDateTime(parts) {
+    const digits = (value, maxLen) => String(value ?? '').replace(/\D/g, '').slice(0, maxLen);
+    const year = digits(parts.year, 4).padStart(4, '0').slice(-4);
+    const month = digits(parts.month, 2).padStart(2, '0').slice(-2);
+    const day = digits(parts.day, 2).padStart(2, '0').slice(-2);
+    const hour = digits(parts.hour, 2).padStart(2, '0').slice(-2);
+    const minute = digits(parts.minute, 2).padStart(2, '0').slice(-2);
+    return `${day}/${month}/${year} ${hour}:${minute}`;
+}
+
+export function getBalanceSummaryPrefix(dateTime) {
+    const parts = parseBalanceSummaryDateTime(dateTime);
+    if (!parts) {
+        return '';
+    }
+    return `${parts.year}年${parts.month}月${parts.day}日 ${parts.hour}:${parts.minute}之戶口結餘: `;
+}
+
+export function formatBalanceSummaryRow(dateTime, balanceValue) {
+    const prefix = getBalanceSummaryPrefix(dateTime);
+    if (!prefix) {
+        return '';
+    }
+    return `${prefix}${formatCurrency(balanceValue)}`;
+}
+
+export function sanitizeNumericInput(value) {
+    const cleaned = String(value).replace(/[^\d.]/g, '');
+    const dotIndex = cleaned.indexOf('.');
+    if (dotIndex === -1) {
+        return cleaned;
+    }
+    return `${cleaned.slice(0, dotIndex + 1)}${cleaned.slice(dotIndex + 1).replace(/\./g, '')}`;
 }
 
 export const EMPTY_TRANSACTION_FORM = {

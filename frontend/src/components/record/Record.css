@@ -489,8 +489,8 @@ tr:last-child .table-value {
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
-    bottom: auto;
+    top: auto;
+    bottom: 0;
     height: 5px;
     background: #fecf13;
 }
@@ -765,6 +765,74 @@ tr:last-child .table-value {
     vertical-align: middle;
 }
 
+.record-hkjc-balance-summary-cell {
+    cursor: default;
+}
+
+.record-hkjc-balance-summary-label {
+    font-weight: 700;
+}
+
+.record-hkjc-balance-part-input {
+    display: inline-block;
+    width: 1.6em;
+    border: none;
+    margin: 0;
+    padding: 0 1px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-weight: 700;
+    line-height: inherit;
+    cursor: default !important;
+    outline: none;
+    text-align: center;
+    user-select: text;
+}
+
+.record-hkjc-balance-part-input:hover,
+.record-hkjc-balance-part-input:focus {
+    cursor: default !important;
+}
+
+.record-hkjc-balance-part-input--year {
+    width: 2.6em;
+}
+
+.record-hkjc-balance-part-input:focus {
+    background-color: #fffbe6;
+}
+
+.record-hkjc-balance-summary-amount,
+.record-hkjc-balance-summary-amount:hover {
+    cursor: default !important;
+}
+
+.record-hkjc-balance-summary-input {
+    display: inline-block;
+    width: 120px;
+    border: none;
+    margin: 0;
+    padding: 0 2px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-weight: 700;
+    line-height: inherit;
+    cursor: default !important;
+    outline: none;
+    user-select: text;
+}
+
+.record-hkjc-balance-summary-input:hover,
+.record-hkjc-balance-summary-input:focus {
+    cursor: default !important;
+}
+
+.record-hkjc-balance-summary-input:focus {
+    background-color: #fffbe6;
+}
+
 .record-hkjc-transaction-row td {
     padding: var(--hkjc-cell-py) var(--hkjc-cell-px);
     font-size: 12px;
@@ -784,10 +852,41 @@ tr:last-child .table-value {
     background: #fff;
 }
 
-.record-hkjc-details-cell {
+.record-hkjc-reference-cell,
+.record-hkjc-reference-cell:hover {
+    cursor: default !important;
+}
+
+.record-hkjc-reference-input {
+    width: 100%;
+    border: none;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: inherit;
+    cursor: default !important;
+    outline: none;
+    box-sizing: border-box;
+    user-select: text;
+}
+
+.record-hkjc-reference-input:hover,
+.record-hkjc-reference-input:focus {
+    cursor: default !important;
+}
+
+.record-hkjc-reference-input:focus {
+    background-color: #fffbe6;
+    outline: none;
+}
+
+.record-hkjc-details-cell,
+.record-hkjc-details-cell:hover {
     white-space: pre-line;
     line-height: var(--hkjc-details-lh);
-    cursor: default;
+    cursor: default !important;
     padding-top: var(--hkjc-cell-py);
     padding-bottom: var(--hkjc-cell-py);
 }

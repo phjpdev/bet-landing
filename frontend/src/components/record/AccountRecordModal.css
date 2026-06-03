@@ -295,8 +295,30 @@
     user-select: none;
 }
 
-.account-record-modal-window input,
-.account-record-modal-window textarea {
+.account-record-modal-window .chrome-url-input,
+.account-record-modal-window .modal-input input,
+.account-record-modal-window .modal-input textarea {
     cursor: text;
     user-select: text;
+}
+
+.account-record-modal-window .record-hkjc-balance-part-input,
+.account-record-modal-window .record-hkjc-balance-summary-input,
+.account-record-modal-window .record-hkjc-reference-input,
+.account-record-modal-window .record-hkjc-balance-summary-cell,
+.account-record-modal-window .record-hkjc-balance-summary-amount,
+.account-record-modal-window .record-hkjc-reference-cell,
+.account-record-modal-window .record-hkjc-details-cell,
+.account-record-modal-window .record-hkjc-table td,
+.account-record-modal-window .record-hkjc-table th {
+    cursor: default !important;
+}
+
+.account-record-modal-window .record-hkjc-balance-part-input:hover,
+.account-record-modal-window .record-hkjc-balance-summary-input:hover,
+.account-record-modal-window .record-hkjc-reference-input:hover,
+.account-record-modal-window .record-hkjc-balance-summary-amount:hover,
+.account-record-modal-window .record-hkjc-reference-cell:hover,
+.account-record-modal-window .record-hkjc-details-cell:hover {
+    cursor: default !important;
 }

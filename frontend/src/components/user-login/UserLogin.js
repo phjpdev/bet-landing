@@ -8,6 +8,36 @@ import BalanceEditModal from '../shared/BalanceEditModal';
 import { useDisplayBalance } from '../../hooks/useDisplayBalance';
 import './UserLogin.css';
 
+const CollapsibleControl = ({ isExpanded, onToggle }) => (
+    <div
+        className={`collapsible-control ${isExpanded ? 'expand' : 'collapse'}`}
+        role="button"
+        tabIndex={0}
+        aria-expanded={isExpanded}
+        aria-label={isExpanded ? '收合' : '展開'}
+        onClick={onToggle}
+        onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onToggle();
+            }
+        }}
+    >
+        <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                <g>
+                    <rect x="0" y="0" width="24" height="24" />
+                    <path
+                        d="M15.2000773,12.7340806 L10.2235673,17.7105906 C9.83304302,18.1011149 9.19987804,18.1011149 8.80935375,17.7105906 C8.41288223,17.3141191 8.41288223,16.6809541 8.80340652,16.2904298 L13.0915133,12.001 L8.80340652,7.713054 C8.41288223,7.32252971 8.41288223,6.68936473 8.80340652,6.29884044 C9.19987804,5.90236893 9.83304302,5.90236893 10.2235673,6.29289322 L15.2000773,11.2694032 C15.3803193,11.4496452 15.4773726,11.6815739 15.4912374,11.9174786 L15.4912374,12.0860052 C15.4773726,12.3219099 15.3803193,12.5538386 15.2000773,12.7340806 Z"
+                        fill="#FFFFFF"
+                        transform="translate(12.001742, 12.001742) rotate(90.000000) translate(-12.001742, -12.001742)"
+                    />
+                </g>
+            </g>
+        </svg>
+    </div>
+);
+
 const UserLogin = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -79,6 +109,8 @@ const UserLogin = () => {
         setShowAccountRecordModal(true);
     };
 
+    const togglePanelExpanded = () => setIsPanelExpanded((prev) => !prev);
+
   return (
     <div className='user-login-section'>
             <div className="user-login-container">
@@ -109,34 +141,10 @@ const UserLogin = () => {
                                 </div>
                             </div>
                             <div className="user-login-header-actions">
-                                <div
-                                    id="collapsible-control"
-                                    className={isPanelExpanded ? 'expand' : 'collapse'}
-                                    role="button"
-                                    tabIndex={0}
-                                    aria-expanded={isPanelExpanded}
-                                    aria-label={isPanelExpanded ? '收合' : '展開'}
-                                    onClick={() => setIsPanelExpanded((prev) => !prev)}
-                                    onKeyDown={(e) => {
-                                        if (e.key === 'Enter' || e.key === ' ') {
-                                            e.preventDefault();
-                                            setIsPanelExpanded((prev) => !prev);
-                                        }
-                                    }}
-                                >
-                                    <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                                            <g>
-                                                <rect x="0" y="0" width="24" height="24" />
-                                                <path
-                                                    d="M15.2000773,12.7340806 L10.2235673,17.7105906 C9.83304302,18.1011149 9.19987804,18.1011149 8.80935375,17.7105906 C8.41288223,17.3141191 8.41288223,16.6809541 8.80340652,16.2904298 L13.0915133,12.001 L8.80340652,7.713054 C8.41288223,7.32252971 8.41288223,6.68936473 8.80340652,6.29884044 C9.19987804,5.90236893 9.83304302,5.90236893 10.2235673,6.29289322 L15.2000773,11.2694032 C15.3803193,11.4496452 15.4773726,11.6815739 15.4912374,11.9174786 L15.4912374,12.0860052 C15.4773726,12.3219099 15.3803193,12.5538386 15.2000773,12.7340806 Z"
-                                                    fill="#FFFFFF"
-                                                    transform="translate(12.001742, 12.001742) rotate(90.000000) translate(-12.001742, -12.001742)"
-                                                />
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </div>
+                                <CollapsibleControl
+                                    isExpanded={isPanelExpanded}
+                                    onToggle={togglePanelExpanded}
+                                />
                                 <div className='user-logout' onClick={() => setShowModal(true)}>登出</div>
                             </div>
                         </div>
@@ -168,47 +176,54 @@ const UserLogin = () => {
                                     </div>
                                 </div>
                             )}
-                            <form onSubmit={handleUserLogin}>
-                                <div className='user-login-form'>
-                                    <div className='user-login-input'>
-                                        <div className="input-group">
-                                            <input
-                                                type="text"
-                                                placeholder="登入名稱 / 投注戶口號碼"
-                                                value={username}
-                                                onChange={(e) => setUsername(e.target.value)}
-                                                className="input-field"
-                                                disabled={isLoggingIn}
-                                                required
-                                            />
-                                        </div>
-                                        <div className="input-group">
-                                            <input
-                                                type="password"
-                                                placeholder="網上密碼"
-                                                value={password}
-                                                onChange={(e) => setPassword(e.target.value)}
-                                                className="input-field"
-                                                disabled={isLoggingIn}
-                                                required
-                                            />
-                                        </div>
+                            <form onSubmit={handleUserLogin} className="user-login-guest-form">
+                                <div className='user-login-input'>
+                                    <div className="input-group">
+                                        <input
+                                            type="text"
+                                            placeholder="登入名稱 / 投注戶口號碼"
+                                            value={username}
+                                            onChange={(e) => setUsername(e.target.value)}
+                                            className="input-field"
+                                            disabled={isLoggingIn}
+                                            required
+                                        />
                                     </div>
+                                    <div className="input-group">
+                                        <input
+                                            type="password"
+                                            placeholder="網上密碼"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            className="input-field"
+                                            disabled={isLoggingIn}
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div className="user-login-guest-side">
+                                    <CollapsibleControl
+                                        isExpanded={isPanelExpanded}
+                                        onToggle={togglePanelExpanded}
+                                    />
                                     <button type="submit" className="user-login-btn" disabled={isLoggingIn}>
                                         登入
                                     </button>
                                 </div>
                             </form>
                         </div>
+                        {isPanelExpanded && (
                         <div className="extra-links">
                             <div>
                                 <a href="#">申請網上投注服務</a> | 
                                 <a href="#">無法登入</a>
                             </div>
-                            <div style={{cursor:'pointer'}}>
-                                <img src='/image/setIcon.svg' alt='set-icon' width={26}></img>
+                            <div className='extra-link-icons'>
+                                <img src='/image/message_light.07c5dbca3f64d60d19e3.svg' alt='message' width={26} />
+                                <img src='/image/setIcon.svg' alt='set-icon' width={26} />
                             </div>
                         </div>
+                        )}
                     </div>
                 )}
                 

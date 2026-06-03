@@ -38,7 +38,7 @@
     flex-shrink: 0;
   }
 
-  #collapsible-control {
+  .collapsible-control {
     width: 24px;
     height: 24px;
     background-color: #4c8666;
@@ -50,12 +50,33 @@
     flex-shrink: 0;
   }
 
-  #collapsible-control svg {
+  .collapsible-control svg {
     display: block;
   }
 
-  #collapsible-control.expand svg {
+  .collapsible-control.expand svg {
     transform: rotate(180deg);
+  }
+
+  .user-login-guest-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .user-login-guest-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-shrink: 0;
+    padding-bottom: 8px;
+  }
+
+  .user-login-guest-side .user-login-btn {
+    margin-top: 0;
+    margin-bottom: 0;
   }
   .user-login-basic-form {
     padding: 16px 0 14px;

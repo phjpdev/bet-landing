@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { formatCurrency } from '../utils/transactionFormat';
 
 const STORAGE_KEY = 'display-balance';
 const DEFAULT_BALANCE = '4.40';
@@ -25,7 +26,7 @@ export function setDisplayBalance(value) {
 }
 
 export function formatBalanceDisplay(value) {
-    return `$${normalizeBalanceInput(value)}`;
+    return formatCurrency(normalizeBalanceInput(value));
 }
 
 export function useDisplayBalance() {

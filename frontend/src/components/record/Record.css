@@ -563,6 +563,7 @@ tr:last-child .table-value {
 .record-hkjc-table-scroll {
     flex: 1;
     min-height: 0;
+    overflow-x: hidden;
     overflow-y: auto;
     padding: 0;
     background: #e7e7e7;
@@ -593,13 +594,6 @@ tr:last-child .table-value {
     height: 32px;
     box-sizing: border-box;
 }
-
-/* Col widths 1–5: 75 / 85 / 65 / 75 / 290 px via <colgroup> in Record.js */
-.record-hkjc-table col:nth-child(1) { width: 75px; }
-.record-hkjc-table col:nth-child(2) { width: 85px; }
-.record-hkjc-table col:nth-child(3) { width: 65px; }
-.record-hkjc-table col:nth-child(4) { width: 75px; }
-.record-hkjc-table col:nth-child(5) { width: 290px; }
 
 .record-hkjc-th-details {
     cursor: default;
@@ -637,20 +631,21 @@ tr:last-child .table-value {
 .record-hkjc-details-cell {
     white-space: pre-line;
     line-height: var(--hkjc-details-lh);
-    cursor: default;
+    cursor: pointer;
+    background-color: #f8f8f8;
     padding-top: var(--hkjc-cell-py);
     padding-bottom: var(--hkjc-cell-py);
-}
-
-.record-hkjc-details-cell:hover {
-    color: #333;
-    background: transparent;
-    text-decoration: none;
 }
 
 .record-hkjc-expense-cell,
 .record-hkjc-deposit-cell {
     text-align: right;
+    white-space: nowrap;
+    word-break: normal;
+}
+
+.record-hkjc-deposit-cell {
+    color: #00853e;
 }
 
 .record-hkjc-empty-cell {

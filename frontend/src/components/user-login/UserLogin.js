@@ -13,7 +13,7 @@ const UserLogin = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState("");
     const [eye, setEye] = useState(true);
-    const { balance, setBalance } = useDisplayBalance();
+    const { balance, setBalance, formattedBalance } = useDisplayBalance();
     const [showBalanceModal, setShowBalanceModal] = useState(false);
     const [readTerm, setReadTerm] = useState(false);
     const [showModal, setShowModal] = useState(false);
@@ -94,7 +94,7 @@ const UserLogin = () => {
                                             style={{fontSize:'16px', fontWeight:'500', minWidth:'100px'}}
                                             onClick={() => setShowBalanceModal(true)}
                                         >
-                                            $ {eye ? balance : '*****'}
+                                            {eye ? formattedBalance : '*****'}
                                         </div>
                                         <div style={{cursor:'pointer'}}><img src='/image/refresh.svg' alt='refresh'></img></div>
                                     </div>

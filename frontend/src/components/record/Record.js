@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 import './Record.css';
 
@@ -9,6 +9,7 @@ import BalanceEditModal from '../shared/BalanceEditModal';
 import TransactionRecordModal from '../shared/TransactionRecordModal';
 import {
     EMPTY_TRANSACTION_FORM,
+    computeHkjcTableColumnWidths,
     formatBalanceSummaryRow,
     formatCurrency,
 } from '../../utils/transactionFormat';
@@ -39,11 +40,6 @@ const TABLE_COLUMNS = [
 
 ];
 
-/** Fixed column widths (px) for HKJC account record table */
-const TABLE_COLUMN_WIDTHS_PX = [75, 85, 65, 75, 290];
-
-
-
 const Record = ({ embedded = false }) => {
 
     const [activeTab, setActiveTab] = useState('record-header-tab3');
@@ -65,6 +61,11 @@ const Record = ({ embedded = false }) => {
     const { balance, setBalance, formattedBalance } = useDisplayBalance();
 
     const { transactions, saveTransaction } = useAccountTransactions();
+
+    const hkjcTableColumnWidths = useMemo(
+        () => computeHkjcTableColumnWidths(transactions),
+        [transactions],
+    );
 
     const [showTable, setShowTable] = useState(false);
 
@@ -453,14 +454,7 @@ const Record = ({ embedded = false }) => {
                 <table className="record-hkjc-table">
                     <colgroup>
                         {TABLE_COLUMNS.map((col, index) => (
-                            <col
-                                key={col}
-                                style={
-                                    TABLE_COLUMN_WIDTHS_PX[index] != null
-                                        ? { width: `${TABLE_COLUMN_WIDTHS_PX[index]}px` }
-                                        : undefined
-                                }
-                            />
+                            <col key={col} style={{ width: hkjcTableColumnWidths[index] }} />
                         ))}
                     </colgroup>
                     <thead>
@@ -488,6 +482,10 @@ const Record = ({ embedded = false }) => {
                                 <React.Fragment key={tx.id}>
                                     {tx.balanceSnapshot !== '' && tx.dateTime && (
                                         <tr className="record-hkjc-balance-summary-row">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                             <td colSpan={8}>
                                                 {formatBalanceSummaryRow(tx.dateTime, tx.balanceSnapshot)}
                                             </td>

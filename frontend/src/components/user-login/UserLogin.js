@@ -68,6 +68,9 @@ const UserLogin = () => {
 
     const openAccountRecord = (e) => {
         e.preventDefault();
+        if (showAccountRecordModal) {
+            return;
+        }
         setShowAccountRecordModal(true);
     };
 

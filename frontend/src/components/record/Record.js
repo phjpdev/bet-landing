@@ -40,9 +40,20 @@ const TABLE_COLUMNS = [
 
 ];
 
+const ACCOUNT_RECORD_TABLE_LOAD_MS = 4500;
+
+const HkjcTableSpinner = () => (
+    <div className="record-hkjc-spinner" aria-hidden="true">
+        {Array.from({ length: 12 }, (_, i) => (
+            <span key={i} className="record-hkjc-spinner-bar" />
+        ))}
+    </div>
+);
+
 const Record = ({ embedded = false }) => {
 
     const [activeTab, setActiveTab] = useState('record-header-tab3');
+    const [isTableLoading, setIsTableLoading] = useState(embedded);
 
     const [currentDateTime, setCurrentDateTime] = useState("");
 
@@ -104,6 +115,15 @@ const Record = ({ embedded = false }) => {
     };
 
 
+
+    useEffect(() => {
+        if (!embedded) {
+            return undefined;
+        }
+        setIsTableLoading(true);
+        const timer = setTimeout(() => setIsTableLoading(false), ACCOUNT_RECORD_TABLE_LOAD_MS);
+        return () => clearTimeout(timer);
+    }, [embedded]);
 
     useEffect(() => {
 
@@ -449,7 +469,7 @@ const Record = ({ embedded = false }) => {
     );
 
     const renderHkjcTransactionTable = () => (
-        <div className="record-hkjc-table-area">
+        <div className={`record-hkjc-table-area${isTableLoading ? ' record-hkjc-table-area--loading' : ''}`}>
             <div className="record-hkjc-table-scroll">
                 <table className="record-hkjc-table">
                     <colgroup>
@@ -471,7 +491,19 @@ const Record = ({ embedded = false }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {transactions.length === 0 ? (
+                        {isTableLoading ? (
+                            <tr className="record-hkjc-table-loading-row">
+                                <td colSpan={8}>
+                                    <div
+                                        className="record-hkjc-table-loading-inner"
+                                        aria-busy="true"
+                                        aria-label="載入中"
+                                    >
+                                        <HkjcTableSpinner />
+                                    </div>
+                                </td>
+                            </tr>
+                        ) : transactions.length === 0 ? (
                             <tr>
                                 <td colSpan={8} className="record-hkjc-empty-cell">
                                     沒有交易紀錄
@@ -482,10 +514,6 @@ const Record = ({ embedded = false }) => {
                                 <React.Fragment key={tx.id}>
                                     {tx.balanceSnapshot !== '' && tx.dateTime && (
                                         <tr className="record-hkjc-balance-summary-row">
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
                                             <td colSpan={8}>
                                                 {formatBalanceSummaryRow(tx.dateTime, tx.balanceSnapshot)}
                                             </td>

@@ -560,6 +560,74 @@ tr:last-child .table-value {
     background: #e7e7e7;
 }
 
+.record-hkjc-table-area--loading {
+    flex: 1;
+    min-height: 0;
+}
+
+.record-hkjc-table-area--loading .record-hkjc-table-scroll {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.record-hkjc-table-area--loading .record-hkjc-table {
+    flex: 1;
+    height: 100%;
+}
+
+.record-hkjc-table-loading-row td {
+    padding: 0;
+    border: none;
+    background: #e7e7e7;
+    vertical-align: middle;
+}
+
+.record-hkjc-table-loading-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px;
+    background: #e7e7e7;
+}
+
+.record-hkjc-spinner {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.record-hkjc-spinner-bar {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 3px;
+    height: 10px;
+    margin-left: -1.5px;
+    border-radius: 1px;
+    background-color: #999;
+    transform-origin: center 20px;
+    animation: record-hkjc-spinner-fade 1s linear infinite;
+}
+
+.record-hkjc-spinner-bar:nth-child(1) { transform: rotate(0deg); animation-delay: -0.916s; }
+.record-hkjc-spinner-bar:nth-child(2) { transform: rotate(30deg); animation-delay: -0.833s; }
+.record-hkjc-spinner-bar:nth-child(3) { transform: rotate(60deg); animation-delay: -0.75s; }
+.record-hkjc-spinner-bar:nth-child(4) { transform: rotate(90deg); animation-delay: -0.666s; }
+.record-hkjc-spinner-bar:nth-child(5) { transform: rotate(120deg); animation-delay: -0.583s; }
+.record-hkjc-spinner-bar:nth-child(6) { transform: rotate(150deg); animation-delay: -0.5s; }
+.record-hkjc-spinner-bar:nth-child(7) { transform: rotate(180deg); animation-delay: -0.416s; }
+.record-hkjc-spinner-bar:nth-child(8) { transform: rotate(210deg); animation-delay: -0.333s; }
+.record-hkjc-spinner-bar:nth-child(9) { transform: rotate(240deg); animation-delay: -0.25s; }
+.record-hkjc-spinner-bar:nth-child(10) { transform: rotate(270deg); animation-delay: -0.166s; }
+.record-hkjc-spinner-bar:nth-child(11) { transform: rotate(300deg); animation-delay: -0.083s; }
+.record-hkjc-spinner-bar:nth-child(12) { transform: rotate(330deg); animation-delay: 0s; }
+
+@keyframes record-hkjc-spinner-fade {
+    0% { opacity: 1; }
+    100% { opacity: 0.15; }
+}
+
 .record-hkjc-table-scroll {
     flex: 1;
     min-height: 0;

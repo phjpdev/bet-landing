@@ -1,12 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Record from './Record';
 import './AccountRecordModal.css';
 
 const DEFAULT_URL = 'bet.hkjc.com/ch/betslip/acctstmt';
 
+const MODAL_TRANSITION_MS = 280;
+
 const AccountRecordModal = ({ onClose }) => {
     const [url, setUrl] = useState(DEFAULT_URL);
+    const [isVisible, setIsVisible] = useState(false);
+    const [isClosing, setIsClosing] = useState(false);
+    const isClosingRef = useRef(false);
+
+    const requestClose = useCallback(() => {
+        if (isClosingRef.current) {
+            return;
+        }
+        isClosingRef.current = true;
+        setIsClosing(true);
+        setIsVisible(false);
+    }, []);
 
     const handleUrlFocus = (e) => {
         e.target.select();
@@ -25,9 +39,30 @@ const AccountRecordModal = ({ onClose }) => {
     };
 
     useEffect(() => {
+        let innerFrame;
+        const outerFrame = requestAnimationFrame(() => {
+            innerFrame = requestAnimationFrame(() => setIsVisible(true));
+        });
+        return () => {
+            cancelAnimationFrame(outerFrame);
+            if (innerFrame) {
+                cancelAnimationFrame(innerFrame);
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!isClosing) {
+            return undefined;
+        }
+        const timer = setTimeout(() => onClose(), MODAL_TRANSITION_MS);
+        return () => clearTimeout(timer);
+    }, [isClosing, onClose]);
+
+    useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.key === 'Escape') {
-                onClose();
+                requestClose();
             }
         };
         document.addEventListener('keydown', handleKeyDown);
@@ -36,10 +71,15 @@ const AccountRecordModal = ({ onClose }) => {
             document.removeEventListener('keydown', handleKeyDown);
             document.body.style.overflow = '';
         };
-    }, [onClose]);
+    }, [requestClose]);
 
     return createPortal(
-        <div className="account-record-modal-root" role="dialog" aria-modal="true" aria-label="戶口紀錄">
+        <div
+            className={`account-record-modal-root${isVisible ? ' account-record-modal-root--visible' : ''}`}
+            role="dialog"
+            aria-modal="true"
+            aria-label="戶口紀錄"
+        >
             <div className="account-record-modal-window">
                 <div className="chrome-titlebar">
                     <div className="chrome-titlebar-left">
@@ -56,7 +96,7 @@ const AccountRecordModal = ({ onClose }) => {
                         <button
                             type="button"
                             className="chrome-win-btn chrome-win-close"
-                            onClick={onClose}
+                            onClick={requestClose}
                             aria-label="關閉"
                         >
                             <span className="chrome-win-close-icon" />

@@ -103,19 +103,25 @@
 }
 
 .record-root--embedded .record-info-sec {
-    position: relative;
-    flex: 1;
-    min-height: 0;
-    height: auto;
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    /* background: #e7e7e7; */
 }
 
 .record-root--embedded .record-info-search {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow-y: auto;
+    position: relative;
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    background: #fff;
+    display: block;
+    padding: 0;
+    border-bottom: 1px solid #ccc;
 }
 
 .record-root--embedded .record-info-container {
@@ -853,33 +859,10 @@ tr:last-child .table-value {
 }
 
 
-.record-root--embedded .record-info-sec {
-    position: absolute;
-    inset: 0;
-    background: #e7e7e7;
-    z-index: 10;
-}
-
-.record-root--embedded .record-info-search {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #fff;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 0;
-}
-
 .record-root--embedded .record-search-form-body {
-    flex: 1;
-    min-height: 0;
+    flex: none;
 }
 
 .record-root--embedded .record-search-btn-div {
-    flex-shrink: 0;
-    margin-top: auto;
+    margin-top: 0;
 }

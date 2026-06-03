@@ -30,7 +30,12 @@ const Navbar = () => {
 
         {/* Right Side - Language Switch */}
         <div className="lang-switch">
-          <button className="logout-btn" onClick={handleLogout}>
+          <button
+            type="button"
+            className="logout-btn"
+            onClick={handleLogout}
+            aria-label="登出"
+          >
             登出
           </button>
           <button type="button" onClick={toggleLanguage} aria-label={language === "zh-HK" ? "Switch to English" : "切換至中文"}>

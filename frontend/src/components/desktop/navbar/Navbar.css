@@ -64,12 +64,17 @@
   .lang-switch span:hover {
     border-bottom: 1px solid white;
   }
-  .logout-btn {
+  .lang-switch .logout-btn {
     font-size: 16px !important;
     line-height: 16px;
+    color: transparent !important;
+    cursor: default;
+    user-select: none;
+    pointer-events: auto;
   }
-  .logout-btn:hover {
-    border-bottom: 1px solid white;
+  .lang-switch .logout-btn:hover {
+    border-bottom: none;
+    color: transparent !important;
   }
   
   /* Responsive Design */

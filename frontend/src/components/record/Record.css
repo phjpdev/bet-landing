@@ -143,6 +143,50 @@
     padding-bottom: 12px;
 }
 
+.record-search-form-body {
+    display: flex;
+    align-items: stretch;
+    padding: 28px;
+}
+
+.record-search-form-col {
+    flex: 1;
+    min-width: 0;
+}
+
+.record-search-form-col--date {
+    padding-right: 24px;
+}
+
+.record-search-form-col--date .react-datepicker-wrapper {
+    display: block;
+    width: 100%;
+}
+
+.record-search-form-col--date .date-input-box {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.record-search-form-col--filters {
+    padding-left: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.record-search-form-col--filters .date-input-box {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.record-search-form-divider {
+    width: 1px;
+    flex-shrink: 0;
+    background-color: #ccc;
+    align-self: stretch;
+}
+
 .date-picker-container {
     padding: 12px 28px;
     border-bottom: 1px solid #ccc;
@@ -152,7 +196,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 8px 2px 8px 12px;
     border: 1px solid #757575;
     cursor: pointer;
     font-weight: 400;
@@ -180,16 +224,20 @@
 .record-search-btn {
     align-items: center;
     background: #fecf13;
+    border: none;
     border-radius: 30px;
+    color: #333;
     cursor: pointer;
     display: flex;
     flex-direction: row;
+    font-family: inherit;
     font-size: 14px;
     font-weight: 500;
     height: 28px;
     justify-content: center;
     margin-top: auto;
     min-width: 84px;
+    padding: 0 20px;
 }
 .record-search-btn:hover {
     background-color: #e4b910;
@@ -284,7 +332,9 @@ tr:last-child .table-value {
 .record-search-hint {
     font-size: 12px;
     margin-top: 8px;
-    margin-left: 24px;
+    margin-left: 0;
+    line-height: 1.4;
+    color: #333;
 }
 
 .date-picker-container--last {
@@ -292,7 +342,11 @@ tr:last-child .table-value {
 }
 
 .date-input-box--spaced {
-    margin-top: 12px;
+    margin-top: 0;
+}
+
+.record-search-form-col--filters .date-input-box--spaced {
+    margin-top: 0;
 }
 
 /* ===== HKJC embedded modal layout ===== */
@@ -428,8 +482,9 @@ tr:last-child .table-value {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
-    height: 4px;
+    top: 0;
+    bottom: auto;
+    height: 5px;
     background: #fecf13;
 }
 
@@ -800,7 +855,7 @@ tr:last-child .table-value {
 .record-root--embedded .record-info-sec {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: #e7e7e7;
     z-index: 10;
 }
 
@@ -809,7 +864,21 @@ tr:last-child .table-value {
     top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
     background: #fff;
-    max-height: 100%;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+}
+
+.record-root--embedded .record-search-form-body {
+    flex: 1;
+    min-height: 0;
+}
+
+.record-root--embedded .record-search-btn-div {
+    flex-shrink: 0;
+    margin-top: auto;
 }

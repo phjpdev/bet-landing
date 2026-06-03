@@ -295,81 +295,66 @@ const Record = ({ embedded = false }) => {
 
 
     const renderSearchOverlay = () => (
-
         <div className="record-info-sec">
-
             <div className="record-info-search">
-
-                <div className="date-picker-container">
-
-                    <DatePicker
-
-                        selectsRange={true}
-
-                        startDate={startDate}
-
-                        endDate={endDate}
-
-                        onChange={(update) => { setDateRange(update); }}
-
-                        dateFormat="dd/MM/yyyy"
-
-                        maxDate={getMaxDate()}
-
-                        withPortal
-
-                        customInput={<CustomInput value={startDate && endDate ? `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}` : ""} initialDateTime={initialDateTime} />}
-
-                    />
-
-                    <div className="record-search-hint">每次最多可搜尋過去30天內其中8天。(以香港時間計算)</div>
-
-                </div>
-
-
-
-                <div className="date-picker-container date-picker-container--last">
-
-                    <div className="date-input-box">
-
-                        <div><span>交易種類</span></div>
-
-                        <div className="date-input-box-right">
-
-                            <span className="date-display">所有投注種類</span>
-
-                            <span className="arrow-icon"><IoIosArrowDown style={{ fontSize: '20px', display: 'flex' }} /></span>
-
+                <div className="record-search-form-body">
+                    <div className="record-search-form-col record-search-form-col--date">
+                        <DatePicker
+                            selectsRange={true}
+                            startDate={startDate}
+                            endDate={endDate}
+                            onChange={(update) => { setDateRange(update); }}
+                            dateFormat="dd/MM/yyyy"
+                            maxDate={getMaxDate()}
+                            withPortal
+                            customInput={
+                                <CustomInput
+                                    value={
+                                        startDate && endDate
+                                            ? `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`
+                                            : ""
+                                    }
+                                    initialDateTime={initialDateTime}
+                                />
+                            }
+                        />
+                        <div className="record-search-hint">
+                            每次最多可搜尋過去30天內其中8天。(以香港時間計算)
                         </div>
-
                     </div>
-
-                    <div className="date-input-box date-input-box--spaced">
-
-                        <div><span>顯示種類</span></div>
-
-                        <div className="date-input-box-right">
-
-                            <span className="date-display">所有</span>
-
-                            <span className="arrow-icon"><IoIosArrowDown style={{ fontSize: '20px', display: 'flex' }} /></span>
-
+                    <div className="record-search-form-divider" aria-hidden="true" />
+                    <div className="record-search-form-col record-search-form-col--filters">
+                        <div className="date-input-box">
+                            <div><span>交易種類</span></div>
+                            <div className="date-input-box-right">
+                                <span className="date-display">所有投注種類</span>
+                                <span className="arrow-icon">
+                                    <IoIosArrowDown style={{ fontSize: '20px', display: 'flex' }} />
+                                </span>
+                            </div>
                         </div>
-
+                        <div className="date-input-box date-input-box--spaced">
+                            <div><span>顯示種類</span></div>
+                            <div className="date-input-box-right">
+                                <span className="date-display">所有</span>
+                                <span className="arrow-icon">
+                                    <IoIosArrowDown style={{ fontSize: '20px', display: 'flex' }} />
+                                </span>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
-
                 <div className="record-search-btn-div">
-
-                    <div className="record-search-btn" onClick={() => { setShowRecordContainer(false); }}>搜尋</div>
-
+                    <button
+                        type="button"
+                        className="record-search-btn"
+                        onClick={() => { setShowRecordContainer(false); }}
+                    >
+                        搜尋
+                    </button>
                 </div>
-
             </div>
-
         </div>
-
     );
 
 

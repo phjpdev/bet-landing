@@ -510,9 +510,9 @@ const Record = ({ embedded = false }) => {
                                 </td>
                             </tr>
                         ) : (
-                            transactions.map((tx) => (
+                            transactions.map((tx, index) => (
                                 <React.Fragment key={tx.id}>
-                                    {tx.balanceSnapshot !== '' && tx.dateTime && (
+                                    {index === 0 && tx.balanceSnapshot !== '' && tx.dateTime && (
                                         <tr className="record-hkjc-balance-summary-row">
                                             <td></td>
                                             <td></td>
@@ -523,7 +523,13 @@ const Record = ({ embedded = false }) => {
                                             </td>
                                         </tr>
                                     )}
-                                    <tr className="record-hkjc-transaction-row">
+                                    <tr
+                                        className={`record-hkjc-transaction-row${
+                                            index % 2 === 0
+                                                ? ' record-hkjc-transaction-row--grey'
+                                                : ' record-hkjc-transaction-row--white'
+                                        }`}
+                                    >
                                         <td>{tx.referenceNo}</td>
                                         <td>{tx.dateTime}</td>
                                         <td>{tx.eventDate}</td>

@@ -524,7 +524,7 @@ tr:last-child .table-value {
 
 .record-hkjc-date-text {
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 900;
     color: #333;
     padding: 0;
     line-height: 1.2;
@@ -688,7 +688,6 @@ tr:last-child .table-value {
     padding: var(--hkjc-cell-py) var(--hkjc-cell-px);
     font-size: 12px;
     color: #333;
-    background: #f8f8f8;
     border-bottom: 1px solid #d5d5d5;
     vertical-align: top;
     word-break: break-word;
@@ -696,13 +695,28 @@ tr:last-child .table-value {
     box-sizing: border-box;
 }
 
+.record-hkjc-transaction-row--grey td {
+    background: #f8f8f8;
+}
+
+.record-hkjc-transaction-row--white td {
+    background: #fff;
+}
+
 .record-hkjc-details-cell {
     white-space: pre-line;
     line-height: var(--hkjc-details-lh);
-    cursor: pointer;
-    background-color: #f8f8f8;
+    cursor: default;
     padding-top: var(--hkjc-cell-py);
     padding-bottom: var(--hkjc-cell-py);
+}
+
+.record-hkjc-transaction-row--grey .record-hkjc-details-cell {
+    background-color: #f8f8f8;
+}
+
+.record-hkjc-transaction-row--white .record-hkjc-details-cell {
+    background-color: #fff;
 }
 
 .record-hkjc-expense-cell,

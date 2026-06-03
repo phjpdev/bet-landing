@@ -1,6 +1,5 @@
 ﻿import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AiOutlineGlobal } from "react-icons/ai";
 import { useLanguage } from "../../../context/LanguageContext";
 import "./Navbar.css"; // Import the CSS file
 
@@ -67,7 +66,12 @@ const Navbar = () => {
             </button>
           )}
           <button type="button" onClick={toggleLanguage} aria-label={language === "zh-HK" ? "Switch to English" : "切換至中文"}>
-            <AiOutlineGlobal />
+            <img
+              src="/image/lang.65997091ab467b4b4033.svg"
+              alt=""
+              width={24}
+              height={24}
+            />
             <span>{language === "zh-HK" ? "ENG" : "中文"}</span>
           </button>
         </div>

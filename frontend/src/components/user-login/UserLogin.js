@@ -118,7 +118,7 @@ const UserLogin = () => {
                     <div className='user-login-box'>
                         <div className="user-login-basic-form" style={{display:'flex', justifyContent:'space-between'}}>
                             <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start'}}>
-                                <img src='/image/user.svg' alt='user' width={28}/>
+                                <img src='/image/user.svg' alt='user' width={36}/>
                                 <div className='user-profile-balance'>
                                     <div style={{fontSize:'12px'}}>投注戶口號碼</div>
                                     <div style={{fontSize:'16px', fontWeight:'500'}}>15339692</div>

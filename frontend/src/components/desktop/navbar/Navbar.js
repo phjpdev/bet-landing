@@ -30,12 +30,12 @@ const Navbar = () => {
 
         {/* Right Side - Language Switch */}
         <div className="lang-switch">
+          <button className="logout-btn" onClick={handleLogout}>
+            登出
+          </button>
           <button type="button" onClick={toggleLanguage} aria-label={language === "zh-HK" ? "Switch to English" : "切換至中文"}>
             <AiOutlineGlobal />
             <span>{language === "zh-HK" ? "ENG" : "中文"}</span>
-          </button>
-          <button className="logout-btn" onClick={handleLogout}>
-            登出
           </button>
         </div>
       </div>

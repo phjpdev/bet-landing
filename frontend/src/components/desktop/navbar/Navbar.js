@@ -1,16 +1,33 @@
-﻿import React from "react";
+﻿import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineGlobal } from "react-icons/ai";
 import { useLanguage } from "../../../context/LanguageContext";
 import "./Navbar.css"; // Import the CSS file
 
+const isBettingLoggedIn = () => !!localStorage.getItem("user-token");
+
 const Navbar = () => {
   const navigate = useNavigate();
   const { language, toggleLanguage } = useLanguage();
+  const [showFeedbackBtn, setShowFeedbackBtn] = useState(isBettingLoggedIn);
+
+  useEffect(() => {
+    const syncFeedbackVisibility = () => {
+      setShowFeedbackBtn(isBettingLoggedIn());
+    };
+    window.addEventListener("storage", syncFeedbackVisibility);
+    window.addEventListener("user-session-changed", syncFeedbackVisibility);
+    return () => {
+      window.removeEventListener("storage", syncFeedbackVisibility);
+      window.removeEventListener("user-session-changed", syncFeedbackVisibility);
+    };
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem("token"); // Remove token
     localStorage.removeItem("user-token"); // Remove token
     localStorage.removeItem("user-question"); // Remove token
+    window.dispatchEvent(new Event("user-session-changed"));
     navigate("/login"); // Redirect to login page
     window.location.reload();
   };
@@ -38,15 +55,17 @@ const Navbar = () => {
           >
             登出
           </button>
-          <button type="button" aria-label="意見/建議">
-            <img
-              src="/image/Survey_desktop_small.7c28abba66881416c7a6.svg"
-              alt=""
-              width={24}
-              height={24}
-            />
-            <span>意見/ 建議</span>
-          </button>
+          {showFeedbackBtn && (
+            <button type="button" aria-label="意見/建議">
+              <img
+                src="/image/Survey_desktop_small.7c28abba66881416c7a6.svg"
+                alt=""
+                width={24}
+                height={24}
+              />
+              <span>意見/ 建議</span>
+            </button>
+          )}
           <button type="button" onClick={toggleLanguage} aria-label={language === "zh-HK" ? "Switch to English" : "切換至中文"}>
             <AiOutlineGlobal />
             <span>{language === "zh-HK" ? "ENG" : "中文"}</span>

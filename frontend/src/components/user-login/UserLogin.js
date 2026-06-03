@@ -34,6 +34,7 @@ const UserLogin = () => {
             const response = await axios.post(`${app_url}/api/user-login`, { username, password });
             localStorage.setItem("user-token", response.data.token);
             localStorage.setItem("user-question", "verified");
+            window.dispatchEvent(new Event("user-session-changed"));
             setShowTermsModal(true);
             setError("");
         } catch (error) {
@@ -60,6 +61,7 @@ const UserLogin = () => {
     const userLogout = () => {
         localStorage.removeItem("user-token");
         localStorage.removeItem("user-question");
+        window.dispatchEvent(new Event("user-session-changed"));
         setShowModal(false);
         setShowAccountRecordModal(false);
         setReadTerm(false);

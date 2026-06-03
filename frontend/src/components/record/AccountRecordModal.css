@@ -163,6 +163,11 @@
     border-bottom: 1px solid #c8ccd0;
     display: flex;
     align-items: center;
+    transition: background-color 0.15s ease;
+}
+
+.chrome-toolbar:hover {
+    background: #d2d2d2;
 }
 
 .chrome-address-bar {
@@ -172,7 +177,12 @@
     align-items: center;
     padding: 2px 8px;
     gap: 4px;
-    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+    background: transparent;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.chrome-toolbar:hover .chrome-address-bar {
+    background: transparent;
 }
 
 .chrome-address-bar:focus-within {

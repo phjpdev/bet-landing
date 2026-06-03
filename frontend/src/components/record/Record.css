@@ -362,12 +362,21 @@ tr:last-child .table-value {
     font-weight: 400;
     font-family: inherit;
     cursor: pointer;
-    padding-right: 16px;
+    padding: 4px 16px 4px 4px;
     line-height: 1;
+    border-radius: 4px;
+    /* transition: background-color 0.15s ease; */
 }
 
 .record-hkjc-topbar-action:hover {
-    opacity: 0.9;
+    /* background-color: rgba(0, 0, 0, 0.22); */
+}
+
+.record-hkjc-topbar-action:hover span {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: none;
 }
 
 .record-hkjc-topbar-icon--print {

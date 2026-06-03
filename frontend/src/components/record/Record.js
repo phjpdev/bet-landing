@@ -557,9 +557,9 @@ const Record = ({ embedded = false }) => {
     const renderHkjcDateRow = () => (
         <div className="record-hkjc-date-row-wrapper">
             <div className="record-hkjc-date-row">
-                <span className="record-hkjc-date-text">
+                <strong className="record-hkjc-date-text">
                     日期範圍 {initialDateTime} - {initialDateTime}
-                </span>
+                </strong>
                 <button
                     type="button"
                     className="record-hkjc-search-btn"
@@ -651,7 +651,9 @@ const Record = ({ embedded = false }) => {
                                 <span className="record-hkjc-summary-value">{currentDateTime}</span>
                             </div>
                             <div className="record-hkjc-summary-item">
-                                <span>投注戶口號碼:</span>
+                                <span>投注戶口號碼: </span>
+                                <span> </span>
+                                <span> </span>
                                 <span className="record-hkjc-summary-value">15339692</span>
                             </div>
                             <div className="record-hkjc-summary-item">
@@ -750,7 +752,7 @@ const Record = ({ embedded = false }) => {
 
                             <div className="record-info-container-header">
 
-                                <div className="record-info-container-date">日期範圍 {initialDateTime} - {initialDateTime}</div>
+                                <strong className="record-info-container-date">日期範圍 {initialDateTime} - {initialDateTime}</strong>
 
                                 <div className="record-info-container-button" onClick={() => { setShowRecordContainer(true); }}>重新搜尋</div>
 

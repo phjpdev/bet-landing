@@ -73,7 +73,10 @@
     position: sticky;
 }
 .record-info-container-date {
-    font-weight: 700;
+    font-family: "Noto Sans TC", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", sans-serif;
+    font-size: 13px;
+    font-weight: 700 !important;
+    color: #333;
 }
 .record-info-container-button {
     align-items: center;
@@ -510,6 +513,10 @@ tr:last-child .table-value {
     flex-shrink: 0;
     box-sizing: border-box;
     border-bottom: 1px solid #ccc;
+    font-family: "Noto Sans TC", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
 }
 
 .record-hkjc-table th:first-child,
@@ -523,9 +530,10 @@ tr:last-child .table-value {
 }
 
 .record-hkjc-date-text {
-    font-size: 13px;
-    font-weight: 900;
-    color: #333;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 700 !important;
+    color: inherit;
     padding: 0;
     line-height: 1.2;
     flex: 1;

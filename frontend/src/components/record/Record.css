@@ -644,8 +644,8 @@ tr:last-child .table-value {
     word-break: normal;
 }
 
-.record-hkjc-deposit-cell {
-    color: #00853e;
+.record-hkjc-transaction-row td.record-hkjc-deposit-cell {
+    color: #3fa33a;
 }
 
 .record-hkjc-empty-cell {

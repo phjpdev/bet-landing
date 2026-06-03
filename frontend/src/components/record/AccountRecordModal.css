@@ -277,3 +277,26 @@
 .account-record-modal-window .modal-overlay {
     z-index: 10100;
 }
+
+/* Keep arrow cursor on labels/table text; pointer only on real controls */
+.account-record-modal-window {
+    cursor: default;
+    user-select: none;
+}
+
+.account-record-modal-window * {
+    cursor: default;
+    user-select: none;
+}
+
+.account-record-modal-window button,
+.account-record-modal-window button * {
+    cursor: pointer;
+    user-select: none;
+}
+
+.account-record-modal-window input,
+.account-record-modal-window textarea {
+    cursor: text;
+    user-select: text;
+}

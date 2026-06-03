@@ -304,6 +304,8 @@ tr:last-child .table-value {
     font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
     font-size: 13px;
     color: #333;
+    cursor: default;
+    user-select: none;
     /* HKJC acctstmt row heights (aligned to bet.hkjc.com) */
     --hkjc-topbar-h: 42px;
     --hkjc-tabs-h: 38px;
@@ -361,7 +363,7 @@ tr:last-child .table-value {
     font-size: 12px;
     font-weight: 400;
     font-family: inherit;
-    cursor: pointer;
+    cursor: pointer !important;
     padding: 4px 16px 4px 4px;
     line-height: 1;
     border-radius: 4px;
@@ -405,7 +407,7 @@ tr:last-child .table-value {
     font-size: 13px;
     font-weight: 400;
     font-family: inherit;
-    cursor: pointer;
+    cursor: pointer !important;
     position: relative;
     padding: 8px 4px 6px;
     white-space: nowrap;
@@ -562,7 +564,7 @@ tr:last-child .table-value {
     font-size: 13px;
     font-weight: 400;
     font-family: inherit;
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 .record-hkjc-search-btn:hover {

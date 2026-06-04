@@ -243,7 +243,7 @@
     letter-spacing: 0.01em;
     padding: 0 4px;
     margin: 0;
-    cursor: text;
+    cursor: default;
 }
 
 .chrome-url-input::selection {
@@ -278,45 +278,40 @@
     z-index: 10100;
 }
 
-/* Keep arrow cursor on labels/table text; pointer only on real controls */
+/* HKJC-style: drag to select text, keep default arrow cursor (no I-beam) */
 .account-record-modal-window {
     cursor: default;
-    user-select: none;
+    user-select: text;
 }
 
-.account-record-modal-window * {
+.account-record-modal-window .chrome-titlebar,
+.account-record-modal-window .chrome-window-controls,
+.account-record-modal-window .chrome-window-controls button {
+    user-select: none;
     cursor: default;
-    user-select: none;
 }
 
-.account-record-modal-window button,
-.account-record-modal-window button * {
-    cursor: pointer;
-    user-select: none;
+.account-record-modal-window .record-hkjc-tab,
+.account-record-modal-window .record-hkjc-topbar-action,
+.account-record-modal-window .record-hkjc-search-btn {
+    cursor: default !important;
+    user-select: text;
 }
 
 .account-record-modal-window .chrome-url-input,
 .account-record-modal-window .modal-input input,
-.account-record-modal-window .modal-input textarea {
-    cursor: text;
-    user-select: text;
-}
-
+.account-record-modal-window .modal-input textarea,
 .account-record-modal-window .record-hkjc-balance-part-input,
 .account-record-modal-window .record-hkjc-balance-summary-input,
-.account-record-modal-window .record-hkjc-balance-summary-cell,
 .account-record-modal-window .record-hkjc-balance-summary-amount,
 .account-record-modal-window .record-hkjc-reference-cell,
 .account-record-modal-window .record-hkjc-details-cell,
 .account-record-modal-window .record-hkjc-table td,
-.account-record-modal-window .record-hkjc-table th {
+.account-record-modal-window .record-hkjc-table th,
+.account-record-modal-window .record-hkjc-summary,
+.account-record-modal-window .record-hkjc-date-text,
+.account-record-modal-window .record-hkjc-empty,
+.account-record-modal-window .record-hkjc-hint-bar {
     cursor: default !important;
-}
-
-.account-record-modal-window .record-hkjc-balance-part-input:hover,
-.account-record-modal-window .record-hkjc-balance-summary-input:hover,
-.account-record-modal-window .record-hkjc-balance-summary-amount:hover,
-.account-record-modal-window .record-hkjc-reference-cell:hover,
-.account-record-modal-window .record-hkjc-details-cell:hover {
-    cursor: default !important;
+    user-select: text;
 }

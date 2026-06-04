@@ -278,7 +278,7 @@ const Record = ({ embedded = false }) => {
             balanceSnapshot:
                 transactionModal.mode === 'edit' && existing
                     ? existing.balanceSnapshot
-                    : balance,
+                    : '',
         });
     };
 

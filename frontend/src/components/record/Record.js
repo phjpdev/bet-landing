@@ -7,13 +7,12 @@ import { useDisplayBalance } from '../../hooks/useDisplayBalance';
 import { useAccountTransactions, createTransactionId } from '../../hooks/useAccountTransactions';
 import BalanceEditModal from '../shared/BalanceEditModal';
 import TransactionRecordModal from '../shared/TransactionRecordModal';
+import BalanceSummaryModal from '../shared/BalanceSummaryModal';
 import {
     EMPTY_TRANSACTION_FORM,
     computeHkjcTableColumnWidths,
     formatCurrency,
-    buildBalanceSummaryDateTime,
-    parseBalanceSummaryDateTime,
-    sanitizeNumericInput,
+    formatBalanceSummaryRow,
 } from '../../utils/transactionFormat';
 
 import DatePicker from "react-datepicker";
@@ -91,7 +90,10 @@ const Record = ({ embedded = false }) => {
         data: EMPTY_TRANSACTION_FORM,
     });
 
-    const [editingBalanceId, setEditingBalanceId] = useState(null);
+    const [balanceSummaryModal, setBalanceSummaryModal] = useState({
+        open: false,
+        tx: null,
+    });
 
     const [formData, setFormData] = useState({
 
@@ -261,6 +263,7 @@ const Record = ({ embedded = false }) => {
     };
 
     const handleSaveTransaction = (form) => {
+        const existing = transactions.find((t) => t.id === transactionModal.id);
         saveTransaction({
             id: transactionModal.id || createTransactionId(),
             referenceNo: form.referenceNo,
@@ -272,8 +275,38 @@ const Record = ({ embedded = false }) => {
             expense: form.expense,
             deposit: form.deposit,
             showShareBet: form.showShareBet,
-            balanceSnapshot: form.balanceSnapshot || balance,
+            balanceSnapshot:
+                transactionModal.mode === 'edit' && existing
+                    ? existing.balanceSnapshot
+                    : balance,
         });
+    };
+
+    const openEditBalanceSummary = (tx) => {
+        setBalanceSummaryModal({ open: true, tx });
+    };
+
+    const closeBalanceSummaryModal = () => {
+        setBalanceSummaryModal({ open: false, tx: null });
+    };
+
+    const handleSaveBalanceSummary = ({ dateTime, balanceSnapshot }) => {
+        const { tx } = balanceSummaryModal;
+        if (!tx) {
+            return;
+        }
+        saveTransaction({
+            ...tx,
+            dateTime,
+            balanceSnapshot,
+        });
+    };
+
+    const handleDeleteBalanceSummary = () => {
+        if (balanceSummaryModal.tx) {
+            deleteTransaction(balanceSummaryModal.tx.id);
+        }
+        closeBalanceSummaryModal();
     };
 
     const handleDeleteTransaction = () => {
@@ -291,6 +324,16 @@ const Record = ({ embedded = false }) => {
             onSave={handleSaveTransaction}
             onDelete={transactionModal.mode === 'edit' ? handleDeleteTransaction : undefined}
             onClose={closeTransactionModal}
+        />
+    );
+
+    const renderBalanceSummaryModal = () => (
+        <BalanceSummaryModal
+            isOpen={balanceSummaryModal.open}
+            transaction={balanceSummaryModal.tx}
+            onSave={handleSaveBalanceSummary}
+            onDelete={handleDeleteBalanceSummary}
+            onClose={closeBalanceSummaryModal}
         />
     );
 
@@ -456,113 +499,24 @@ const Record = ({ embedded = false }) => {
 
 
 
-    const handleNumericKeyDown = (e) => {
-        if (e.ctrlKey || e.metaKey) {
-            return;
-        }
-        if (
-            ['Backspace', 'Delete', 'Tab', 'Enter', 'Escape', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(
-                e.key,
-            )
-        ) {
-            return;
-        }
-        if (/^[0-9.]$/.test(e.key)) {
-            if (e.key === '.' && e.currentTarget.value.includes('.')) {
-                e.preventDefault();
-            }
-            return;
-        }
-        e.preventDefault();
-    };
-
-    const commitBalanceEdit = (tx, value) => {
-        saveTransaction({
-            ...tx,
-            balanceSnapshot: sanitizeNumericInput(value) || '0',
-        });
-        setEditingBalanceId(null);
-    };
-
-    const commitBalanceDatePart = (tx, field, value) => {
-        const parts = parseBalanceSummaryDateTime(tx.dateTime);
-        if (!parts) {
-            return;
-        }
-        saveTransaction({
-            ...tx,
-            dateTime: buildBalanceSummaryDateTime({
-                ...parts,
-                [field]: sanitizeNumericInput(value),
-            }),
-        });
-    };
-
-    const renderBalancePartInput = (tx, field, defaultValue, maxLength, className = '') => (
-        <input
-            key={`${tx.id}-${field}-${tx.dateTime}`}
-            type="text"
-            inputMode="numeric"
-            className={`record-hkjc-balance-part-input ${className}`.trim()}
-            defaultValue={defaultValue}
-            maxLength={maxLength}
-            onKeyDown={handleNumericKeyDown}
-            onBlur={(e) => commitBalanceDatePart(tx, field, e.target.value)}
-        />
-    );
-
     const renderBalanceSummaryRow = (tx) => {
-        const parts = parseBalanceSummaryDateTime(tx.dateTime);
-        if (!parts) {
+        const summaryText = formatBalanceSummaryRow(tx.dateTime, tx.balanceSnapshot);
+        if (!summaryText) {
             return null;
         }
 
-        const rawBalance = sanitizeNumericInput(tx.balanceSnapshot) || '0';
-
         return (
             <tr className="record-hkjc-balance-summary-row">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td colSpan={8} className="record-hkjc-balance-summary-cell">
-                    {renderBalancePartInput(tx, 'year', parts.year, 4, 'record-hkjc-balance-part-input--year')}
-                    <span className="record-hkjc-balance-summary-label">年</span>
-                    {renderBalancePartInput(tx, 'month', parts.month, 2)}
-                    <span className="record-hkjc-balance-summary-label">月</span>
-                    {renderBalancePartInput(tx, 'day', parts.day, 2)}
-                    <span className="record-hkjc-balance-summary-label">日</span>
-                    {' '}
-                    {renderBalancePartInput(tx, 'hour', parts.hour, 2)}
-                    <span className="record-hkjc-balance-summary-label">:</span>
-                    {renderBalancePartInput(tx, 'minute', parts.minute, 2)}
-                    <span className="record-hkjc-balance-summary-label">之戶口結餘: </span>
-                    {editingBalanceId === tx.id ? (
-                        <input
-                            type="text"
-                            inputMode="decimal"
-                            className="record-hkjc-balance-summary-input"
-                            defaultValue={rawBalance}
-                            autoFocus
-                            onKeyDown={(e) => {
-                                handleNumericKeyDown(e);
-                                if (e.key === 'Enter') {
-                                    e.currentTarget.blur();
-                                }
-                                if (e.key === 'Escape') {
-                                    setEditingBalanceId(null);
-                                }
-                            }}
-                            onBlur={(e) => commitBalanceEdit(tx, e.target.value)}
-                        />
-                    ) : (
-                        <span
-                            className="record-hkjc-balance-summary-amount"
-                            onClick={() => setEditingBalanceId(tx.id)}
-                        >
-                            {formatCurrency(tx.balanceSnapshot)}
-                        </span>
-                    )}
+                <td />
+                <td />
+                <td />
+                <td />
+                <td
+                    colSpan={4}
+                    className="record-hkjc-balance-summary-cell"
+                    onClick={() => openEditBalanceSummary(tx)}
+                >
+                    {summaryText}
                 </td>
             </tr>
         );
@@ -780,6 +734,7 @@ const Record = ({ embedded = false }) => {
                 {renderExportModal()}
                 {renderBalanceModal()}
                 {renderTransactionModal()}
+                {renderBalanceSummaryModal()}
             </div>
         );
     }
@@ -964,6 +919,8 @@ const Record = ({ embedded = false }) => {
             {renderBalanceModal()}
 
             {renderTransactionModal()}
+
+            {renderBalanceSummaryModal()}
 
         </div>
 

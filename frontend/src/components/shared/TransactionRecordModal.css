@@ -130,3 +130,46 @@
 .transaction-record-action-btn--delete:hover {
     background: #ffebee;
 }
+
+.balance-summary-modal .transaction-record-input {
+    margin-bottom: 0;
+}
+
+.balance-summary-modal-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.balance-summary-modal-row--balance {
+    margin-top: 4px;
+    margin-bottom: 20px;
+}
+
+.balance-summary-modal-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #333;
+    flex-shrink: 0;
+}
+
+.balance-summary-modal-input {
+    width: auto;
+    flex: 0 1 auto;
+    min-width: 48px;
+    text-align: center;
+}
+
+.balance-summary-modal-input--year {
+    min-width: 72px;
+    flex: 1 1 72px;
+    max-width: 100px;
+}
+
+.balance-summary-modal-input--balance {
+    flex: 1 1 120px;
+    min-width: 100px;
+    text-align: left;
+}

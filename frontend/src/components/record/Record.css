@@ -772,6 +772,7 @@ tr:last-child .table-value {
 
 .record-hkjc-balance-summary-cell {
     cursor: default;
+    text-align: left;
 }
 
 .record-hkjc-balance-summary-label {

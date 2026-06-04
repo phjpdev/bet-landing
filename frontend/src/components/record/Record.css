@@ -775,6 +775,12 @@ tr:last-child .table-value {
     text-align: left;
 }
 
+.record-hkjc-balance-summary-row .record-hkjc-balance-summary-trigger,
+.record-hkjc-balance-summary-row:hover .record-hkjc-balance-summary-trigger,
+.record-hkjc-balance-summary-row .record-hkjc-balance-summary-trigger:hover {
+    background-color: #fff;
+}
+
 .record-hkjc-balance-summary-label {
     font-weight: 700;
 }

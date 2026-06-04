@@ -507,15 +507,14 @@ const Record = ({ embedded = false }) => {
 
         return (
             <tr className="record-hkjc-balance-summary-row">
-                <td />
-                <td />
-                <td />
-                <td />
                 <td
-                    colSpan={4}
-                    className="record-hkjc-balance-summary-cell"
+                    className="record-hkjc-reference-cell record-hkjc-balance-summary-trigger"
                     onClick={() => openEditBalanceSummary(tx)}
-                >
+                />
+                <td />
+                <td />
+                <td />
+                <td colSpan={4} className="record-hkjc-balance-summary-cell">
                     {summaryText}
                 </td>
             </tr>

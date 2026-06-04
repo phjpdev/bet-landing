@@ -361,7 +361,8 @@ const Record = ({ embedded = false }) => {
                             onChange={(update) => { setDateRange(update); }}
                             dateFormat="dd/MM/yyyy"
                             maxDate={getMaxDate()}
-                            withPortal
+                            popperPlacement="bottom-start"
+                            popperClassName="record-datepicker-popper"
                             customInput={
                                 <CustomInput
                                     value={

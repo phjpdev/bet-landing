@@ -109,7 +109,7 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    /* background: #e7e7e7; */
+    background-color: transparent;
 }
 
 .record-root--embedded .record-info-search {
@@ -167,6 +167,14 @@
 .record-search-form-col--date .react-datepicker-wrapper {
     display: block;
     width: 100%;
+}
+
+.record-datepicker-popper {
+    z-index: 20;
+}
+
+.react-datepicker__portal {
+    background-color: transparent !important;
 }
 
 .record-search-form-col--date .date-input-box {

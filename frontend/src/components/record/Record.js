@@ -43,6 +43,16 @@ const TABLE_COLUMNS = [
 
 const ACCOUNT_RECORD_TABLE_LOAD_MS = 4500;
 
+const formatRecordDisplayDate = (date) => {
+    if (!date) {
+        return '';
+    }
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+};
+
 const HkjcTableSpinner = () => (
     <div className="record-hkjc-spinner" aria-hidden="true">
         {Array.from({ length: 12 }, (_, i) => (
@@ -63,6 +73,8 @@ const Record = ({ embedded = false }) => {
     const [showRecordContainer, setShowRecordContainer] = useState(false);
 
     const [dateRange, setDateRange] = useState([null, null]);
+
+    const [displayDateRange, setDisplayDateRange] = useState({ start: '', end: '' });
 
     const [startDate, endDate] = dateRange;
 
@@ -165,6 +177,12 @@ const Record = ({ embedded = false }) => {
 
             setInitialDateTime(formattedDate);
 
+            setDisplayDateRange((prev) =>
+                prev.start
+                    ? prev
+                    : { start: formattedDate, end: formattedDate },
+            );
+
         };
 
 
@@ -189,6 +207,25 @@ const Record = ({ embedded = false }) => {
 
         return maxDate;
 
+    };
+
+    const applyDateRangeFromPicker = (start, end) => {
+        if (start && end) {
+            setDisplayDateRange({
+                start: formatRecordDisplayDate(start),
+                end: formatRecordDisplayDate(end),
+            });
+            return;
+        }
+        if (start) {
+            const formatted = formatRecordDisplayDate(start);
+            setDisplayDateRange({ start: formatted, end: formatted });
+        }
+    };
+
+    const handleSearchDateRange = () => {
+        applyDateRangeFromPicker(startDate, endDate);
+        setShowRecordContainer(false);
     };
 
 
@@ -358,7 +395,11 @@ const Record = ({ embedded = false }) => {
                             selectsRange={true}
                             startDate={startDate}
                             endDate={endDate}
-                            onChange={(update) => { setDateRange(update); }}
+                            onChange={(update) => {
+                                const [start, end] = update;
+                                setDateRange(update);
+                                applyDateRangeFromPicker(start, end);
+                            }}
                             dateFormat="dd/MM/yyyy"
                             maxDate={getMaxDate()}
                             popperPlacement="bottom-start"
@@ -367,10 +408,10 @@ const Record = ({ embedded = false }) => {
                                 <CustomInput
                                     value={
                                         startDate && endDate
-                                            ? `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`
-                                            : ""
+                                            ? `${formatRecordDisplayDate(startDate)} - ${formatRecordDisplayDate(endDate)}`
+                                            : ''
                                     }
-                                    initialDateTime={initialDateTime}
+                                    fallbackRange={`${displayDateRange.start || initialDateTime} - ${displayDateRange.end || initialDateTime}`}
                                 />
                             }
                         />
@@ -404,7 +445,7 @@ const Record = ({ embedded = false }) => {
                     <button
                         type="button"
                         className="record-search-btn"
-                        onClick={() => { setShowRecordContainer(false); }}
+                        onClick={handleSearchDateRange}
                     >
                         搜尋
                     </button>
@@ -617,7 +658,8 @@ const Record = ({ embedded = false }) => {
         <div className="record-hkjc-date-row-wrapper">
             <div className="record-hkjc-date-row">
                 <strong className="record-hkjc-date-text">
-                    日期範圍 {initialDateTime} - {initialDateTime}
+                    日期範圍 {displayDateRange.start || initialDateTime} -{' '}
+                    {displayDateRange.end || initialDateTime}
                 </strong>
                 <button
                     type="button"
@@ -812,7 +854,10 @@ const Record = ({ embedded = false }) => {
 
                             <div className="record-info-container-header">
 
-                                <strong className="record-info-container-date">日期範圍 {initialDateTime} - {initialDateTime}</strong>
+                                <strong className="record-info-container-date">
+                                    日期範圍 {displayDateRange.start || initialDateTime} -{' '}
+                                    {displayDateRange.end || initialDateTime}
+                                </strong>
 
                                 <div className="record-info-container-button" onClick={() => { setShowRecordContainer(true); }}>重新搜尋</div>
 
@@ -930,7 +975,7 @@ const Record = ({ embedded = false }) => {
 
 
 
-const CustomInput = ({ value, onClick, initialDateTime }) => (
+const CustomInput = ({ value, onClick, fallbackRange }) => (
 
     <div className="date-input-box" onClick={onClick}>
 
@@ -938,7 +983,7 @@ const CustomInput = ({ value, onClick, initialDateTime }) => (
 
         <div className="date-input-box-right">
             <span className="date-display">
-                {value || `${initialDateTime} - ${initialDateTime}`}
+                {value || fallbackRange}
             </span>
             <span className="arrow-icon"><IoIosArrowDown style={{ fontSize: '20px', display: 'flex' }} /></span>
 

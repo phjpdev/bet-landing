@@ -66,10 +66,8 @@ const AccountRecordModal = ({ onClose }) => {
             }
         };
         document.addEventListener('keydown', handleKeyDown);
-        document.body.style.overflow = 'hidden';
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
-            document.body.style.overflow = '';
         };
     }, [requestClose]);
 

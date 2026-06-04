@@ -304,7 +304,6 @@
 
 .account-record-modal-window .record-hkjc-balance-part-input,
 .account-record-modal-window .record-hkjc-balance-summary-input,
-.account-record-modal-window .record-hkjc-reference-input,
 .account-record-modal-window .record-hkjc-balance-summary-cell,
 .account-record-modal-window .record-hkjc-balance-summary-amount,
 .account-record-modal-window .record-hkjc-reference-cell,
@@ -316,7 +315,6 @@
 
 .account-record-modal-window .record-hkjc-balance-part-input:hover,
 .account-record-modal-window .record-hkjc-balance-summary-input:hover,
-.account-record-modal-window .record-hkjc-reference-input:hover,
 .account-record-modal-window .record-hkjc-balance-summary-amount:hover,
 .account-record-modal-window .record-hkjc-reference-cell:hover,
 .account-record-modal-window .record-hkjc-details-cell:hover {

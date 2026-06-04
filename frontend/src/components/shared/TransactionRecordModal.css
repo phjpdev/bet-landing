@@ -98,8 +98,13 @@
     gap: 12px;
 }
 
+.transaction-record-actions--with-delete {
+    flex-wrap: wrap;
+}
+
 .transaction-record-action-btn {
     flex: 1;
+    min-width: 0;
     height: 44px;
     border: none;
     border-radius: 8px;
@@ -113,4 +118,15 @@
 
 .transaction-record-action-btn:hover {
     background: #01316a;
+}
+
+.transaction-record-action-btn--delete {
+    flex: 1 1 100%;
+    background: #fff;
+    color: #c62828;
+    border: 1px solid #c62828;
+}
+
+.transaction-record-action-btn--delete:hover {
+    background: #ffebee;
 }

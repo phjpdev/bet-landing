@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { EMPTY_TRANSACTION_FORM } from '../../utils/transactionFormat';
 import './TransactionRecordModal.css';
 
-const TransactionRecordModal = ({ isOpen, mode, initialData, onSave, onClose }) => {
+const TransactionRecordModal = ({ isOpen, mode, initialData, onSave, onDelete, onClose }) => {
     const [form, setForm] = useState(EMPTY_TRANSACTION_FORM);
 
     useEffect(() => {
@@ -114,7 +114,16 @@ const TransactionRecordModal = ({ isOpen, mode, initialData, onSave, onClose }) 
                     </button>
                 </div>
 
-                <div className="transaction-record-actions">
+                <div className={`transaction-record-actions${mode === 'edit' && onDelete ? ' transaction-record-actions--with-delete' : ''}`}>
+                    {mode === 'edit' && onDelete && (
+                        <button
+                            type="button"
+                            className="transaction-record-action-btn transaction-record-action-btn--delete"
+                            onClick={onDelete}
+                        >
+                            刪除
+                        </button>
+                    )}
                     <button type="button" className="transaction-record-action-btn" onClick={onClose}>
                         取消
                     </button>

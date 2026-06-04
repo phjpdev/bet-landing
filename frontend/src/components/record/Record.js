@@ -73,7 +73,7 @@ const Record = ({ embedded = false }) => {
 
     const { balance, setBalance, formattedBalance } = useDisplayBalance();
 
-    const { transactions, saveTransaction } = useAccountTransactions();
+    const { transactions, saveTransaction, deleteTransaction } = useAccountTransactions();
 
     const hkjcTableColumnWidths = useMemo(
         () => computeHkjcTableColumnWidths(transactions),
@@ -91,7 +91,6 @@ const Record = ({ embedded = false }) => {
         data: EMPTY_TRANSACTION_FORM,
     });
 
-    const [editingReferenceId, setEditingReferenceId] = useState(null);
     const [editingBalanceId, setEditingBalanceId] = useState(null);
 
     const [formData, setFormData] = useState({
@@ -277,12 +276,20 @@ const Record = ({ embedded = false }) => {
         });
     };
 
+    const handleDeleteTransaction = () => {
+        if (transactionModal.id) {
+            deleteTransaction(transactionModal.id);
+        }
+        closeTransactionModal();
+    };
+
     const renderTransactionModal = () => (
         <TransactionRecordModal
             isOpen={transactionModal.open}
             mode={transactionModal.mode}
             initialData={transactionModal.data}
             onSave={handleSaveTransaction}
+            onDelete={transactionModal.mode === 'edit' ? handleDeleteTransaction : undefined}
             onClose={closeTransactionModal}
         />
     );
@@ -469,14 +476,6 @@ const Record = ({ embedded = false }) => {
         e.preventDefault();
     };
 
-    const commitReferenceEdit = (tx, value) => {
-        saveTransaction({
-            ...tx,
-            referenceNo: sanitizeNumericInput(value),
-        });
-        setEditingReferenceId(null);
-    };
-
     const commitBalanceEdit = (tx, value) => {
         saveTransaction({
             ...tx,
@@ -569,46 +568,17 @@ const Record = ({ embedded = false }) => {
         );
     };
 
-    const renderReferenceCell = (tx) => {
-        if (editingReferenceId === tx.id) {
-            return (
-                <td className="record-hkjc-reference-cell">
-                    <input
-                        type="text"
-                        inputMode="numeric"
-                        className="record-hkjc-reference-input"
-                        defaultValue={tx.referenceNo}
-                        autoFocus
-                        onKeyDown={(e) => {
-                            handleNumericKeyDown(e);
-                            if (e.key === 'Enter') {
-                                e.currentTarget.blur();
-                            }
-                            if (e.key === 'Escape') {
-                                setEditingReferenceId(null);
-                            }
-                        }}
-                        onBlur={(e) => commitReferenceEdit(tx, e.target.value)}
-                    />
-                </td>
-            );
-        }
-
-        return (
-            <td
-                className="record-hkjc-reference-cell"
-                onClick={() => setEditingReferenceId(tx.id)}
-            >
-                {tx.referenceNo}
-            </td>
-        );
-    };
-
-    const renderDetailsCell = (tx) => (
+    const renderReferenceCell = (tx) => (
         <td
-            className="record-hkjc-details-cell"
+            className="record-hkjc-reference-cell"
             onClick={() => openEditTransaction(tx)}
         >
+            {tx.referenceNo}
+        </td>
+    );
+
+    const renderDetailsCell = (tx) => (
+        <td className="record-hkjc-details-cell">
             {tx.details}
         </td>
     );

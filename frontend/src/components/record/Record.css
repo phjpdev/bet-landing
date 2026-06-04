@@ -857,31 +857,6 @@ tr:last-child .table-value {
     cursor: default !important;
 }
 
-.record-hkjc-reference-input {
-    width: 100%;
-    border: none;
-    margin: 0;
-    padding: 0;
-    background: transparent;
-    color: inherit;
-    font: inherit;
-    line-height: inherit;
-    cursor: default !important;
-    outline: none;
-    box-sizing: border-box;
-    user-select: text;
-}
-
-.record-hkjc-reference-input:hover,
-.record-hkjc-reference-input:focus {
-    cursor: default !important;
-}
-
-.record-hkjc-reference-input:focus {
-    background-color: #fffbe6;
-    outline: none;
-}
-
 .record-hkjc-details-cell,
 .record-hkjc-details-cell:hover {
     white-space: pre-line;

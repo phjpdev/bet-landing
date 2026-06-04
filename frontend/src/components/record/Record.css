@@ -750,7 +750,9 @@ tr:last-child .table-value {
 
 .record-hkjc-th-details:hover {
     color: #333;
+    font-weight: 400;
     text-decoration: none;
+    background: transparent;
 }
 
 .record-hkjc-balance-summary-row td {
@@ -842,6 +844,7 @@ tr:last-child .table-value {
     word-break: break-word;
     line-height: 1.2;
     box-sizing: border-box;
+    transition: none;
 }
 
 .record-hkjc-transaction-row--grey td {
@@ -852,25 +855,61 @@ tr:last-child .table-value {
     background: #fff;
 }
 
+.record-hkjc-transaction-row--grey:hover td,
+.record-hkjc-transaction-row--grey td:hover {
+    background: #f8f8f8;
+    color: #333;
+}
+
+.record-hkjc-transaction-row--white:hover td,
+.record-hkjc-transaction-row--white td:hover {
+    background: #fff;
+    color: #333;
+}
+
 .record-hkjc-reference-cell,
 .record-hkjc-reference-cell:hover {
     cursor: default !important;
+    color: #333;
+    font-weight: inherit;
+    text-decoration: none;
+    outline: none;
+    box-shadow: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .record-hkjc-details-cell,
 .record-hkjc-details-cell:hover {
     white-space: pre-line;
-    line-height: var(--hkjc-details-lh);
+    line-height: 1.2;
     cursor: default !important;
-    padding-top: var(--hkjc-cell-py);
-    padding-bottom: var(--hkjc-cell-py);
+    color: #333;
+    font-weight: inherit;
+    text-decoration: none;
+    outline: none;
+    box-shadow: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.record-hkjc-transaction-row--grey .record-hkjc-details-cell {
+.record-hkjc-transaction-row--grey .record-hkjc-details-cell,
+.record-hkjc-transaction-row--grey:hover .record-hkjc-details-cell,
+.record-hkjc-transaction-row--grey .record-hkjc-details-cell:hover {
     background-color: #f8f8f8;
 }
 
-.record-hkjc-transaction-row--white .record-hkjc-details-cell {
+.record-hkjc-transaction-row--white .record-hkjc-details-cell,
+.record-hkjc-transaction-row--white:hover .record-hkjc-details-cell,
+.record-hkjc-transaction-row--white .record-hkjc-details-cell:hover {
+    background-color: #fff;
+}
+
+.record-hkjc-transaction-row--grey:hover .record-hkjc-reference-cell,
+.record-hkjc-transaction-row--grey .record-hkjc-reference-cell:hover {
+    background-color: #f8f8f8;
+}
+
+.record-hkjc-transaction-row--white:hover .record-hkjc-reference-cell,
+.record-hkjc-transaction-row--white .record-hkjc-reference-cell:hover {
     background-color: #fff;
 }
 

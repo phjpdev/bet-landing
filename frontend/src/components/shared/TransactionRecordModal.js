@@ -67,12 +67,12 @@ const TransactionRecordModal = ({ isOpen, mode, initialData, onSave, onDelete, o
                     value={form.dateTime}
                     onChange={handleChange('dateTime')}
                 />
-                <input
-                    type="text"
-                    className="transaction-record-input"
+                <textarea
+                    className="transaction-record-input transaction-record-textarea"
                     placeholder="投注類別"
                     value={form.betType}
                     onChange={handleChange('betType')}
+                    rows={4}
                 />
                 <textarea
                     className="transaction-record-input transaction-record-textarea"

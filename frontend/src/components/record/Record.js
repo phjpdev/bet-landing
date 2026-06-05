@@ -572,6 +572,12 @@ const Record = ({ embedded = false }) => {
         </td>
     );
 
+    const renderBetTypeCell = (tx) => (
+        <td className="record-hkjc-bet-type-cell">
+            {tx.betType}
+        </td>
+    );
+
     const renderDetailsCell = (tx) => (
         <td className="record-hkjc-details-cell">
             {tx.details}
@@ -633,7 +639,7 @@ const Record = ({ embedded = false }) => {
                                         {renderReferenceCell(tx)}
                                         <td>{tx.dateTime}</td>
                                         <td>{tx.eventDate}</td>
-                                        <td>{tx.betType}</td>
+                                        {renderBetTypeCell(tx)}
                                         {renderDetailsCell(tx)}
                                         <td>{tx.receipt}</td>
                                         <td className="record-hkjc-expense-cell">

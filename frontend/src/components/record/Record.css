@@ -896,6 +896,8 @@ tr:last-child .table-value {
     -webkit-tap-highlight-color: transparent;
 }
 
+.record-hkjc-bet-type-cell,
+.record-hkjc-bet-type-cell:hover,
 .record-hkjc-details-cell,
 .record-hkjc-details-cell:hover {
     white-space: pre-line;
@@ -909,12 +911,18 @@ tr:last-child .table-value {
     -webkit-tap-highlight-color: transparent;
 }
 
+.record-hkjc-transaction-row--grey .record-hkjc-bet-type-cell,
+.record-hkjc-transaction-row--grey:hover .record-hkjc-bet-type-cell,
+.record-hkjc-transaction-row--grey .record-hkjc-bet-type-cell:hover,
 .record-hkjc-transaction-row--grey .record-hkjc-details-cell,
 .record-hkjc-transaction-row--grey:hover .record-hkjc-details-cell,
 .record-hkjc-transaction-row--grey .record-hkjc-details-cell:hover {
     background-color: #f8f8f8;
 }
 
+.record-hkjc-transaction-row--white .record-hkjc-bet-type-cell,
+.record-hkjc-transaction-row--white:hover .record-hkjc-bet-type-cell,
+.record-hkjc-transaction-row--white .record-hkjc-bet-type-cell:hover,
 .record-hkjc-transaction-row--white .record-hkjc-details-cell,
 .record-hkjc-transaction-row--white:hover .record-hkjc-details-cell,
 .record-hkjc-transaction-row--white .record-hkjc-details-cell:hover {

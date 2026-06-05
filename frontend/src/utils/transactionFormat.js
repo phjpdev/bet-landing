@@ -17,7 +17,8 @@ export function formatCurrency(value) {
 const HKJC_COL_REFERENCE = 75;
 const HKJC_COL_DATE = 85;
 const HKJC_COL_EVENT = 65;
-const HKJC_COL_BET = 75;
+const HKJC_COL_BET_MIN = 75;
+const HKJC_COL_BET_MAX = 260;
 const HKJC_COL_RECEIPT = 55;
 const HKJC_COL_DETAILS_DEFAULT = 240;
 const HKJC_COL_MONEY_DEFAULT = 88;
@@ -26,10 +27,22 @@ const HKJC_COL_MONEY_MIN = 72;
 const HKJC_COL_MONEY_MAX = 132;
 const HKJC_MONEY_CHAR_PX = 6.5;
 const HKJC_MONEY_CELL_PAD = 12;
+const HKJC_TEXT_CHAR_PX = 6.5;
+const HKJC_TEXT_CELL_PAD = 12;
 
 function measureFormattedMoneyWidth(formatted) {
     if (!formatted) return 0;
     return formatted.length * HKJC_MONEY_CHAR_PX + HKJC_MONEY_CELL_PAD;
+}
+
+function measureTextColumnWidth(text, minPx, maxPx) {
+    if (!text?.trim()) {
+        return minPx;
+    }
+    const lines = String(text).split(/\r?\n/);
+    const maxLineLen = Math.max(...lines.map((line) => line.length), 0);
+    const needed = maxLineLen * HKJC_TEXT_CHAR_PX + HKJC_TEXT_CELL_PAD;
+    return Math.min(maxPx, Math.max(minPx, Math.ceil(needed)));
 }
 
 /**
@@ -58,18 +71,28 @@ export function computeHkjcTableColumnWidths(transactions) {
           )
         : HKJC_COL_MONEY_DEFAULT;
 
+    const betColPx = transactions.length
+        ? Math.max(
+              ...transactions.map((tx) =>
+                  measureTextColumnWidth(tx.betType, HKJC_COL_BET_MIN, HKJC_COL_BET_MAX),
+              ),
+          )
+        : HKJC_COL_BET_MIN;
+
+    const betExtraPx = betColPx - HKJC_COL_BET_MIN;
+
     const detailsColPx = needsWideMoney
         ? Math.max(
               HKJC_COL_DETAILS_MIN,
-              HKJC_COL_DETAILS_DEFAULT - (moneyColPx - HKJC_COL_MONEY_DEFAULT) * 2,
+              HKJC_COL_DETAILS_DEFAULT - (moneyColPx - HKJC_COL_MONEY_DEFAULT) * 2 - betExtraPx,
           )
-        : HKJC_COL_DETAILS_DEFAULT;
+        : Math.max(HKJC_COL_DETAILS_MIN, HKJC_COL_DETAILS_DEFAULT - betExtraPx);
 
     const pxWidths = [
         HKJC_COL_REFERENCE,
         HKJC_COL_DATE,
         HKJC_COL_EVENT,
-        HKJC_COL_BET,
+        betColPx,
         detailsColPx,
         HKJC_COL_RECEIPT,
         moneyColPx,

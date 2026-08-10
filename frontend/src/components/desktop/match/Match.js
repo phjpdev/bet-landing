@@ -197,8 +197,8 @@ const Match = () => {
                                     <div className="match-teams-flex">
                                         <div className="match-team-tv">
                                             <div className="match-teams-wid">
-                                                <div>{match.homeName}</div>
-                                                <div>{match.awayName}</div>
+                                                <div title={match.homeName}>{match.homeName}</div>
+                                                <div title={match.awayName}>{match.awayName}</div>
                                             </div>
                                             <div className="match-tv">
                                                 <img src="/image/early_settlement_icon.svg" width={20} alt="icon"/>

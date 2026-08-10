@@ -80,14 +80,19 @@
     width: 420px;
 }
 .match-teams-wid, .match-header-teams-wid {
-    width: 80px;
+    width: 180px;
+}
+.match-teams-wid > div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .match-header-teams-wid {
     padding-left: 24px;
 }
 .match-teams-flex {
     padding: 8px 12px;
-    width: 200px;
+    width: 280px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -235,6 +240,7 @@
     justify-content: center;
     align-items: center;
     margin-right: 15px;
+    white-space: nowrap;
 }
 .match-status {
     font-weight: 400;

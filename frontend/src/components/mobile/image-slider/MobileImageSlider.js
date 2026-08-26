@@ -3,10 +3,10 @@ import './MobileImageSlider.css';
 
 const MobileImageSlider = () => {
   const images = [
-    { src: "/image/slider1.jpg", alt: "同場過關：沙卡勢助兵工廠雙喜臨門" },
-    { src: "/image/slider2.jpg", alt: "世盃決賽組合有得玩" },
-    { src: "/image/slider3.jpg", alt: "適可而止 時刻自律" },
-    { src: "/image/slider4.jpg", alt: "世盃冠軍、小組首名及一二名有得玩" },
+    { src: "/image/FB3732_260825_4E_ch.jpg", alt: "韓職名家：大田市民強勢「蔚」所欲為" },
+    { src: "/image/FB3736_260825_4E_ch.jpg", alt: "亞洲足球名宿：費薩里主勝有辦「法」" },
+    { src: "/image/RG_All-in-one_640x274_TC.jpg", alt: "適可而止 時刻自律" },
+    { src: "/image/FB3751_260825_4E_ch.jpg", alt: "東南亞錦標賽專家：信越南贏波捧盃" },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);

@@ -7,10 +7,7 @@ const CASHOUT_ICON =
   "https://consvc.hkjc.com//consvc.hkjc.com/-/media/Sites/JCBW/MenuIcons/icon-betslip/earlySettlement_svg.svg?sc_lang=zh-HK";
 
 const SIDEBAR_ITEMS = [
-  { label: "歐聯決賽", tone: "red" },
-  { label: "世盃冠軍", tone: "red" },
-  { label: "世盃決賽組合", tone: "red" },
-  { label: "世盃", tone: "red" },
+  { label: "英超冠軍", tone: "red" },
   { label: "所有賽事", tone: "default" },
   { label: "即場投注", tone: "red" },
   { label: "過關/混合過關", tone: "red" },
@@ -34,7 +31,6 @@ const SIDEBAR_ITEMS = [
   { label: "波膽", tone: "default" },
   { label: "半場波膽", tone: "default" },
   { label: "第一隊入球", tone: "default" },
-  { label: "下一隊入球", tone: "default" },
   { label: "首名入球", tone: "default" },
   { label: "任何時間入球球員", tone: "default" },
   { label: "最後入球球員", tone: "default" },
@@ -44,9 +40,13 @@ const SIDEBAR_ITEMS = [
   { label: "特別項目", tone: "default" },
   { label: "冠軍", tone: "default", icon: "cup" },
   { label: "晉級隊伍", tone: "default" },
-  { label: "決賽組合", tone: "default", icon: "cup" },
-  { label: "世盃", tone: "default" },
-  { label: "日乙日丙百年構想聯賽", tone: "default" },
+  { label: "歐洲聯賽冠軍盃", tone: "default" },
+  { label: "澳洲盃", tone: "default" },
+  { label: "日本天皇盃", tone: "default" },
+  { label: "歐洲協會聯賽", tone: "default" },
+  { label: "南美球會盃", tone: "default" },
+  { label: "北美聯賽盃", tone: "default" },
+  { label: "英格蘭聯賽盃", tone: "default" },
   { label: "阿根廷盃", tone: "default" },
   { label: "所有賠率", tone: "default" },
 ];

@@ -53,6 +53,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* fixed slot so the TV-channel badge never shifts the score column */
+    width: 40px;
+    flex: none;
 }
 .match-tvchannel {
     align-items: center;
@@ -81,6 +84,7 @@
 }
 .match-teams-wid, .match-header-teams-wid {
     width: 180px;
+    flex: none;
 }
 .match-teams-wid > div {
     white-space: nowrap;
@@ -93,12 +97,23 @@
 .match-teams-flex {
     padding: 8px 12px;
     width: 280px;
+    flex: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: rgb(64, 90, 85);
     line-height: 16px;
     font-weight: 500;
+}
+/* remaining slot of .match-teams; content stays right-aligned and never
+   steals width from the columns on its left */
+.match-inplay-cell {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    overflow: hidden;
 }
 .match-inplay, .match-header-inplay {
     display: flex;
@@ -207,6 +222,7 @@
     background-color: #ffd505;
     border-radius: 2px;
     width: 18px;
+    flex: none;
 }
 .match-score {
     color: #333;
@@ -307,6 +323,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 16px;
+    flex: none;
 }
 .match-text {
     margin: 16px 8px 24px;

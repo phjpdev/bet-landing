@@ -225,7 +225,7 @@ const Match = () => {
                                         
                                     </div>
                                     {match.inPlay ? (
-                                        <div>
+                                        <div className="match-inplay-cell">
                                             {match.corner ? (
                                                 <div className="match-corner">
                                                     <img src="/image/icon-corner.svg"></img>
@@ -245,7 +245,7 @@ const Match = () => {
                                             )}
                                         </div>
                                     ) : (
-                                        ""
+                                        <div className="match-inplay-cell"></div>
                                     )}
                                 </div>
                                 <div className="match-vertical-line"></div>
